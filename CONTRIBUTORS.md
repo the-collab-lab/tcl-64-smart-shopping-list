@@ -11,4 +11,6 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 ## Mentors
 
+- [Yufa Li](https://github.com/01001101CK) 🧘‍♀️
+
 ## Code of Conduct Contacts

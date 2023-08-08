@@ -12,5 +12,6 @@ Add yourself as a contributor to this project as a Markdown link that links your
 ## Mentors
 
 - [Yufa Li](https://github.com/01001101CK) 🧘‍♀️
+- [Danielle Heberling](https://github.com/deeheber) 🧐
 
 ## Code of Conduct Contacts

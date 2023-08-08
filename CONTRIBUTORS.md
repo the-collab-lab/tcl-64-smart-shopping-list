@@ -8,6 +8,7 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 - [Satoshi Shirosaka](https://github.com/Satoshi-Sh) 🙏
 - [Christina Woodhams](https://github.com/polly89) 💃
+- [Ismarji Workman](https://github.com/ismarjiw) 🧋
 
 ## Mentors
 

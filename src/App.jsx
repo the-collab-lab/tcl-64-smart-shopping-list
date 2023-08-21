@@ -2,7 +2,7 @@ import {
 	BrowserRouter as Router,
 	Routes,
 	Route,
-	redirect,
+	Navigate,
 } from 'react-router-dom';
 
 import { AddItem, Home, Layout, List } from './views';
@@ -18,12 +18,6 @@ export function App() {
 	 * This custom hook takes a token pointing to a shopping list
 	 * in our database and syncs it with localStorage for later use.
 	 * Check ./utils/hooks.js for its implementation.
-	 *
-	 * We use `my test list` by default so we can see the list
-	 * of items that was prepopulated for this project.
-	 * We'll later set this to `null` by default (since new users do not
-	 * have tokens), and use `setListToken` when we allow a user
-	 * to create and join a new list.
 	 */
 	const [listToken, setListToken] = useStateWithStorage(
 		'tcl-shopping-list-token',
@@ -36,11 +30,11 @@ export function App() {
 	 */
 	const data = useShoppingListData(listToken);
 
-	function createNewList() {
+	function createToken() {
 		try {
 			const newToken = generateToken();
 			setListToken(newToken);
-			return redirect('/list');
+			return true;
 		} catch {
 			console.log('Error: An error occurred while setting the new token');
 		}
@@ -50,10 +44,10 @@ export function App() {
 		<Router>
 			<Routes>
 				<Route path="/" element={<Layout />}>
-					<Route index element={<Home createNewList={createNewList} />} />
+					<Route index element={<Home createToken={createToken} />} />
 					<Route
 						path="/list"
-						element={listToken ? <List data={data} /> : <redirect to="/list" />}
+						element={listToken ? <List data={data} /> : <Navigate to="/" />}
 					/>
 					<Route path="/add-item" element={<AddItem />} />
 				</Route>

@@ -1,11 +1,19 @@
 import './Home.css';
+import { useNavigate } from 'react-router-dom';
 
-export function Home() {
+export function Home({ createToken }) {
+	const navigate = useNavigate();
+
+	function createNewList() {
+		if (createToken()) {
+			navigate('/list');
+		}
+	}
+
 	return (
 		<div className="Home">
-			<p>
-				Hello from the home (<code>/</code>) page!
-			</p>
+			<h2>Welcome to your Smart Shopping List</h2>
+			<button onClick={createNewList}>Create a new list</button>
 		</div>
 	);
 }

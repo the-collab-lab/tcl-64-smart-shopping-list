@@ -1,10 +1,17 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	useNavigate,
+} from 'react-router-dom';
 
 import { AddItem, Home, Layout, List } from './views';
 
 import { useShoppingListData } from './api';
 
 import { useStateWithStorage } from './utils';
+
+import { generateToken } from '@the-collab-lab/shopping-list-utils';
 
 export function App() {
 	/**
@@ -20,7 +27,7 @@ export function App() {
 	 */
 	const [listToken, setListToken] = useStateWithStorage(
 		'tcl-shopping-list-token',
-		'my test list',
+		null,
 	);
 
 	/**
@@ -28,12 +35,23 @@ export function App() {
 	 * Check ./api/firestore.js for its implementation.
 	 */
 	const data = useShoppingListData(listToken);
+	const navigate = useNavigate();
+
+	function createNewList() {
+		try {
+			const newToken = generateToken();
+			setListToken(newToken);
+			navigate('/list');
+		} catch {
+			console.log('Error: An error occurred while setting the new token');
+		}
+	}
 
 	return (
 		<Router>
 			<Routes>
 				<Route path="/" element={<Layout />}>
-					<Route index element={<Home />} />
+					<Route index element={<Home createNewList={createNewList} />} />
 					<Route path="/list" element={<List data={data} />} />
 					<Route path="/add-item" element={<AddItem />} />
 				</Route>

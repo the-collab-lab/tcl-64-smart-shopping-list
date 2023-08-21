@@ -2,7 +2,7 @@ import {
 	BrowserRouter as Router,
 	Routes,
 	Route,
-	useNavigate,
+	redirect,
 } from 'react-router-dom';
 
 import { AddItem, Home, Layout, List } from './views';
@@ -35,13 +35,12 @@ export function App() {
 	 * Check ./api/firestore.js for its implementation.
 	 */
 	const data = useShoppingListData(listToken);
-	const navigate = useNavigate();
 
 	function createNewList() {
 		try {
 			const newToken = generateToken();
 			setListToken(newToken);
-			navigate('/list');
+			return redirect('/list');
 		} catch {
 			console.log('Error: An error occurred while setting the new token');
 		}
@@ -52,7 +51,10 @@ export function App() {
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					<Route index element={<Home createNewList={createNewList} />} />
-					<Route path="/list" element={<List data={data} />} />
+					<Route
+						path="/list"
+						element={listToken ? <List data={data} /> : <redirect to="/list" />}
+					/>
 					<Route path="/add-item" element={<AddItem />} />
 				</Route>
 			</Routes>

@@ -17,7 +17,6 @@ export function AddItem() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const daysUntilNextPurchase = dayConverter(frequency);
-		console.log(itemName, frequency, daysUntilNextPurchase);
 		addItem(listId, { itemName, daysUntilNextPurchase });
 	};
 	const handleChange = (e) => {
@@ -28,7 +27,6 @@ export function AddItem() {
 			if (e.key === 'Enter' && e.keyCode === 13) {
 				e.preventDefault();
 				const daysUntilNextPurchase = dayConverter(frequency);
-				console.log(itemName, frequency, daysUntilNextPurchase);
 				addItem(listId, { itemName, daysUntilNextPurchase });
 			}
 		};

@@ -1,26 +1,29 @@
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../api/config';
+import { createNewList } from '../api/firebase';
 
-export function Home({ createToken }) {
+export function Home({ createToken, setListToken, listToken }) {
 	const navigate = useNavigate();
 
-	async function createNewList() {
-		const listId = createToken();
-		try {
-			await addDoc(collection(db, listId), {});
-			console.log('Grocery list created for token: ', listId);
-			navigate('/list');
-		} catch (error) {
-			console.error('Error creating grocery list: ', error);
-		}
+	if (listToken) {
+		navigate('/list');
 	}
 
+	function handleClick() {
+		let listId = createToken();
+		if (createNewList(listId) !== 'error') {
+			setListToken(listId);
+			navigate('/list');
+		} else {
+			listId = null;
+			console.log(listId);
+			setListToken(listId);
+		}
+	}
 	return (
 		<div className="Home">
 			<h2>Welcome to your Smart Shopping List</h2>
-			<button onClick={createNewList}>Create a new list</button>
+			<button onClick={handleClick}>Create a new list</button>
 		</div>
 	);
 }

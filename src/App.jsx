@@ -33,7 +33,6 @@ export function App() {
 	function createToken() {
 		try {
 			const newToken = generateToken();
-			setListToken(newToken);
 			return newToken;
 		} catch {
 			console.log('Error: An error occurred while setting the new token');
@@ -47,11 +46,11 @@ export function App() {
 					<Route
 						index
 						element={
-							listToken ? (
-								<Navigate to="/list" />
-							) : (
-								<Home createToken={createToken} />
-							)
+							<Home
+								createToken={createToken}
+								setListToken={setListToken}
+								listToken={listToken}
+							/>
 						}
 					/>
 					<Route

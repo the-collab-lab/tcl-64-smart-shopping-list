@@ -14,20 +14,33 @@ export function AddItem() {
 	const [itemName, setItemName] = useState('');
 	const [frequency, setFrequency] = useState('soon');
 	const listId = 'my test list';
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const daysUntilNextPurchase = dayConverter(frequency);
-		addItem(listId, { itemName, daysUntilNextPurchase });
+		try {
+			const result = await addItem(listId, { itemName, daysUntilNextPurchase });
+			console.log(`${itemName} was added to the list with Id:${result.id}`);
+		} catch (err) {
+			console.error(err);
+		}
 	};
 	const handleChange = (e) => {
 		setFrequency(e.target.value);
 	};
 	useEffect(() => {
-		const handleKeyPress = (e) => {
+		const handleKeyPress = async (e) => {
 			if (e.key === 'Enter' && e.keyCode === 13) {
 				e.preventDefault();
 				const daysUntilNextPurchase = dayConverter(frequency);
-				addItem(listId, { itemName, daysUntilNextPurchase });
+				try {
+					const result = await addItem(listId, {
+						itemName,
+						daysUntilNextPurchase,
+					});
+					console.log(`${itemName} was added to the list with Id:${result.id}`);
+				} catch (err) {
+					console.error(err);
+				}
 			}
 		};
 		window.addEventListener('keydown', handleKeyPress);

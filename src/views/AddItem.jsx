@@ -1,11 +1,24 @@
 import { useState, useEffect } from 'react';
+import { addItem } from '../api/firebase';
+
+const dayConverter = (text) => {
+	if (text === 'soon') {
+		return 7;
+	} else if (text === 'kind-of-soon') {
+		return 14;
+	} else {
+		return 30;
+	}
+};
 export function AddItem() {
-	const [item, setItem] = useState('');
+	const [itemName, setItemName] = useState('');
 	const [frequency, setFrequency] = useState('soon');
+	const listId = 'my test list';
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// submit data
-		console.log(item, frequency);
+		const daysUntilNextPurchase = dayConverter(frequency);
+		console.log(itemName, frequency, daysUntilNextPurchase);
+		addItem(listId, { itemName, daysUntilNextPurchase });
 	};
 	const handleChange = (e) => {
 		setFrequency(e.target.value);
@@ -14,15 +27,16 @@ export function AddItem() {
 		const handleKeyPress = (e) => {
 			if (e.key === 'Enter' && e.keyCode === 13) {
 				e.preventDefault();
-				// submit data
-				console.log(item, frequency);
+				const daysUntilNextPurchase = dayConverter(frequency);
+				console.log(itemName, frequency, daysUntilNextPurchase);
+				addItem(listId, { itemName, daysUntilNextPurchase });
 			}
 		};
 		window.addEventListener('keydown', handleKeyPress);
 		return () => {
 			window.removeEventListener('keydown', handleKeyPress);
 		};
-	}, [item, frequency]);
+	}, [itemName, frequency]);
 	return (
 		<form onSubmit={handleSubmit}>
 			<label htmlFor="item">Item:</label>
@@ -31,9 +45,9 @@ export function AddItem() {
 				id="item"
 				name="item"
 				placeholder="Enter Item"
-				value={item}
+				value={itemName}
 				onChange={(e) => {
-					setItem(e.target.value);
+					setItemName(e.target.value);
 				}}
 			/>
 			<br />

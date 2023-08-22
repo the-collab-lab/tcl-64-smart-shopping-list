@@ -34,7 +34,7 @@ export function App() {
 		try {
 			const newToken = generateToken();
 			setListToken(newToken);
-			return true;
+			return newToken;
 		} catch {
 			console.log('Error: An error occurred while setting the new token');
 		}

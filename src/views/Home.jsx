@@ -6,21 +6,11 @@ import { db } from '../api/config';
 export function Home({ createToken }) {
 	const navigate = useNavigate();
 
-	// function createNewList() {
-	// 	if (createToken()) {
-	// 		navigate('/list');
-	// 	}
-	// }
-
 	async function createNewList() {
-		const token = createToken();
-		const groceryData = {
-			itemName: null,
-			buyTime: null,
-		};
+		const listId = createToken();
 		try {
-			await addDoc(collection(db, 'tokens', token, 'groceryList'), groceryData);
-			console.log('Grocery list created for token: ', token);
+			await addDoc(collection(db, listId), {});
+			console.log('Grocery list created for token: ', listId);
 			navigate('/list');
 		} catch (error) {
 			console.error('Error creating grocery list: ', error);

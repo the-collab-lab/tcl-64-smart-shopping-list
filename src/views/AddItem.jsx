@@ -13,15 +13,17 @@ const dayConverter = (text) => {
 export function AddItem() {
 	const [itemName, setItemName] = useState('');
 	const [frequency, setFrequency] = useState('soon');
+	const [message, setMessage] = useState('');
 	const listId = 'my test list';
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const daysUntilNextPurchase = dayConverter(frequency);
 		try {
-			const result = await addItem(listId, { itemName, daysUntilNextPurchase });
-			console.log(`${itemName} was added to the list with Id:${result.id}`);
+			await addItem(listId, { itemName, daysUntilNextPurchase });
+			setMessage(`${itemName} was added to the list`);
 		} catch (err) {
 			console.error(err);
+			setMessage(`Failed Add: ${itemName}`);
 		}
 	};
 	const handleChange = (e) => {
@@ -33,13 +35,14 @@ export function AddItem() {
 				e.preventDefault();
 				const daysUntilNextPurchase = dayConverter(frequency);
 				try {
-					const result = await addItem(listId, {
+					await addItem(listId, {
 						itemName,
 						daysUntilNextPurchase,
 					});
-					console.log(`${itemName} was added to the list with Id:${result.id}`);
+					setMessage(`${itemName} was added to the list`);
 				} catch (err) {
 					console.error(err);
+					setMessage(`Failed Add: ${itemName}`);
 				}
 			}
 		};
@@ -49,50 +52,53 @@ export function AddItem() {
 		};
 	}, [itemName, frequency]);
 	return (
-		<form onSubmit={handleSubmit}>
-			<label htmlFor="item">Item:</label>
-			<input
-				type="text"
-				id="item"
-				name="item"
-				placeholder="Enter Item"
-				value={itemName}
-				onChange={(e) => {
-					setItemName(e.target.value);
-				}}
-			/>
-			<br />
-			<input
-				id="soon"
-				type="radio"
-				name="frequency"
-				value="soon"
-				checked={frequency === 'soon'}
-				onChange={handleChange}
-			/>
-			<label htmlFor="soon">Soon</label>
-			<br />
-			<input
-				id="kind-of-soon"
-				type="radio"
-				name="frequency"
-				value="kind-of-soon"
-				checked={frequency === 'kind-of-soon'}
-				onChange={handleChange}
-			/>
-			<label htmlFor="kind-of-soon">Kind of Soon</label>
-			<br />
-			<input
-				id="not-soon"
-				type="radio"
-				name="frequency"
-				value="not-soon"
-				checked={frequency === 'not-soon'}
-				onChange={handleChange}
-			/>
-			<label htmlFor="not-soon">Not Soon</label>
-			<br />
-			<button type="submit">Add Item</button>
-		</form>
+		<div>
+			<form onSubmit={handleSubmit}>
+				<label htmlFor="item">Item:</label>
+				<input
+					type="text"
+					id="item"
+					name="item"
+					placeholder="Enter Item"
+					value={itemName}
+					onChange={(e) => {
+						setItemName(e.target.value);
+					}}
+				/>
+				<br />
+				<input
+					id="soon"
+					type="radio"
+					name="frequency"
+					value="soon"
+					checked={frequency === 'soon'}
+					onChange={handleChange}
+				/>
+				<label htmlFor="soon">Soon</label>
+				<br />
+				<input
+					id="kind-of-soon"
+					type="radio"
+					name="frequency"
+					value="kind-of-soon"
+					checked={frequency === 'kind-of-soon'}
+					onChange={handleChange}
+				/>
+				<label htmlFor="kind-of-soon">Kind of Soon</label>
+				<br />
+				<input
+					id="not-soon"
+					type="radio"
+					name="frequency"
+					value="not-soon"
+					checked={frequency === 'not-soon'}
+					onChange={handleChange}
+				/>
+				<label htmlFor="not-soon">Not Soon</label>
+				<br />
+				<button type="submit">Add Item</button>
+			</form>
+			<div>{message && <p>{message}</p>}</div>
+		</div>
 	);
 }

@@ -82,11 +82,12 @@ export async function deleteItem() {
 }
 
 export async function createNewList(listId) {
+	let response;
 	try {
-		await addDoc(collection(db, listId), {});
+		response = await addDoc(collection(db, listId), {});
 	} catch (error) {
 		console.error('Error creating grocery list: ', error);
 		return 'error';
 	}
-	return listId;
+	return response;
 }

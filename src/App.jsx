@@ -46,11 +46,11 @@ export function App() {
 					<Route
 						index
 						element={
-							<Home
-								createToken={createToken}
-								setListToken={setListToken}
-								listToken={listToken}
-							/>
+							listToken ? (
+								<Navigate to="/list" />
+							) : (
+								<Home createToken={createToken} setListToken={setListToken} />
+							)
 						}
 					/>
 					<Route

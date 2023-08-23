@@ -21,9 +21,11 @@ export function AddItem() {
 		try {
 			await addItem(listId, { itemName, daysUntilNextPurchase });
 			setMessage(`${itemName} was added to the list`);
+			setItemName('');
+			setFrequency('soon');
 		} catch (err) {
 			console.error(err);
-			setMessage(`Failed Add: ${itemName}`);
+			setMessage(`Fail to Add: ${itemName}`);
 		}
 	};
 	const handleChange = (e) => {
@@ -40,6 +42,8 @@ export function AddItem() {
 						daysUntilNextPurchase,
 					});
 					setMessage(`${itemName} was added to the list`);
+					setItemName('');
+					setFrequency('soon');
 				} catch (err) {
 					console.error(err);
 					setMessage(`Failed Add: ${itemName}`);

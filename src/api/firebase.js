@@ -1,4 +1,4 @@
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, addDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
 import { getFutureDate } from '../utils';
@@ -79,4 +79,15 @@ export async function deleteItem() {
 	 * to delete an existing item. You'll need to figure out what arguments
 	 * this function must accept!
 	 */
+}
+
+export async function createNewList(listId) {
+	let response;
+	try {
+		response = await addDoc(collection(db, listId), {});
+	} catch (error) {
+		console.error('Error creating grocery list: ', error);
+		return 'error';
+	}
+	return response;
 }

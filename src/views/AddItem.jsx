@@ -10,11 +10,11 @@ const dayConverter = (text) => {
 		return 30;
 	}
 };
-export function AddItem() {
+export function AddItem({ listId }) {
 	const [itemName, setItemName] = useState('');
 	const [frequency, setFrequency] = useState('soon');
 	const [message, setMessage] = useState('');
-	const listId = 'my test list';
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const daysUntilNextPurchase = dayConverter(frequency);
@@ -31,30 +31,7 @@ export function AddItem() {
 	const handleChange = (e) => {
 		setFrequency(e.target.value);
 	};
-	useEffect(() => {
-		const handleKeyPress = async (e) => {
-			if (e.key === 'Enter' && e.keyCode === 13) {
-				e.preventDefault();
-				const daysUntilNextPurchase = dayConverter(frequency);
-				try {
-					await addItem(listId, {
-						itemName,
-						daysUntilNextPurchase,
-					});
-					setMessage(`${itemName} was added to the list`);
-					setItemName('');
-					setFrequency('soon');
-				} catch (err) {
-					console.error(err);
-					setMessage(`Failed to Add: ${itemName}`);
-				}
-			}
-		};
-		window.addEventListener('keydown', handleKeyPress);
-		return () => {
-			window.removeEventListener('keydown', handleKeyPress);
-		};
-	}, [itemName, frequency]);
+
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>

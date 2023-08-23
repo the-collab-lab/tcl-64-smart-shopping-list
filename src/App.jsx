@@ -34,8 +34,8 @@ export function App() {
 		try {
 			const newToken = generateToken();
 			return newToken;
-		} catch {
-			console.log('Error: An error occurred while setting the new token');
+		} catch (error) {
+			console.error('Error creating token: ', error);
 		}
 	}
 

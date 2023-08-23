@@ -84,7 +84,6 @@ export async function deleteItem() {
 export async function createNewList(listId) {
 	try {
 		await addDoc(collection(db, listId), {});
-		console.log('Grocery list created for token: ', listId);
 	} catch (error) {
 		console.error('Error creating grocery list: ', error);
 		return 'error';

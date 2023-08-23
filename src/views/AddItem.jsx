@@ -10,11 +10,12 @@ const dayConverter = (text) => {
 		return 30;
 	}
 };
-export function AddItem() {
+
+export function AddItem({ listId }) {
 	const [itemName, setItemName] = useState('');
 	const [frequency, setFrequency] = useState('soon');
 	const [message, setMessage] = useState('');
-	const listId = 'my test list';
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const daysUntilNextPurchase = dayConverter(frequency);
@@ -28,33 +29,11 @@ export function AddItem() {
 			setMessage(`Failed to Add: ${itemName}`);
 		}
 	};
-	const handleChange = (e) => {
+
+	const handleFrequencyChange = (e) => {
 		setFrequency(e.target.value);
 	};
-	useEffect(() => {
-		const handleKeyPress = async (e) => {
-			if (e.key === 'Enter' && e.keyCode === 13) {
-				e.preventDefault();
-				const daysUntilNextPurchase = dayConverter(frequency);
-				try {
-					await addItem(listId, {
-						itemName,
-						daysUntilNextPurchase,
-					});
-					setMessage(`${itemName} was added to the list`);
-					setItemName('');
-					setFrequency('soon');
-				} catch (err) {
-					console.error(err);
-					setMessage(`Failed to Add: ${itemName}`);
-				}
-			}
-		};
-		window.addEventListener('keydown', handleKeyPress);
-		return () => {
-			window.removeEventListener('keydown', handleKeyPress);
-		};
-	}, [itemName, frequency]);
+
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
@@ -76,7 +55,7 @@ export function AddItem() {
 					name="frequency"
 					value="soon"
 					checked={frequency === 'soon'}
-					onChange={handleChange}
+					onChange={handleFrequencyChange}
 				/>
 				<label htmlFor="soon">Soon</label>
 				<br />
@@ -86,7 +65,7 @@ export function AddItem() {
 					name="frequency"
 					value="kind-of-soon"
 					checked={frequency === 'kind-of-soon'}
-					onChange={handleChange}
+					onChange={handleFrequencyChange}
 				/>
 				<label htmlFor="kind-of-soon">Kind of Soon</label>
 				<br />
@@ -96,7 +75,7 @@ export function AddItem() {
 					name="frequency"
 					value="not-soon"
 					checked={frequency === 'not-soon'}
-					onChange={handleChange}
+					onChange={handleFrequencyChange}
 				/>
 				<label htmlFor="not-soon">Not Soon</label>
 				<br />

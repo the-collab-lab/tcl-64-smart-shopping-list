@@ -25,7 +25,7 @@ export function AddItem() {
 			setFrequency('soon');
 		} catch (err) {
 			console.error(err);
-			setMessage(`Fail to Add: ${itemName}`);
+			setMessage(`Failed to Add: ${itemName}`);
 		}
 	};
 	const handleChange = (e) => {

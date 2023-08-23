@@ -28,7 +28,7 @@ export function AddItem({ listId }) {
 			setMessage(`Failed to Add: ${itemName}`);
 		}
 	};
-	const handleChange = (e) => {
+	const handleFrequencyChange = (e) => {
 		setFrequency(e.target.value);
 	};
 
@@ -53,7 +53,7 @@ export function AddItem({ listId }) {
 					name="frequency"
 					value="soon"
 					checked={frequency === 'soon'}
-					onChange={handleChange}
+					onChange={handleFrequencyChange}
 				/>
 				<label htmlFor="soon">Soon</label>
 				<br />
@@ -63,7 +63,7 @@ export function AddItem({ listId }) {
 					name="frequency"
 					value="kind-of-soon"
 					checked={frequency === 'kind-of-soon'}
-					onChange={handleChange}
+					onChange={handleFrequencyChange}
 				/>
 				<label htmlFor="kind-of-soon">Kind of Soon</label>
 				<br />
@@ -73,7 +73,7 @@ export function AddItem({ listId }) {
 					name="frequency"
 					value="not-soon"
 					checked={frequency === 'not-soon'}
-					onChange={handleChange}
+					onChange={handleFrequencyChange}
 				/>
 				<label htmlFor="not-soon">Not Soon</label>
 				<br />

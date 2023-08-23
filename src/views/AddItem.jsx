@@ -46,7 +46,7 @@ export function AddItem() {
 					setFrequency('soon');
 				} catch (err) {
 					console.error(err);
-					setMessage(`Failed Add: ${itemName}`);
+					setMessage(`Failed to Add: ${itemName}`);
 				}
 			}
 		};

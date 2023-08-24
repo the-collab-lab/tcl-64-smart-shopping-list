@@ -80,3 +80,14 @@ export async function deleteItem() {
 	 * this function must accept!
 	 */
 }
+
+export async function createNewList(listId) {
+	let response;
+	try {
+		response = await addDoc(collection(db, listId), {});
+	} catch (error) {
+		console.error('Error creating grocery list: ', error);
+		return 'error';
+	}
+	return response;
+}

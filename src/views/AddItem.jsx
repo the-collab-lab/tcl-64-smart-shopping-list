@@ -1,15 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { addItem } from '../api/firebase';
 
 const dayConverter = (text) => {
-	if (text === 'soon') {
-		return 7;
-	} else if (text === 'kind-of-soon') {
-		return 14;
-	} else {
-		return 30;
+	switch (text) {
+		case 'soon':
+			return 7;
+		case 'kind-of-soon':
+			return 14;
+		default:
+			return 30;
 	}
 };
+
 export function AddItem({ listId }) {
 	const [itemName, setItemName] = useState('');
 	const [frequency, setFrequency] = useState('soon');

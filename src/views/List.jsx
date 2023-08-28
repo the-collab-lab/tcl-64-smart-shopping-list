@@ -1,25 +1,33 @@
 import { ListItem } from '../components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function List({ data }) {
 	const [searchInput, setSearchInput] = useState('');
-	const [displayList, setDisplayList] = useState(data);
-	const filterDisplay = (currentInput) => {
-		const filteredList = displayList.filter((listItem) => {
-			return listItem.name.toLowerCase().includes(currentInput.toLowerCase());
-		});
-		console.log(filteredList);
-	};
+	const [displayList, setDisplayList] = useState([]);
+
+	useEffect(() => {
+		setDisplayList(data);
+	}, [data]);
 
 	const listItemsToDisplay = displayList.map((item) => {
 		return <ListItem key={item.id} name={item.name} />;
 	});
-	console.log(searchInput);
+
+	const resetDisplayList = (e) => {
+		e.preventDefault();
+		setDisplayList(data);
+		setSearchInput('');
+	};
+
+	const filterDisplay = (currentInput) => {
+		const filteredList = data.filter((listItem) => {
+			return listItem.name.toLowerCase().includes(currentInput.toLowerCase());
+		});
+		setDisplayList(filteredList);
+	};
+
 	return (
 		<>
-			<p>
-				Hello from the <code>/list</code> page!
-			</p>
 			<form>
 				<label htmlFor="filter">Filter by item name</label>
 				<br />
@@ -30,9 +38,16 @@ export function List({ data }) {
 					value={searchInput}
 					onChange={(e) => {
 						setSearchInput(e.target.value);
-						filterDisplay(searchInput);
+						filterDisplay(e.target.value);
 					}}
 				></input>
+				<button
+					onClick={(e) => {
+						resetDisplayList(e);
+					}}
+				>
+					X
+				</button>
 			</form>
 			<ul>{listItemsToDisplay}</ul>
 		</>

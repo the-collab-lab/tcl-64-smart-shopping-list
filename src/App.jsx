@@ -29,6 +29,7 @@ export function App() {
 	 * Check ./api/firestore.js for its implementation.
 	 */
 	const data = useShoppingListData(listToken);
+	console.log(data);
 
 	function createToken() {
 		try {

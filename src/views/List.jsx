@@ -3,9 +3,8 @@ import { useState } from 'react';
 
 export function List({ data }) {
 	const [searchInput, setSearchInput] = useState('');
-
 	const listItemsToDisplay = data.map((item) => {
-		return item.name.toLowerCase().includes(searchInput.toLowerCase()) ? (
+		return item.name?.toLowerCase().includes(searchInput.toLowerCase()) ? (
 			<ListItem key={item.id} name={item.name} />
 		) : null;
 	});

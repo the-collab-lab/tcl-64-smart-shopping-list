@@ -1,4 +1,10 @@
-import { collection, onSnapshot, addDoc } from 'firebase/firestore';
+import {
+	collection,
+	onSnapshot,
+	addDoc,
+	doc,
+	getDoc,
+} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
 import { getFutureDate } from '../utils';
@@ -90,4 +96,20 @@ export async function createNewList(listId) {
 		return 'error';
 	}
 	return response;
+}
+
+export async function checkIfListExists(listId) {
+	let response;
+	try {
+		const listCollectionRef = collection(db, listId);
+		console.log(listCollectionRef);
+		const listDocRef = doc(listCollectionRef, listId);
+		console.log(listDocRef);
+		response = await getDoc(listDocRef);
+		console.log(response);
+		return response.empty ? null : response;
+	} catch (error) {
+		console.error('List does not exist for specified token: ', error);
+		return null;
+	}
 }

@@ -100,6 +100,7 @@ export async function createNewList(listId) {
 
 export async function checkIfListExists(listId) {
 	let response;
+	// test why token not found in database still navigates to List page
 	try {
 		const listCollectionRef = collection(db, listId);
 		console.log(listCollectionRef);

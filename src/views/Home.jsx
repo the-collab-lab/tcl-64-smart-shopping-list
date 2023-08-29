@@ -37,9 +37,7 @@ export function Home({ createToken, setListToken }) {
 				setListToken(listId);
 				navigate('/list');
 			} else {
-				setExistingListMessage(
-					'The provided token does not match any existing list. Please try again.',
-				);
+				setExistingListMessage('Enter a valid token or create a new list.');
 			}
 		} else {
 			setExistingListMessage('Please enter a token.');

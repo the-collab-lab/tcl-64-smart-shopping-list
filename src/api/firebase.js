@@ -100,17 +100,12 @@ export async function checkIfListExists(listId) {
 
 		// If the collection exists and has documents, return the snapshot
 		if (!querySnapshot.empty) {
-			console.log('Shopping list collection snapshot:', querySnapshot);
 			return querySnapshot;
 		} else {
 			// Collection doesn't exist
-			console.log(
-				'The provided token does not match any existing shopping list.',
-			);
 			return null;
 		}
 	} catch (error) {
-		console.error('List does not exist for specified token: ', error);
 		return null;
 	}
 }

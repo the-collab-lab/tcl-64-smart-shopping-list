@@ -1,13 +1,4 @@
-import {
-	collection,
-	onSnapshot,
-	addDoc,
-	doc,
-	getDoc,
-	getDocs,
-	where,
-	query,
-} from 'firebase/firestore';
+import { collection, onSnapshot, addDoc, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
 import { getFutureDate } from '../utils';

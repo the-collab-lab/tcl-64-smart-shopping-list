@@ -4,6 +4,9 @@ import {
 	addDoc,
 	doc,
 	getDoc,
+	getDocs,
+	where,
+	query,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
@@ -99,16 +102,22 @@ export async function createNewList(listId) {
 }
 
 export async function checkIfListExists(listId) {
-	let response;
-	// test why token not found in database still navigates to List page
+	const listCollectionRef = collection(db, listId);
+
 	try {
-		const listCollectionRef = collection(db, listId);
-		console.log(listCollectionRef);
-		const listDocRef = doc(listCollectionRef, listId);
-		console.log(listDocRef);
-		response = await getDoc(listDocRef);
-		console.log(response);
-		return response.empty ? null : response;
+		const querySnapshot = await getDocs(listCollectionRef);
+
+		// If the collection exists and has documents, return the snapshot
+		if (!querySnapshot.empty) {
+			console.log('Shopping list collection snapshot:', querySnapshot);
+			return querySnapshot;
+		} else {
+			// Collection doesn't exist
+			console.log(
+				'The provided token does not match any existing shopping list.',
+			);
+			return null;
+		}
 	} catch (error) {
 		console.error('List does not exist for specified token: ', error);
 		return null;

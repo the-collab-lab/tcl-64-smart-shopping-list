@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 export function List({ data }) {
 	const [searchInput, setSearchInput] = useState('');
+
 	const listItemsToDisplay = data.map((item) => {
 		return item.name?.toLowerCase().includes(searchInput.toLowerCase()) ? (
 			<ListItem key={item.id} name={item.name} />
@@ -24,6 +25,7 @@ export function List({ data }) {
 					name="filter"
 					id="filter"
 					value={searchInput}
+					placeholder="Name"
 					onChange={(e) => {
 						setSearchInput(e.target.value);
 					}}

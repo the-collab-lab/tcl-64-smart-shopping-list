@@ -31,14 +31,14 @@ export function Home({ createToken, setListToken }) {
 
 		if (!tokenInput) {
 			setExistingListMessage('Please enter a token.');
+		}
+		const listExists = await checkIfListExists(tokenInput);
+		if (listExists) {
+			setListToken(tokenInput);
+			navigate('/list');
 		} else {
-			const listExists = await checkIfListExists(tokenInput);
-			if (listExists) {
-				setListToken(tokenInput);
-				navigate('/list');
-			} else {
-				setExistingListMessage(' Enter a valid token or create a new list.');
-			}
+			setExistingListMessage(' Enter a valid token or create a new list.');
+			setTokenInput('');
 		}
 	}
 	function handleTokenInputChange(e) {

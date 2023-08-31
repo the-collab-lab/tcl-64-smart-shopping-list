@@ -29,20 +29,23 @@ export function Home({ createToken, setListToken }) {
 	async function handleJoinClick(e) {
 		e.preventDefault();
 
-		if (tokenInput) {
-			const listExists = await checkIfListExists(tokenInput);
+		let message = '';
 
-			if (listExists) {
-				setListToken(tokenInput);
-				navigate('/list');
-			} else {
-				setExistingListMessage('Enter a valid token or create a new list.');
-			}
+		if (!tokenInput) {
+			message = 'Please enter a token.';
 		} else {
-			setExistingListMessage('Please enter a token.');
+			const listExists = await checkIfListExists(tokenInput);
+			message = listExists
+				? '/list'
+				: ' Enter a valid token or create a new list.';
+		}
+
+		setExistingListMessage(message);
+		if (message === '/list') {
+			setListToken(tokenInput);
+			navigate('/list');
 		}
 	}
-
 	function handleTokenInputChange(e) {
 		setTokenInput(e.target.value);
 	}

@@ -30,11 +30,10 @@ export function Home({ createToken, setListToken }) {
 		e.preventDefault();
 
 		if (tokenInput) {
-			let listId = tokenInput;
-			const listExists = await checkIfListExists(listId);
+			const listExists = await checkIfListExists(tokenInput);
 
 			if (listExists) {
-				setListToken(listId);
+				setListToken(tokenInput);
 				navigate('/list');
 			} else {
 				setExistingListMessage('Enter a valid token or create a new list.');

@@ -5,7 +5,11 @@ export function List({ data }) {
 	const [searchInput, setSearchInput] = useState('');
 
 	const listItemsToDisplay = data.map((item) => {
-		return item.name?.toLowerCase().includes(searchInput.toLowerCase()) ? (
+		const isItemInSearchCriteria = item.name
+			?.toLowerCase()
+			.includes(searchInput.toLowerCase());
+
+		return isItemInSearchCriteria ? (
 			<ListItem key={item.id} name={item.name} />
 		) : null;
 	});

@@ -5,13 +5,11 @@ export function List({ data }) {
 	const [searchInput, setSearchInput] = useState('');
 
 	const listItemsToDisplay = data.map((item) => {
-		const isItemInSearchCriteria = item.name
+		const isItemInSearch = item.name
 			?.toLowerCase()
 			.includes(searchInput.toLowerCase());
 
-		return isItemInSearchCriteria ? (
-			<ListItem key={item.id} name={item.name} />
-		) : null;
+		return isItemInSearch ? <ListItem key={item.id} name={item.name} /> : null;
 	});
 
 	const handleKeyDown = (e) => {

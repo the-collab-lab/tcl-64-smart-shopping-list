@@ -31,6 +31,7 @@ export function Home({ createToken, setListToken }) {
 
 		if (!tokenInput) {
 			setExistingListMessage('Please enter a token.');
+			return;
 		}
 		const listExists = await checkIfListExists(tokenInput);
 		if (listExists) {

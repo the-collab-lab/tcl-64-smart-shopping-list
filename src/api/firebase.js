@@ -102,6 +102,7 @@ export async function checkIfListExists(listId) {
 		if (!querySnapshot.empty) {
 			return querySnapshot;
 		}
+		return null;
 	} catch (error) {
 		console.error('Unable to verify if list exists: ', error.message);
 		return null;

@@ -18,14 +18,14 @@ export function List({ data }) {
 	return (
 		<>
 			<form>
-				<label htmlFor="filter">Filter by item name</label>
+				<label htmlFor="filter">Filter List</label>
 				<br />
 				<input
 					type="text"
 					name="filter"
 					id="filter"
 					value={searchInput}
-					placeholder="Name"
+					placeholder="Item name"
 					onChange={(e) => {
 						setSearchInput(e.target.value);
 					}}

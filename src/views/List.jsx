@@ -10,6 +10,12 @@ export function List({ data }) {
 		) : null;
 	});
 
+	const handleKeyDown = (e) => {
+		if (e.keyCode === 13) {
+			e.preventDefault();
+		}
+	};
+
 	const resetDisplayList = (e) => {
 		e.preventDefault();
 		setSearchInput('');
@@ -28,6 +34,9 @@ export function List({ data }) {
 					placeholder="Item name"
 					onChange={(e) => {
 						setSearchInput(e.target.value);
+					}}
+					onKeyDown={(e) => {
+						handleKeyDown(e);
 					}}
 				></input>
 				<button

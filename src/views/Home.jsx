@@ -26,7 +26,7 @@ export function Home({ createToken, setListToken }) {
 		}
 	}
 
-	async function handleJoinClick(e) {
+	async function handleTokenInputFormSubmit(e) {
 		e.preventDefault();
 
 		if (!tokenInput) {
@@ -49,7 +49,7 @@ export function Home({ createToken, setListToken }) {
 	return (
 		<div className="Home">
 			<h2>Welcome to your Smart Shopping List</h2>
-			<form onSubmit={handleJoinClick}>
+			<form onSubmit={handleTokenInputFormSubmit}>
 				<label htmlFor="tokenInput">Enter existing list token:</label>
 				<br />
 				<input

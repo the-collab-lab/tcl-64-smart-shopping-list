@@ -31,6 +31,7 @@ export function List({ data }) {
 					}}
 				></input>
 				<button
+					type="button"
 					name="clearInput"
 					onClick={(e) => {
 						resetDisplayList(e);

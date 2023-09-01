@@ -101,11 +101,9 @@ export async function checkIfListExists(listId) {
 		// If the collection exists and has documents, return the snapshot
 		if (!querySnapshot.empty) {
 			return querySnapshot;
-		} else {
-			// Collection doesn't exist
-			return null;
 		}
 	} catch (error) {
+		console.error('Unable to verify if list exists: ', error.message);
 		return null;
 	}
 }

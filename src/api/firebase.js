@@ -1,4 +1,4 @@
-import { collection, onSnapshot, addDoc } from 'firebase/firestore';
+import { collection, onSnapshot, addDoc, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
 import { getFutureDate } from '../utils';
@@ -90,4 +90,21 @@ export async function createNewList(listId) {
 		return 'error';
 	}
 	return response;
+}
+
+export async function checkIfListExists(listId) {
+	const listCollectionRef = collection(db, listId);
+
+	try {
+		const querySnapshot = await getDocs(listCollectionRef);
+
+		// If the collection exists and has documents, return the snapshot
+		if (!querySnapshot.empty) {
+			return querySnapshot;
+		}
+		return null;
+	} catch (error) {
+		console.error('Unable to verify if list exists: ', error.message);
+		return null;
+	}
 }

@@ -55,7 +55,13 @@ export function App() {
 					/>
 					<Route
 						path="/list"
-						element={listToken ? <List data={data} /> : <Navigate to="/" />}
+						element={
+							listToken ? (
+								<List data={data} listId={listToken} />
+							) : (
+								<Navigate to="/" />
+							)
+						}
 					/>
 					<Route
 						path="/add-item"

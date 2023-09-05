@@ -72,7 +72,7 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 	});
 }
 
-export async function updateItem({ listId, itemId, currentItemUpdates }) {
+export async function updateItem(listId, itemId, currentItemUpdates) {
 	const currentItemRef = doc(db, listId, itemId);
 	try {
 		await updateDoc(currentItemRef, currentItemUpdates);

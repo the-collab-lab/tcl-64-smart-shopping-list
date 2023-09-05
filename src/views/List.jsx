@@ -1,7 +1,7 @@
 import { ListItem } from '../components';
 import { useState } from 'react';
 
-export function List({ data }) {
+export function List({ data, listId }) {
 	const [searchInput, setSearchInput] = useState('');
 
 	const listItemsToDisplay = data.map((item) => {
@@ -10,7 +10,14 @@ export function List({ data }) {
 			.includes(searchInput.toLowerCase());
 
 		return isItemInSearch ? (
-			<ListItem key={item.id} name={item.name} itemId={item.id} />
+			<ListItem
+				key={item.id}
+				name={item.name}
+				itemId={item.id}
+				dateLastPurchased={item.dateLastPurchased}
+				totalPurchases={item.totalPurchases}
+				listId={listId}
+			/>
 		) : null;
 	});
 

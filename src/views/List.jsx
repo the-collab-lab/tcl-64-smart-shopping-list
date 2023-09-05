@@ -15,13 +15,13 @@ export function List({ data }) {
 						navigate('/add-item');
 					}}
 				>
-					Add your first item
+					Add item
 				</button>
 			</>
 		);
 	};
 
-	const FormandList = () => {
+	const FormAndList = () => {
 		const [searchInput, setSearchInput] = useState('');
 
 		const handleKeyDown = (e) => {
@@ -77,5 +77,5 @@ export function List({ data }) {
 		);
 	};
 
-	return <>{data.length > 1 ? <FormandList /> : <WelcomePrompt />}</>;
+	return <>{data.length > 1 ? <FormAndList /> : <WelcomePrompt />}</>;
 }

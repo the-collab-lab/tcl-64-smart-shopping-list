@@ -1,17 +1,10 @@
 import { ListItem } from '../components';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function List({ data }) {
 	const [searchInput, setSearchInput] = useState('');
-	const [isLoading, setIsLoading] = useState(true);
 	const navigate = useNavigate();
-
-	useEffect(() => {
-		if (data.length >= 1) {
-			setIsLoading(false);
-		}
-	}, [data]);
 
 	const WelcomePrompt = () => {
 		return (
@@ -28,6 +21,7 @@ export function List({ data }) {
 			</>
 		);
 	};
+
 	const FormandList = () => {
 		return (
 			<>
@@ -81,15 +75,5 @@ export function List({ data }) {
 		setSearchInput('');
 	};
 
-	return (
-		<>
-			{isLoading ? (
-				<h3>Loading...</h3>
-			) : data.length > 1 ? (
-				<FormandList />
-			) : (
-				<WelcomePrompt />
-			)}
-		</>
-	);
+	return <>{data.length > 1 ? <FormandList /> : <WelcomePrompt />}</>;
 }

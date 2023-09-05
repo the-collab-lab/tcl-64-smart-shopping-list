@@ -9,7 +9,9 @@ export function List({ data }) {
 			?.toLowerCase()
 			.includes(searchInput.toLowerCase());
 
-		return isItemInSearch ? <ListItem key={item.id} name={item.name} /> : null;
+		return isItemInSearch ? (
+			<ListItem key={item.id} name={item.name} itemId={item.id} />
+		) : null;
 	});
 
 	const handleKeyDown = (e) => {

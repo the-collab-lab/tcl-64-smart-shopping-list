@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function List({ data }) {
-	const [searchInput, setSearchInput] = useState('');
 	const navigate = useNavigate();
 
 	const WelcomePrompt = () => {
@@ -23,6 +22,28 @@ export function List({ data }) {
 	};
 
 	const FormandList = () => {
+		const [searchInput, setSearchInput] = useState('');
+
+		const handleKeyDown = (e) => {
+			if (e.keyCode === 13) {
+				e.preventDefault();
+			}
+		};
+		const resetDisplayList = (e) => {
+			e.preventDefault();
+			setSearchInput('');
+		};
+
+		const listItemsToDisplay = data.map((item) => {
+			const isItemInSearch = item.name
+				?.toLowerCase()
+				.includes(searchInput.toLowerCase());
+
+			return isItemInSearch ? (
+				<ListItem key={item.id} name={item.name} />
+			) : null;
+		});
+
 		return (
 			<>
 				<form>
@@ -54,25 +75,6 @@ export function List({ data }) {
 				<ul>{listItemsToDisplay}</ul>
 			</>
 		);
-	};
-
-	const listItemsToDisplay = data.map((item) => {
-		const isItemInSearch = item.name
-			?.toLowerCase()
-			.includes(searchInput.toLowerCase());
-
-		return isItemInSearch ? <ListItem key={item.id} name={item.name} /> : null;
-	});
-
-	const handleKeyDown = (e) => {
-		if (e.keyCode === 13) {
-			e.preventDefault();
-		}
-	};
-
-	const resetDisplayList = (e) => {
-		e.preventDefault();
-		setSearchInput('');
 	};
 
 	return <>{data.length > 1 ? <FormandList /> : <WelcomePrompt />}</>;

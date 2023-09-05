@@ -11,7 +11,8 @@ export function ListItem({
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 
-	const newTotalPurchases = totalPurchases + 1;
+	const increasePurchases = totalPurchases + 1;
+	const decreasePurchases = totalPurchases - 1;
 
 	useEffect(() => {
 		const currentTime = Date.now();
@@ -32,10 +33,16 @@ export function ListItem({
 		setIsChecked(!isChecked);
 
 		if (!isChecked) {
-			console.log('is checked is true');
 			await updateItem(listId, itemId, {
 				dateLastPurchased: new Date(),
-				totalPurchases: newTotalPurchases,
+				totalPurchases: increasePurchases,
+			});
+		} else {
+			setIsChecked(false);
+
+			await updateItem(listId, itemId, {
+				dateLastPurchased: null,
+				totalPurchases: decreasePurchases,
 			});
 		}
 	};

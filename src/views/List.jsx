@@ -15,7 +15,7 @@ export function List({ data }) {
 						navigate('/add-item');
 					}}
 				>
-					Add item
+					Add Item
 				</button>
 			</>
 		);

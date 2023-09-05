@@ -1,5 +1,5 @@
 import './ListItem.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { updateItem } from '../api/firebase';
 
 export function ListItem({
@@ -12,6 +12,25 @@ export function ListItem({
 	const [isChecked, setIsChecked] = useState(false);
 
 	const newTotalPurchases = totalPurchases + 1;
+
+	useEffect(() => {
+		const currentTime = Date.now();
+
+		if (dateLastPurchased === null) {
+			return;
+		}
+		const timeSinceLastPurchase = currentTime - dateLastPurchased.toMillis();
+		// console.log(currentTime)
+		// console.log(dateLastPurchased)
+
+		if (timeSinceLastPurchase < 24 * 60 * 60 * 1000) {
+			console.log('useEffect if condition');
+			setIsChecked(true);
+		} else {
+			console.log('useEffect else condition');
+			setIsChecked(false);
+		}
+	}, [dateLastPurchased]);
 
 	const handleCheck = async () => {
 		setIsChecked(!isChecked);
@@ -28,7 +47,7 @@ export function ListItem({
 	return (
 		<li className="ListItem">
 			<label>
-				<input type="checkbox" onChange={handleCheck} />
+				<input type="checkbox" checked={isChecked} onChange={handleCheck} />
 				{name}
 			</label>
 		</li>

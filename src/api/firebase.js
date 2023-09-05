@@ -76,7 +76,6 @@ export async function updateItem(listId, itemId, currentItemUpdates) {
 	const currentItemRef = doc(db, listId, itemId);
 	try {
 		await updateDoc(currentItemRef, currentItemUpdates);
-		console.log('Successfully updated the item.');
 	} catch (error) {
 		console.error('Unable to update item:', error.message);
 	}

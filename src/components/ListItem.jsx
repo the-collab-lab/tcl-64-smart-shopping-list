@@ -20,14 +20,10 @@ export function ListItem({
 			return;
 		}
 		const timeSinceLastPurchase = currentTime - dateLastPurchased.toMillis();
-		// console.log(currentTime)
-		// console.log(dateLastPurchased)
 
 		if (timeSinceLastPurchase < 24 * 60 * 60 * 1000) {
-			console.log('useEffect if condition');
 			setIsChecked(true);
 		} else {
-			console.log('useEffect else condition');
 			setIsChecked(false);
 		}
 	}, [dateLastPurchased]);

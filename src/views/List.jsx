@@ -8,12 +8,12 @@ export function List({ data }) {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		setTimeout(() => {
+		if (data.length >= 1) {
 			setIsLoading(false);
-		}, 1000);
-	}, []);
+		}
+	}, [data]);
 
-	const WelcomPrompt = () => {
+	const WelcomePrompt = () => {
 		return (
 			<>
 				<h3>Shopping list is currently empty...</h3>
@@ -88,7 +88,7 @@ export function List({ data }) {
 			) : data.length > 1 ? (
 				<FormandList />
 			) : (
-				<WelcomPrompt />
+				<WelcomePrompt />
 			)}
 		</>
 	);

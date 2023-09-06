@@ -15,18 +15,19 @@ export function ListItem({
 	const decreasePurchases = totalPurchases - 1;
 
 	useEffect(() => {
-		const currentTime = Date.now();
+		const validateCheckboxState = () => {
+			if (dateLastPurchased === null) {
+				//update to a falsey?
+				return;
+			}
 
-		if (dateLastPurchased === null) {
-			return;
-		}
-		const timeSinceLastPurchase = currentTime - dateLastPurchased.toMillis();
+			const currentTime = Date.now();
+			const timeSinceLastPurchase = currentTime - dateLastPurchased.toMillis();
 
-		if (timeSinceLastPurchase < 24 * 60 * 60 * 1000) {
-			setIsChecked(true);
-		} else {
-			setIsChecked(false);
-		}
+			setIsChecked(timeSinceLastPurchase < 24 * 60 * 60 * 1000);
+		};
+
+		validateCheckboxState();
 	}, [dateLastPurchased]);
 
 	const handleCheck = async () => {

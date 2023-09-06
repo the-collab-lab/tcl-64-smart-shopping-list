@@ -16,14 +16,12 @@ export function ListItem({
 
 	useEffect(() => {
 		const validateCheckboxState = () => {
-			if (dateLastPurchased === null) {
-				//update to a falsey?
+			if (!dateLastPurchased) {
 				return;
 			}
 
 			const currentTime = Date.now();
 			const timeSinceLastPurchase = currentTime - dateLastPurchased.toMillis();
-
 			setIsChecked(timeSinceLastPurchase < 24 * 60 * 60 * 1000);
 		};
 

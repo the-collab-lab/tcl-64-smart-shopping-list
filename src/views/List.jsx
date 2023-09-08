@@ -2,7 +2,7 @@ import { ListItem } from '../components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export function List({ data }) {
+export function List({ data, listId }) {
 	const navigate = useNavigate();
 
 	const WelcomePrompt = () => {
@@ -40,7 +40,14 @@ export function List({ data }) {
 				.includes(searchInput.toLowerCase());
 
 			return isItemInSearch ? (
-				<ListItem key={item.id} name={item.name} />
+				<ListItem
+					key={item.id}
+					name={item.name}
+					itemId={item.id}
+					dateLastPurchased={item.dateLastPurchased}
+					totalPurchases={item.totalPurchases}
+					listId={listId}
+				/>
 			) : null;
 		});
 

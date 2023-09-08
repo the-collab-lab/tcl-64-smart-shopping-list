@@ -1,4 +1,11 @@
-import { collection, onSnapshot, addDoc, getDocs } from 'firebase/firestore';
+import {
+	collection,
+	onSnapshot,
+	addDoc,
+	getDocs,
+	doc,
+	updateDoc,
+} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
 import { getFutureDate } from '../utils';
@@ -65,12 +72,13 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 	});
 }
 
-export async function updateItem() {
-	/**
-	 * TODO: Fill this out so that it uses the correct Firestore function
-	 * to update an existing item. You'll need to figure out what arguments
-	 * this function must accept!
-	 */
+export async function updateItem(listId, itemId, currentItemUpdates) {
+	const currentItemRef = doc(db, listId, itemId);
+	try {
+		await updateDoc(currentItemRef, currentItemUpdates);
+	} catch (error) {
+		console.error('Unable to update item:', error.message);
+	}
 }
 
 export async function deleteItem() {

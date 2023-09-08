@@ -18,8 +18,10 @@ export function ListItem({
 			}
 
 			const currentTime = Date.now();
+			const dayInMilliSec = 24 * 60 * 60 * 1000;
 			const timeSinceLastPurchase = currentTime - dateLastPurchased.toMillis();
-			setIsChecked(timeSinceLastPurchase < 24 * 60 * 60 * 1000);
+
+			setIsChecked(timeSinceLastPurchase < dayInMilliSec);
 		};
 
 		validateCheckboxState();

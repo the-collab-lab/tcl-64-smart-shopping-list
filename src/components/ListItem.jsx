@@ -41,7 +41,12 @@ export function ListItem({
 	return (
 		<li className="ListItem">
 			<label>
-				<input type="checkbox" checked={isChecked} onChange={handleCheck} />
+				<input
+					type="checkbox"
+					name="checkbox"
+					checked={isChecked}
+					onChange={handleCheck}
+				/>
 				{name}
 			</label>
 		</li>

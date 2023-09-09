@@ -13,17 +13,20 @@ export function Home({ createToken, setListToken }) {
 	async function handleCreateClick() {
 		let listId = createToken();
 
-		const firestoreResult = await createNewList(listId);
-		if (firestoreResult !== 'error') {
-			setListToken(listId);
-			navigate('/list');
-		} else {
-			listId = null;
-			setListToken(listId);
-			setCreateListMessage(
-				'Your shopping list was not created. Please try again. ',
-			);
-		}
+		setListToken(listId);
+		navigate('/list');
+
+		// const firestoreResult = await createNewList(listId);
+		// if (firestoreResult !== 'error') {
+		// 	setListToken(listId);
+		// 	navigate('/list');
+		// } else {
+		// 	listId = null;
+		// 	setListToken(listId);
+		// 	setCreateListMessage(
+		// 		'Your shopping list was not created. Please try again. ',
+		// 	);
+		// }
 	}
 
 	async function handleTokenInputFormSubmit(e) {

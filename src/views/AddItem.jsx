@@ -18,14 +18,14 @@ export function AddItem({ listId, data }) {
 	const [itemMessage, setItemMessage] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 
+	const clearMessage = (messageToAdjust) => {
+		setTimeout(() => {
+			messageToAdjust('');
+		}, 3000);
+	};
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		const clearMessage = (messageToAdjust) => {
-			setTimeout(() => {
-				messageToAdjust('');
-			}, 3000);
-		};
 
 		if (!itemName) {
 			setErrorMessage('Please enter item name.');
@@ -43,7 +43,7 @@ export function AddItem({ listId, data }) {
 		});
 
 		if (existingItem !== undefined) {
-			setErrorMessage('That item is already in your shopping list.');
+			setErrorMessage(`${existingItem.name} is already in your shopping list.`);
 			clearMessage(setErrorMessage);
 			return;
 		}

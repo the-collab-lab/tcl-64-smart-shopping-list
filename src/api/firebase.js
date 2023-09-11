@@ -86,6 +86,11 @@ export async function updateItem(
 		dateLastPurchased.toDate(),
 	);
 	console.log('prev:', previousEstimate);
+	const daysSinceLastPurchase = getDaysBetweenDates(
+		dateLastPurchased.toDate(),
+		new Date(),
+	);
+	console.log('daysSince:', daysSinceLastPurchase);
 
 	try {
 		await updateDoc(currentItemRef, currentItemUpdates);

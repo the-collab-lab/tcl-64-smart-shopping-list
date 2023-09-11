@@ -1,6 +1,7 @@
 import './ListItem.css';
 import { useState, useEffect } from 'react';
 import { updateItem } from '../api/firebase';
+import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 export function ListItem({
 	name,

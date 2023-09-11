@@ -12,13 +12,32 @@ const dayConverter = (text) => {
 	}
 };
 
-export function AddItem({ listId }) {
+export function AddItem({ listId, data }) {
 	const [itemName, setItemName] = useState('');
 	const [frequency, setFrequency] = useState('soon');
 	const [message, setMessage] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		const existingItem = data.find((item) => {
+			return (
+				itemName.localeCompare(item.name, 'en', {
+					sensitivity: 'base',
+					ignorePunctuation: true,
+				}) === 0
+			);
+		});
+
+		if (existingItem !== undefined) {
+			setErrorMessage('That item is already in your shopping list.');
+			setTimeout(() => {
+				setErrorMessage('');
+			}, 3000);
+			return;
+		}
+
 		const daysUntilNextPurchase = dayConverter(frequency);
 		try {
 			await addItem(listId, { itemName, daysUntilNextPurchase });
@@ -30,6 +49,7 @@ export function AddItem({ listId }) {
 			setMessage(`Failed to Add: ${itemName}`);
 		}
 	};
+
 	const handleFrequencyChange = (e) => {
 		setFrequency(e.target.value);
 	};
@@ -81,6 +101,7 @@ export function AddItem({ listId }) {
 				<br />
 				<button type="submit">Add Item</button>
 			</form>
+			<div>{errorMessage && <p>{errorMessage}</p>}</div>
 			<div>{message && <p>{message}</p>}</div>
 		</div>
 	);

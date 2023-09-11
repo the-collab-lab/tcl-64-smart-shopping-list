@@ -21,6 +21,14 @@ export function AddItem({ listId, data }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		if (!itemName) {
+			setErrorMessage('Please enter item name.');
+			setTimeout(() => {
+				setErrorMessage('');
+			}, 3000);
+			return;
+		}
+
 		const existingItem = data.find((item) => {
 			return (
 				itemName.localeCompare(item.name, 'en', {

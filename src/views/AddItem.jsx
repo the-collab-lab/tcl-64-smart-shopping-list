@@ -15,17 +15,21 @@ const dayConverter = (text) => {
 export function AddItem({ listId, data }) {
 	const [itemName, setItemName] = useState('');
 	const [frequency, setFrequency] = useState('soon');
-	const [message, setMessage] = useState('');
+	const [itemMessage, setItemMessage] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		const clearMessage = (messageToAdjust) => {
+			setTimeout(() => {
+				messageToAdjust('');
+			}, 3000);
+		};
+
 		if (!itemName) {
 			setErrorMessage('Please enter item name.');
-			setTimeout(() => {
-				setErrorMessage('');
-			}, 3000);
+			clearMessage(setErrorMessage);
 			return;
 		}
 
@@ -40,27 +44,21 @@ export function AddItem({ listId, data }) {
 
 		if (existingItem !== undefined) {
 			setErrorMessage('That item is already in your shopping list.');
-			setTimeout(() => {
-				setErrorMessage('');
-			}, 3000);
+			clearMessage(setErrorMessage);
 			return;
 		}
 
 		const daysUntilNextPurchase = dayConverter(frequency);
 		try {
 			await addItem(listId, { itemName, daysUntilNextPurchase });
-			setMessage(`${itemName} was added to the list`);
+			setItemMessage(`${itemName} was added to the list`);
 			setItemName('');
 			setFrequency('soon');
-			setTimeout(() => {
-				setMessage('');
-			}, 3000);
+			clearMessage(setItemMessage);
 		} catch (err) {
 			console.error(err);
-			setMessage(`Failed to Add: ${itemName}`);
-			setTimeout(() => {
-				setMessage('');
-			}, 3000);
+			setItemMessage(`Failed to Add: ${itemName}`);
+			clearMessage(setItemMessage);
 		}
 	};
 
@@ -116,7 +114,7 @@ export function AddItem({ listId, data }) {
 				<button type="submit">Add Item</button>
 			</form>
 			<div>{errorMessage && <p>{errorMessage}</p>}</div>
-			<div>{message && <p>{message}</p>}</div>
+			<div>{itemMessage && <p>{itemMessage}</p>}</div>
 		</div>
 	);
 }

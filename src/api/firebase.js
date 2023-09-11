@@ -8,7 +8,7 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
-import { getFutureDate } from '../utils';
+import { getFutureDate, getDaysBetweenDates } from '../utils';
 
 /**
  * A custom hook that subscribes to a shopping list in our Firestore database
@@ -72,8 +72,21 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 	});
 }
 
-export async function updateItem(listId, itemId, currentItemUpdates) {
+export async function updateItem(
+	listId,
+	itemId,
+	dateLastPurchased,
+	dateNextPurchased,
+	currentItemUpdates,
+) {
 	const currentItemRef = doc(db, listId, itemId);
+
+	const previousEstimate = getDaysBetweenDates(
+		dateNextPurchased.toDate(),
+		dateLastPurchased.toDate(),
+	);
+	console.log('prev:', previousEstimate);
+
 	try {
 		await updateDoc(currentItemRef, currentItemUpdates);
 	} catch (error) {

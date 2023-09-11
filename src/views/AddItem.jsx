@@ -27,7 +27,7 @@ export function AddItem({ listId, data }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		if (!itemName) {
+		if (!itemName.trim()) {
 			setErrorMessage('Please enter item name.');
 			clearMessage(setErrorMessage);
 			return;

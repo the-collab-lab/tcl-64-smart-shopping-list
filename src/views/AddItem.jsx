@@ -44,9 +44,15 @@ export function AddItem({ listId, data }) {
 			setMessage(`${itemName} was added to the list`);
 			setItemName('');
 			setFrequency('soon');
+			setTimeout(() => {
+				setMessage('');
+			}, 3000);
 		} catch (err) {
 			console.error(err);
 			setMessage(`Failed to Add: ${itemName}`);
+			setTimeout(() => {
+				setMessage('');
+			}, 3000);
 		}
 	};
 

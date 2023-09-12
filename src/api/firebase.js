@@ -89,16 +89,16 @@ export async function deleteItem() {
 	 */
 }
 
-export async function createNewList(listId) {
-	let response;
-	try {
-		response = await addDoc(collection(db, listId), {});
-	} catch (error) {
-		console.error('Error creating grocery list: ', error);
-		return 'error';
-	}
-	return response;
-}
+// export async function createNewList(listId) {
+// 	let response;
+// 	try {
+// 		response = await addDoc(collection(db, listId), {});
+// 	} catch (error) {
+// 		console.error('Error creating grocery list: ', error);
+// 		return 'error';
+// 	}
+// 	return response;
+// }
 
 export async function checkIfListExists(listId) {
 	const listCollectionRef = collection(db, listId);

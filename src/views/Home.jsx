@@ -1,29 +1,31 @@
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
-import { createNewList } from '../api/firebase';
+// import { createNewList } from '../api/firebase';
 import { useState } from 'react';
 import { checkIfListExists } from '../api/firebase';
 
 export function Home({ createToken, setListToken }) {
 	const navigate = useNavigate();
-	const [createListMessage, setCreateListMessage] = useState('');
+	// const [createListMessage, setCreateListMessage] = useState('');
 	const [existingListMessage, setExistingListMessage] = useState('');
 	const [tokenInput, setTokenInput] = useState('');
 
 	async function handleCreateClick() {
 		let listId = createToken();
 
-		const firestoreResult = await createNewList(listId);
-		if (firestoreResult !== 'error') {
-			setListToken(listId);
-			navigate('/list');
-		} else {
-			listId = null;
-			setListToken(listId);
-			setCreateListMessage(
-				'Your shopping list was not created. Please try again. ',
-			);
-		}
+		// const firestoreResult = await createNewList(listId);
+		// if (firestoreResult !== 'error') {
+		// 	setListToken(listId);
+		// 	navigate('/list');
+		// } else {
+		// 	listId = null;
+		// 	setListToken(listId);
+		// 	setCreateListMessage(
+		// 		'Your shopping list was not created. Please try again. ',
+		// 	);
+		// }
+		setListToken(listId);
+		navigate('/list');
 	}
 
 	async function handleTokenInputFormSubmit(e) {
@@ -66,7 +68,7 @@ export function Home({ createToken, setListToken }) {
 			<p>{existingListMessage}</p>
 			<br />
 			<button onClick={handleCreateClick}>Create a new list</button>
-			<p>{createListMessage}</p>
+			{/* <p>{createListMessage}</p> */}
 		</div>
 	);
 }

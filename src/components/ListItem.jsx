@@ -1,7 +1,6 @@
 import './ListItem.css';
 import { useState, useEffect } from 'react';
 import { updateItem } from '../api/firebase';
-import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 export function ListItem({
 	name,
@@ -31,10 +30,17 @@ export function ListItem({
 
 	const handleCheck = async () => {
 		if (!isChecked) {
-			await updateItem(listId, itemId, dateLastPurchased, dateNextPurchased, {
-				dateLastPurchased: new Date(),
-				totalPurchases: totalPurchases + 1,
-			});
+			await updateItem(
+				listId,
+				itemId,
+				dateLastPurchased,
+				dateNextPurchased,
+				totalPurchases,
+				{
+					dateLastPurchased: new Date(),
+					totalPurchases: totalPurchases + 1,
+				},
+			);
 		}
 
 		setIsChecked(true);

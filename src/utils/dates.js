@@ -13,7 +13,7 @@ export function getFutureDate(offset) {
 
 export function getDaysBetweenDates(startDate, endDate) {
 	console.log(endDate.getTime() - startDate.getTime());
-	return parseInt(
+	return Math.round(
 		(endDate.getTime() - startDate.getTime()) / ONE_DAY_IN_MILLISECONDS,
 	);
 }

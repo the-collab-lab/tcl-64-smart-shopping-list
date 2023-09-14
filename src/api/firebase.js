@@ -116,7 +116,6 @@ export async function updateItem(
 			dateLastPurchased.toDate(),
 			dateNextPurchased.toDate(),
 		);
-		console.log('prev:', previousEstimate);
 
 		numberOfDays = calculateEstimate(
 			previousEstimate,

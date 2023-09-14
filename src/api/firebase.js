@@ -79,33 +79,57 @@ export async function updateItem(
 	dateLastPurchased,
 	dateNextPurchased,
 	totalPurchases,
+	dateCreated,
 	currentItemUpdates,
 ) {
 	const currentItemRef = doc(db, listId, itemId);
 
-	const previousEstimate = getDaysBetweenDates(
-		dateLastPurchased.toDate(),
-		dateNextPurchased.toDate(),
-	);
-	console.log('prev:', previousEstimate);
+	let numberOfDays;
+	let daysSinceLastPurchase;
 
-	const daysSinceLastPurchase = getDaysBetweenDates(
-		dateLastPurchased.toDate(),
-		new Date(),
-	);
-	console.log('daysSinceLastPurchase:', daysSinceLastPurchase);
+	if (!dateLastPurchased) {
+		const daysSinceLastTransaction = getDaysBetweenDates(
+			dateCreated.toDate(),
+			dateNextPurchased.toDate(),
+		);
+		numberOfDays = calculateEstimate(
+			null,
+			daysSinceLastTransaction,
+			totalPurchases,
+		);
+		console.log(
+			'total purchases:',
+			totalPurchases,
+			'numberOfDays:',
+			numberOfDays,
+			'daysSinceLastTransaction:',
+			daysSinceLastTransaction,
+		);
+	} else {
+		daysSinceLastPurchase = getDaysBetweenDates(
+			dateLastPurchased.toDate(),
+			new Date(),
+		);
+		console.log('daysSinceLastPurchase:', daysSinceLastPurchase);
 
-	const numberOfDays = calculateEstimate(
-		previousEstimate,
-		daysSinceLastPurchase,
-		totalPurchases,
-	);
-	console.log(
-		'dateNextPurchased:',
-		numberOfDays,
-		'totalPurchases:',
-		totalPurchases,
-	);
+		const previousEstimate = getDaysBetweenDates(
+			dateLastPurchased.toDate(),
+			dateNextPurchased.toDate(),
+		);
+		console.log('prev:', previousEstimate);
+
+		numberOfDays = calculateEstimate(
+			previousEstimate,
+			daysSinceLastPurchase,
+			totalPurchases,
+		);
+		console.log(
+			'dateNextPurchased:',
+			numberOfDays,
+			'totalPurchases:',
+			totalPurchases,
+		);
+	}
 
 	const estimatedNextPurchaseDate = getFutureDate(numberOfDays);
 

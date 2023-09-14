@@ -9,6 +9,7 @@ export function ListItem({
 	totalPurchases,
 	listId,
 	dateNextPurchased,
+	dateCreated,
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 
@@ -36,6 +37,7 @@ export function ListItem({
 				dateLastPurchased,
 				dateNextPurchased,
 				totalPurchases,
+				dateCreated,
 				{
 					dateLastPurchased: new Date(),
 					totalPurchases: totalPurchases + 1,

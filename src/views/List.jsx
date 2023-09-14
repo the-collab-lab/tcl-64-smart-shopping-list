@@ -48,6 +48,7 @@ export function List({ data, listId }) {
 					totalPurchases={item.totalPurchases}
 					listId={listId}
 					dateNextPurchased={item.dateNextPurchased}
+					dateCreated={item.dateCreated}
 				/>
 			) : null;
 		});

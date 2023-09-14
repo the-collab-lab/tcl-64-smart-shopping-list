@@ -78,59 +78,56 @@ export async function updateItem(
 	itemId,
 	dateLastPurchased,
 	dateNextPurchased,
-	totalPurchases,
 	dateCreated,
 	currentItemUpdates,
 ) {
 	const currentItemRef = doc(db, listId, itemId);
+	// use updated totalPurchases
+	const { totalPurchases } = currentItemUpdates;
 
-	let numberOfDays;
-	let daysSinceLastPurchase;
-
-	if (!dateLastPurchased) {
-		const daysSinceLastTransaction = getDaysBetweenDates(
+	let daysSinceLastTransaction;
+	let previousEstimate;
+	// When the item was purchased first time
+	if (totalPurchases == 1) {
+		// number of days from the option selected by the user
+		daysSinceLastTransaction = getDaysBetweenDates(
 			dateCreated.toDate(),
 			dateNextPurchased.toDate(),
 		);
-		numberOfDays = calculateEstimate(
-			null,
-			daysSinceLastTransaction,
-			totalPurchases,
-		);
-		console.log(
-			'total purchases:',
-			totalPurchases,
-			'numberOfDays:',
-			numberOfDays,
-			'daysSinceLastTransaction:',
-			daysSinceLastTransaction,
-		);
-	} else {
-		daysSinceLastPurchase = getDaysBetweenDates(
-			dateLastPurchased.toDate(),
-			new Date(),
-		);
-		console.log('daysSinceLastPurchase:', daysSinceLastPurchase);
-
-		const previousEstimate = getDaysBetweenDates(
+	}
+	// after the first purchase
+	else {
+		previousEstimate = getDaysBetweenDates(
 			dateLastPurchased.toDate(),
 			dateNextPurchased.toDate(),
 		);
-
-		numberOfDays = calculateEstimate(
-			previousEstimate,
-			daysSinceLastPurchase,
-			totalPurchases,
-		);
-		console.log(
-			'dateNextPurchased:',
-			numberOfDays,
-			'totalPurchases:',
-			totalPurchases,
+		daysSinceLastTransaction = getDaysBetweenDates(
+			dateLastPurchased.toDate(),
+			new Date(),
 		);
 	}
+	const numberOfDays = calculateEstimate(
+		previousEstimate,
+		daysSinceLastTransaction,
+		totalPurchases,
+	);
 
 	const estimatedNextPurchaseDate = getFutureDate(numberOfDays);
+
+	console.log(
+		'previousEstimate: ',
+		previousEstimate,
+		'\ndaysSinceLastTransaction:',
+		daysSinceLastTransaction,
+		'\ndays to dateNextPurchased(Rounded Average of the last two values): ',
+		numberOfDays,
+		'\ntotalPurchases: ',
+		totalPurchases,
+		'\nToday: ',
+		new Date(),
+		'\nestimatedNextPurchaseDate: ',
+		estimatedNextPurchaseDate,
+	);
 
 	try {
 		await updateDoc(currentItemRef, {

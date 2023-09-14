@@ -36,7 +36,6 @@ export function ListItem({
 				itemId,
 				dateLastPurchased,
 				dateNextPurchased,
-				totalPurchases,
 				dateCreated,
 				{
 					dateLastPurchased: new Date(),

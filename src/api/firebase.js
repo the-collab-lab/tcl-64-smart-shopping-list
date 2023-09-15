@@ -89,10 +89,9 @@ export async function updateItem(
 	let previousEstimate;
 	// When the item was purchased first time
 	if (totalPurchases === 1) {
-		// number of days from the option selected by the user
 		daysSinceLastTransaction = getDaysBetweenDates(
 			dateCreated.toDate(),
-			dateNextPurchased.toDate(),
+			new Date(),
 		);
 	}
 	// after the first purchase

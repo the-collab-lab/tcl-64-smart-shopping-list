@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase';
 
+const messageResetTimeout = 3000;
+
 const dayConverter = (text) => {
 	switch (text) {
 		case 'soon':
@@ -12,24 +14,62 @@ const dayConverter = (text) => {
 	}
 };
 
-export function AddItem({ listId }) {
+export function AddItem({ listId, data }) {
 	const [itemName, setItemName] = useState('');
 	const [frequency, setFrequency] = useState('soon');
-	const [message, setMessage] = useState('');
+	const [itemMessage, setItemMessage] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
+
+	const clearErrorMessage = () => {
+		setTimeout(() => {
+			setErrorMessage('');
+		}, messageResetTimeout);
+	};
+
+	const clearItemMessage = () => {
+		setTimeout(() => {
+			setItemMessage('');
+		}, messageResetTimeout);
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		if (!itemName.trim()) {
+			setErrorMessage('Please enter item name.');
+			clearErrorMessage();
+			return;
+		}
+
+		const existingItem = data.find((item) => {
+			return (
+				itemName.localeCompare(item.name, 'en', {
+					sensitivity: 'base',
+					ignorePunctuation: true,
+				}) === 0
+			);
+		});
+
+		if (existingItem !== undefined) {
+			setErrorMessage(`${existingItem.name} is already in your shopping list.`);
+			clearErrorMessage();
+			return;
+		}
+
 		const daysUntilNextPurchase = dayConverter(frequency);
 		try {
 			await addItem(listId, { itemName, daysUntilNextPurchase });
-			setMessage(`${itemName} was added to the list`);
+			setItemMessage(`${itemName} was added to the list`);
 			setItemName('');
 			setFrequency('soon');
+			clearItemMessage();
 		} catch (err) {
 			console.error(err);
-			setMessage(`Failed to Add: ${itemName}`);
+			setItemMessage(`Failed to Add: ${itemName}`);
+			clearItemMessage();
 		}
 	};
+
 	const handleFrequencyChange = (e) => {
 		setFrequency(e.target.value);
 	};
@@ -81,7 +121,8 @@ export function AddItem({ listId }) {
 				<br />
 				<button type="submit">Add Item</button>
 			</form>
-			<div>{message && <p>{message}</p>}</div>
+			<div>{errorMessage && <p>{errorMessage}</p>}</div>
+			<div>{itemMessage && <p>{itemMessage}</p>}</div>
 		</div>
 	);
 }

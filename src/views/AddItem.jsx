@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase';
 
+const messageResetTimeout = 3000;
+
 const dayConverter = (text) => {
 	switch (text) {
 		case 'soon':
@@ -18,10 +20,16 @@ export function AddItem({ listId, data }) {
 	const [itemMessage, setItemMessage] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 
-	const clearMessage = (messageToAdjust) => {
+	const clearErrorMessage = () => {
 		setTimeout(() => {
-			messageToAdjust('');
-		}, 3000);
+			setErrorMessage('');
+		}, messageResetTimeout);
+	};
+
+	const clearItemMessage = () => {
+		setTimeout(() => {
+			setItemMessage('');
+		}, messageResetTimeout);
 	};
 
 	const handleSubmit = async (e) => {
@@ -29,7 +37,7 @@ export function AddItem({ listId, data }) {
 
 		if (!itemName.trim()) {
 			setErrorMessage('Please enter item name.');
-			clearMessage(setErrorMessage);
+			clearErrorMessage();
 			return;
 		}
 
@@ -44,7 +52,7 @@ export function AddItem({ listId, data }) {
 
 		if (existingItem !== undefined) {
 			setErrorMessage(`${existingItem.name} is already in your shopping list.`);
-			clearMessage(setErrorMessage);
+			clearErrorMessage();
 			return;
 		}
 
@@ -54,11 +62,11 @@ export function AddItem({ listId, data }) {
 			setItemMessage(`${itemName} was added to the list`);
 			setItemName('');
 			setFrequency('soon');
-			clearMessage(setItemMessage);
+			clearItemMessage();
 		} catch (err) {
 			console.error(err);
 			setItemMessage(`Failed to Add: ${itemName}`);
-			clearMessage(setItemMessage);
+			clearItemMessage();
 		}
 	};
 

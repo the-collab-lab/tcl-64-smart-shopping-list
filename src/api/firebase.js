@@ -82,20 +82,15 @@ export async function updateItem(
 	currentItemUpdates,
 ) {
 	const currentItemRef = doc(db, listId, itemId);
-	// use updated totalPurchases
 	const { totalPurchases } = currentItemUpdates;
-
 	let daysSinceLastTransaction;
 	let previousEstimate;
-	// When the item was purchased first time
 	if (totalPurchases === 1) {
 		daysSinceLastTransaction = getDaysBetweenDates(
 			dateCreated.toDate(),
 			new Date(),
 		);
-	}
-	// after the first purchase
-	else {
+	} else {
 		previousEstimate = getDaysBetweenDates(
 			dateLastPurchased.toDate(),
 			dateNextPurchased.toDate(),
@@ -112,21 +107,6 @@ export async function updateItem(
 	);
 
 	const estimatedNextPurchaseDate = getFutureDate(numberOfDays);
-
-	console.log(
-		'previousEstimate: ',
-		previousEstimate,
-		'\ndaysSinceLastTransaction:',
-		daysSinceLastTransaction,
-		'\ndays to dateNextPurchased(Rounded Average of the last two values): ',
-		numberOfDays,
-		'\ntotalPurchases: ',
-		totalPurchases,
-		'\nToday: ',
-		new Date(),
-		'\nestimatedNextPurchaseDate: ',
-		estimatedNextPurchaseDate,
-	);
 
 	try {
 		await updateDoc(currentItemRef, {

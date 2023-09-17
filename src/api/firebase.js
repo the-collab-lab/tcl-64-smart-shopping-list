@@ -8,7 +8,8 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
-import { getFutureDate } from '../utils';
+import { getFutureDate, getDaysBetweenDates } from '../utils';
+import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 /**
  * A custom hook that subscribes to a shopping list in our Firestore database
@@ -72,10 +73,46 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 	});
 }
 
-export async function updateItem(listId, itemId, currentItemUpdates) {
+export async function updateItem(
+	listId,
+	itemId,
+	dateLastPurchased,
+	dateNextPurchased,
+	dateCreated,
+	currentItemUpdates,
+) {
 	const currentItemRef = doc(db, listId, itemId);
+	const { totalPurchases } = currentItemUpdates;
+	let daysSinceLastTransaction;
+	let previousEstimate;
+	if (totalPurchases === 1) {
+		daysSinceLastTransaction = getDaysBetweenDates(
+			dateCreated.toDate(),
+			new Date(),
+		);
+	} else {
+		previousEstimate = getDaysBetweenDates(
+			dateLastPurchased.toDate(),
+			dateNextPurchased.toDate(),
+		);
+		daysSinceLastTransaction = getDaysBetweenDates(
+			dateLastPurchased.toDate(),
+			new Date(),
+		);
+	}
+	const numberOfDays = calculateEstimate(
+		previousEstimate,
+		daysSinceLastTransaction,
+		totalPurchases,
+	);
+
+	const estimatedNextPurchaseDate = getFutureDate(numberOfDays);
+
 	try {
-		await updateDoc(currentItemRef, currentItemUpdates);
+		await updateDoc(currentItemRef, {
+			...currentItemUpdates,
+			dateNextPurchased: estimatedNextPurchaseDate,
+		});
 	} catch (error) {
 		console.error('Unable to update item:', error.message);
 	}

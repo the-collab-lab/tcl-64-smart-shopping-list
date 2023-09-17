@@ -8,6 +8,8 @@ export function ListItem({
 	dateLastPurchased,
 	totalPurchases,
 	listId,
+	dateNextPurchased,
+	dateCreated,
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 
@@ -29,10 +31,17 @@ export function ListItem({
 
 	const handleCheck = async () => {
 		if (!isChecked) {
-			await updateItem(listId, itemId, {
-				dateLastPurchased: new Date(),
-				totalPurchases: totalPurchases + 1,
-			});
+			await updateItem(
+				listId,
+				itemId,
+				dateLastPurchased,
+				dateNextPurchased,
+				dateCreated,
+				{
+					dateLastPurchased: new Date(),
+					totalPurchases: totalPurchases + 1,
+				},
+			);
 		}
 
 		setIsChecked(true);

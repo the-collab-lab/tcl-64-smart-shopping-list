@@ -24,7 +24,6 @@ export function List({ data, listId }) {
 
 	const FormAndList = () => {
 		const [searchInput, setSearchInput] = useState('');
-		// const [urgency, setUrgency] = useState('');
 
 		const handleKeyDown = (e) => {
 			if (e.keyCode === 13) {
@@ -41,8 +40,9 @@ export function List({ data, listId }) {
 				new Date(),
 				item.dateNextPurchased.toDate(),
 			);
-
-			if (daysUntilPurchase <= 7) {
+			if (!item.dateLastPurchased) {
+				return 'not purchased yet';
+			} else if (daysUntilPurchase <= 7) {
 				return 'soon';
 			} else if (daysUntilPurchase <= 30) {
 				return 'kind of soon';
@@ -53,34 +53,12 @@ export function List({ data, listId }) {
 			}
 		};
 
-		const soonItemsToDisplay = [];
-		const kindOfSoonItemsToDisplay = [];
-		const notSoonItemsToDisplay = [];
-		const inactiveItemsToDisplay = [];
-
 		const listItemsToDisplay = data.map((item) => {
 			const isItemInSearch = item.name
 				?.toLowerCase()
 				.includes(searchInput.toLowerCase());
 
 			const itemUrgency = determineUrgency(item);
-
-			switch (itemUrgency) {
-				case 'soon':
-					soonItemsToDisplay.push(item.name);
-					break;
-				case 'kind of soon':
-					kindOfSoonItemsToDisplay.push(item.name);
-					break;
-				case 'not soon':
-					notSoonItemsToDisplay.push(item.name);
-					break;
-				case 'inactive':
-					inactiveItemsToDisplay.push(item.name);
-					break;
-				default:
-					break;
-			}
 
 			return isItemInSearch ? (
 				<ListItem

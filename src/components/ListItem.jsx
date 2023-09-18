@@ -57,7 +57,7 @@ export function ListItem({
 					checked={isChecked}
 					onChange={handleCheck}
 				/>
-				{name} :{urgency}
+				{name} : {urgency}
 			</label>
 		</li>
 	);

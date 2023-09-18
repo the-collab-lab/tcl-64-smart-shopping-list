@@ -153,3 +153,15 @@ export async function checkIfListExists(listId) {
 		return null;
 	}
 }
+
+export async function comparePurchaseUrgency(listId) {
+	const listCollectionRef = collection(db, listId);
+
+	try {
+		const query = listCollectionRef.orderBy('name');
+		console.log(query);
+		return query;
+	} catch (e) {
+		console.error('Unable to sort list', e.message);
+	}
+}

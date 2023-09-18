@@ -1,6 +1,7 @@
 import { ListItem } from '../components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getDaysBetweenDates } from '../utils';
 
 export function List({ data, listId }) {
 	const navigate = useNavigate();
@@ -23,6 +24,7 @@ export function List({ data, listId }) {
 
 	const FormAndList = () => {
 		const [searchInput, setSearchInput] = useState('');
+		// const [urgency, setUrgency] = useState('');
 
 		const handleKeyDown = (e) => {
 			if (e.keyCode === 13) {
@@ -34,10 +36,51 @@ export function List({ data, listId }) {
 			setSearchInput('');
 		};
 
+		const determineUrgency = (item) => {
+			const daysUntilPurchase = getDaysBetweenDates(
+				new Date(),
+				item.dateNextPurchased.toDate(),
+			);
+
+			if (daysUntilPurchase <= 7) {
+				return 'soon';
+			} else if (daysUntilPurchase <= 30) {
+				return 'kind of soon';
+			} else if (daysUntilPurchase < 60) {
+				return 'not soon';
+			} else {
+				return 'inactive';
+			}
+		};
+
+		const soonItemsToDisplay = [];
+		const kindOfSoonItemsToDisplay = [];
+		const notSoonItemsToDisplay = [];
+		const inactiveItemsToDisplay = [];
+
 		const listItemsToDisplay = data.map((item) => {
 			const isItemInSearch = item.name
 				?.toLowerCase()
 				.includes(searchInput.toLowerCase());
+
+			const itemUrgency = determineUrgency(item);
+
+			switch (itemUrgency) {
+				case 'soon':
+					soonItemsToDisplay.push(item.name);
+					break;
+				case 'kind of soon':
+					kindOfSoonItemsToDisplay.push(item.name);
+					break;
+				case 'not soon':
+					notSoonItemsToDisplay.push(item.name);
+					break;
+				case 'inactive':
+					inactiveItemsToDisplay.push(item.name);
+					break;
+				default:
+					break;
+			}
 
 			return isItemInSearch ? (
 				<ListItem
@@ -49,6 +92,7 @@ export function List({ data, listId }) {
 					listId={listId}
 					dateNextPurchased={item.dateNextPurchased}
 					dateCreated={item.dateCreated}
+					urgency={itemUrgency}
 				/>
 			) : null;
 		});

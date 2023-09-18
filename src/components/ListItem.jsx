@@ -10,6 +10,7 @@ export function ListItem({
 	listId,
 	dateNextPurchased,
 	dateCreated,
+	urgency,
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 
@@ -56,7 +57,7 @@ export function ListItem({
 					checked={isChecked}
 					onChange={handleCheck}
 				/>
-				{name}
+				{name} :{urgency}
 			</label>
 		</li>
 	);

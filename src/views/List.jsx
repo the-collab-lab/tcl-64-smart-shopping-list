@@ -38,11 +38,13 @@ export function List({ data, listId }) {
 
 		const determineUrgency = (item) => {
 			const daysUntilPurchase = getDaysBetweenDates(
-				new Date(),
 				item.dateNextPurchased.toDate(),
+				new Date(),
 			);
-			console.log(item.name, daysUntilPurchase);
-			if (daysUntilPurchase <= 7) {
+			console.log(item, daysUntilPurchase);
+			if (!item.dateLastPurchased) {
+				return 'not purchased yet';
+			} else if (daysUntilPurchase <= 7) {
 				return 'soon';
 			} else if (daysUntilPurchase <= 30) {
 				return 'kind of soon';
@@ -57,6 +59,7 @@ export function List({ data, listId }) {
 		const kindOfSoonItemsToDisplay = [];
 		const notSoonItemsToDisplay = [];
 		const inactiveItemsToDisplay = [];
+		const notPurchasedItemsToDisplay = [];
 
 		const listItemsToDisplay = data.map((item) => {
 			const isItemInSearch = item.name

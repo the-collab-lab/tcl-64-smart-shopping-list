@@ -5,6 +5,8 @@ import {
 	getDocs,
 	doc,
 	updateDoc,
+	orderBy,
+	query,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
@@ -154,14 +156,28 @@ export async function checkIfListExists(listId) {
 	}
 }
 
+// TODO: sort inactive items last + sort items in ascending order of days until purchase
 export async function comparePurchaseUrgency(listId) {
 	const listCollectionRef = collection(db, listId);
 
 	try {
-		const query = listCollectionRef.orderBy('name');
-		console.log(query);
-		return query;
-	} catch (e) {
-		console.error('Unable to sort list', e.message);
+		// Create a query with 'orderBy' to sort documents by the 'name' field
+		const q = query(listCollectionRef, orderBy('name'));
+
+		// Execute the query and get the query snapshot
+		const querySnapshot = await getDocs(q);
+
+		// Initialize an array to store the sorted data
+		const sortedData = [];
+
+		// Iterate through the documents in the snapshot and push them to the array
+		querySnapshot.forEach((doc) => {
+			sortedData.push({ id: doc.id, ...doc.data() });
+		});
+
+		return sortedData;
+	} catch (error) {
+		console.error('Error querying and sorting data:', error);
+		return [];
 	}
 }

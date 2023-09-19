@@ -1,7 +1,8 @@
 import { ListItem } from '../components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getDaysBetweenDates } from '../utils';
+import { comparePurchaseUrgency } from '../api/firebase';
 
 export function List({ data, listId }) {
 	const navigate = useNavigate();
@@ -24,6 +25,20 @@ export function List({ data, listId }) {
 
 	const FormAndList = () => {
 		const [searchInput, setSearchInput] = useState('');
+		const [sortedData, setSortedData] = useState([]);
+
+		useEffect(() => {
+			const fetchData = async () => {
+				try {
+					const sortedItems = await comparePurchaseUrgency(listId);
+					setSortedData(sortedItems);
+				} catch (e) {
+					console.error('Error fetching and sorting data:', e);
+				}
+			};
+
+			fetchData();
+		}, []);
 
 		const handleKeyDown = (e) => {
 			if (e.keyCode === 13) {
@@ -53,7 +68,7 @@ export function List({ data, listId }) {
 			}
 		};
 
-		const listItemsToDisplay = data.map((item) => {
+		const listItemsToDisplay = sortedData.map((item) => {
 			const isItemInSearch = item.name
 				?.toLowerCase()
 				.includes(searchInput.toLowerCase());

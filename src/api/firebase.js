@@ -185,13 +185,6 @@ export async function comparePurchaseUrgency(listId) {
 		});
 
 		sortedData.sort((a, b) => {
-			if (a.dateLastPurchased === null && b.dateLastPurchased !== null) {
-				return -1;
-			}
-			if (b.dateLastPurchased === null && a.dateLastPurchased !== null) {
-				return 1;
-			}
-
 			return a.daysUntilPurchase - b.daysUntilPurchase;
 		});
 

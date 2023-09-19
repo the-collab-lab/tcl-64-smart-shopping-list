@@ -52,11 +52,9 @@ export function List({ data, listId }) {
 		const determineUrgency = (item) => {
 			if (item.daysUntilPurchase < 0) {
 				return 'overdue';
-			} else if (!item.dateLastPurchased) {
-				return 'not yet purchased';
 			} else if (item.daysUntilPurchase <= 7) {
 				return 'soon';
-			} else if (item.daysUntilPurchase <= 30) {
+			} else if (item.daysUntilPurchase < 30) {
 				return 'kind of soon';
 			} else if (item.daysUntilPurchase < 60) {
 				return 'not soon';

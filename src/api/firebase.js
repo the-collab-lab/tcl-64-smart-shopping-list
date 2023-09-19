@@ -156,12 +156,11 @@ export async function checkIfListExists(listId) {
 	}
 }
 
-// TODO: sort inactive items last + sort items in ascending order of days until purchase
 export async function comparePurchaseUrgency(listId) {
 	const listCollectionRef = collection(db, listId);
 
 	try {
-		// Create a query with 'orderBy' to sort documents by the 'name' field
+		// Create a query with 'orderBy' to sort documents by the 'name' field (alphabetize)
 		const q = query(listCollectionRef, orderBy('name'));
 
 		// Execute the query and get the query snapshot
@@ -171,13 +170,35 @@ export async function comparePurchaseUrgency(listId) {
 		const sortedData = [];
 
 		// Iterate through the documents in the snapshot and push them to the array
+		// after also adding daysUntilPurchase to itemData
 		querySnapshot.forEach((doc) => {
-			sortedData.push({ id: doc.id, ...doc.data() });
+			const itemData = { id: doc.id, ...doc.data() };
+
+			const daysUntilPurchase = getDaysBetweenDates(
+				new Date(),
+				itemData.dateNextPurchased.toDate(),
+			);
+
+			itemData.daysUntilPurchase = daysUntilPurchase;
+			sortedData.push(itemData);
 		});
 
+		sortedData.sort((a, b) => {
+			// Compare by 'dateLastPurchased' -> items with null values will come first (overdue / not yet purchased)
+			if (a.dateLastPurchased === null && b.dateLastPurchased !== null) {
+				return -1;
+			}
+			if (b.dateLastPurchased === null && a.dateLastPurchased !== null) {
+				return 1;
+			}
+			// If 'dateLastPurchased' is equal or both are null, then compare by 'daysUntilPurchase'
+			return a.daysUntilPurchase - b.daysUntilPurchase;
+		});
+
+		console.log(sortedData);
 		return sortedData;
-	} catch (error) {
-		console.error('Error querying and sorting data:', error);
+	} catch (e) {
+		console.error('Error querying and sorting data:', e);
 		return [];
 	}
 }

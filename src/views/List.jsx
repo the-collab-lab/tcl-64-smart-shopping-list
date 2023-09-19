@@ -1,7 +1,6 @@
 import { ListItem } from '../components';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getDaysBetweenDates } from '../utils';
 import { comparePurchaseUrgency } from '../api/firebase';
 
 export function List({ data, listId }) {
@@ -28,7 +27,7 @@ export function List({ data, listId }) {
 		const [sortedData, setSortedData] = useState([]);
 
 		useEffect(() => {
-			const fetchData = async () => {
+			const fetchItemData = async () => {
 				try {
 					const sortedItems = await comparePurchaseUrgency(listId);
 					setSortedData(sortedItems);
@@ -37,7 +36,7 @@ export function List({ data, listId }) {
 				}
 			};
 
-			fetchData();
+			fetchItemData();
 		}, []);
 
 		const handleKeyDown = (e) => {
@@ -51,17 +50,13 @@ export function List({ data, listId }) {
 		};
 
 		const determineUrgency = (item) => {
-			const daysUntilPurchase = getDaysBetweenDates(
-				new Date(),
-				item.dateNextPurchased.toDate(),
-			);
 			if (!item.dateLastPurchased) {
 				return 'not purchased yet';
-			} else if (daysUntilPurchase <= 7) {
+			} else if (item.daysUntilPurchase <= 7) {
 				return 'soon';
-			} else if (daysUntilPurchase <= 30) {
+			} else if (item.daysUntilPurchase <= 30) {
 				return 'kind of soon';
-			} else if (daysUntilPurchase < 60) {
+			} else if (item.daysUntilPurchase < 60) {
 				return 'not soon';
 			} else {
 				return 'inactive';

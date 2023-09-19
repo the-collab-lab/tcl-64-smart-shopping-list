@@ -50,14 +50,16 @@ export function ListItem({
 
 	return (
 		<li className="ListItem">
-			<label>
+			<label className="ListItem-label">
 				<input
+					clasName="ListItem-checkbox"
 					type="checkbox"
 					name="checkbox"
 					checked={isChecked}
 					onChange={handleCheck}
 				/>
-				{name} : {urgency}
+				<span className="ListItem-name">{name}</span>
+				<span className="ListItem-urgency">{urgency}</span>
 			</label>
 		</li>
 	);

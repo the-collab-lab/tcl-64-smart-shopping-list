@@ -5,6 +5,7 @@ import {
 	getDocs,
 	doc,
 	updateDoc,
+	deleteDoc,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
@@ -118,12 +119,14 @@ export async function updateItem(
 	}
 }
 
-export async function deleteItem() {
-	/**
-	 * TODO: Fill this out so that it uses the correct Firestore function
-	 * to delete an existing item. You'll need to figure out what arguments
-	 * this function must accept!
-	 */
+export async function deleteItem(listId, itemId) {
+	const currentItemRef = doc(db, listId, itemId);
+
+	try {
+		await deleteDoc(currentItemRef);
+	} catch (error) {
+		console.error('Unable to delete item:', error.message);
+	}
 }
 
 export async function createNewList(listId) {

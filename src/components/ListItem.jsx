@@ -47,6 +47,13 @@ export function ListItem({
 		setIsChecked(true);
 	};
 
+	const handleDelete = async () => {
+		if (window.confirm('Are you sure you want to delete this item?')) {
+			// window.open("exit.html", "Thanks for Visiting!");
+			console.log('this item was deleted');
+		}
+	};
+
 	return (
 		<li className="ListItem">
 			<label>
@@ -58,6 +65,8 @@ export function ListItem({
 				/>
 				{name}
 			</label>
+			&nbsp;
+			<button onClick={handleDelete}>Delete</button>
 		</li>
 	);
 }

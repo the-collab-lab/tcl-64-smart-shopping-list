@@ -1,6 +1,6 @@
 import './ListItem.css';
 import { useState, useEffect } from 'react';
-import { updateItem } from '../api/firebase';
+import { updateItem, deleteItem } from '../api/firebase';
 
 export function ListItem({
 	name,
@@ -49,8 +49,7 @@ export function ListItem({
 
 	const handleDelete = async () => {
 		if (window.confirm('Are you sure you want to delete this item?')) {
-			// window.open("exit.html", "Thanks for Visiting!");
-			console.log('this item was deleted');
+			await deleteItem(listId, itemId);
 		}
 	};
 

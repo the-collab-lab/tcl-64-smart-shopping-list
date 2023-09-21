@@ -28,12 +28,8 @@ export function List({ data, listId }) {
 
 		useEffect(() => {
 			const fetchItemData = async () => {
-				try {
-					const sortedItems = await comparePurchaseUrgency(listId);
-					setSortedData(sortedItems);
-				} catch (e) {
-					console.error('Error fetching and sorting data:', e);
-				}
+				const sortedItems = await comparePurchaseUrgency(listId);
+				setSortedData(sortedItems);
 			};
 
 			fetchItemData();

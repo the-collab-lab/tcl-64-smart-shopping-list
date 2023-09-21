@@ -163,9 +163,9 @@ export async function checkIfListExists(listId) {
  * @returns {Array} An array of sorted shopping list items.
  */
 export async function comparePurchaseUrgency(listId) {
-	const listCollectionRef = collection(db, listId);
-
 	try {
+		const listCollectionRef = collection(db, listId);
+
 		const q = query(listCollectionRef, orderBy('name'));
 
 		const querySnapshot = await getDocs(q);

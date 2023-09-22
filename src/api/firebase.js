@@ -5,6 +5,8 @@ import {
 	getDocs,
 	doc,
 	updateDoc,
+	orderBy,
+	query,
 	deleteDoc,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
@@ -154,5 +156,44 @@ export async function checkIfListExists(listId) {
 	} catch (error) {
 		console.error('Unable to verify if list exists: ', error.message);
 		return null;
+	}
+}
+
+/**
+ * Fetches and sorts shopping list items by daysUntilPurchase and name.
+ *
+ * @param {string} listId - The ID of the shopping list.
+ * @returns {Array} An array of sorted shopping list items.
+ */
+export async function comparePurchaseUrgency(listId) {
+	try {
+		const listCollectionRef = collection(db, listId);
+
+		const q = query(listCollectionRef, orderBy('name'));
+
+		const querySnapshot = await getDocs(q);
+
+		const sortedData = [];
+
+		querySnapshot.forEach((doc) => {
+			const itemData = { id: doc.id, ...doc.data() };
+
+			const daysUntilPurchase = getDaysBetweenDates(
+				new Date(),
+				itemData.dateNextPurchased.toDate(),
+			);
+
+			itemData.daysUntilPurchase = daysUntilPurchase;
+			sortedData.push(itemData);
+		});
+
+		sortedData.sort((a, b) => {
+			return a.daysUntilPurchase - b.daysUntilPurchase;
+		});
+
+		return sortedData;
+	} catch (e) {
+		console.error('Error querying and sorting data:', e);
+		return [];
 	}
 }

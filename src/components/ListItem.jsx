@@ -10,6 +10,7 @@ export function ListItem({
 	listId,
 	dateNextPurchased,
 	dateCreated,
+	urgency,
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 
@@ -55,14 +56,16 @@ export function ListItem({
 
 	return (
 		<li className="ListItem">
-			<label>
+			<label className="ListItem-label">
 				<input
+					className="ListItem-checkbox"
 					type="checkbox"
 					name="checkbox"
 					checked={isChecked}
 					onChange={handleCheck}
 				/>
-				{name}
+				<span className="ListItem-name">{name}</span>
+				<code className="ListItem-urgency">{urgency}</code>
 			</label>
 			&nbsp;
 			<button onClick={handleDelete}>Delete</button>

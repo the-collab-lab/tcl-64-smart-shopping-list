@@ -3,8 +3,12 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { comparePurchaseUrgency } from '../api/firebase';
 
-export function List({ data, listId }) {
+export function List({ data, listId, setListToken }) {
 	const navigate = useNavigate();
+	const removeListToken = () => {
+		localStorage.removeItem('tcl-shopping-list-token');
+		setListToken(null);
+	};
 
 	const WelcomePrompt = () => {
 		return (
@@ -17,6 +21,10 @@ export function List({ data, listId }) {
 					}}
 				>
 					Add Item
+				</button>
+				&nbsp;
+				<button type="button" onClick={removeListToken}>
+					Log Out
 				</button>
 			</>
 		);
@@ -110,6 +118,9 @@ export function List({ data, listId }) {
 					</button>
 				</form>
 				<ul>{listItemsToDisplay}</ul>
+				<button type="button" onClick={removeListToken}>
+					Log Out
+				</button>
 			</>
 		);
 	};

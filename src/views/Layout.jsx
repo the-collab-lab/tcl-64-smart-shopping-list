@@ -24,9 +24,11 @@ export function Layout() {
 				</main>
 				<nav className="Nav">
 					<div className="Nav-container">
-						<NavLink to="/" className="Nav-link">
-							Home
-						</NavLink>
+						{!listToken ? (
+							<NavLink to="/" className="Nav-link">
+								Home
+							</NavLink>
+						) : null}
 						{listToken ? (
 							<NavLink to="/list" className="Nav-link">
 								List

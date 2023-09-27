@@ -29,9 +29,9 @@ export function List({ data, listId }) {
 	const CopyToken = () => {
 		const [copied, setCopied] = useState(false);
 
-		const handleCopyToClipboard = () => {
+		const handleCopyToClipboard = async () => {
 			try {
-				copy(listId);
+				await copy(listId);
 				setCopied(true);
 
 				setTimeout(() => {

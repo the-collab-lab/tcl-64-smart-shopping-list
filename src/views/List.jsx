@@ -47,7 +47,7 @@ export function List({ data, listId }) {
 				<span>
 					List token: <em>{listId}</em>{' '}
 					<button onClick={handleCopyToClipboard}>
-						<FontAwesomeIcon icon={clipboard} title="Clipboard" />
+						<FontAwesomeIcon icon={clipboard} title="Copy to clipboard" />
 					</button>
 				</span>
 				{copied ? <p>Copied!</p> : null}

@@ -11,6 +11,8 @@ import './Layout.css';
  */
 
 export function Layout() {
+	const listToken = localStorage.getItem('tcl-shopping-list-token');
+
 	return (
 		<>
 			<div className="Layout">
@@ -25,12 +27,16 @@ export function Layout() {
 						<NavLink to="/" className="Nav-link">
 							Home
 						</NavLink>
-						<NavLink to="/list" className="Nav-link">
-							List
-						</NavLink>
-						<NavLink to="/add-item" className="Nav-link">
-							Add Item
-						</NavLink>
+						{listToken ? (
+							<NavLink to="/list" className="Nav-link">
+								List
+							</NavLink>
+						) : null}
+						{listToken ? (
+							<NavLink to="/add-item" className="Nav-link">
+								Add Item
+							</NavLink>
+						) : null}
 					</div>
 				</nav>
 			</div>

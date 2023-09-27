@@ -45,10 +45,10 @@ export function List({ data, listId }) {
 		return (
 			<div>
 				<span>
-					Use the token <em>{listId}</em>{' '}
+					Use the token <em>{listId}</em>
 					<button onClick={handleCopyToClipboard}>
-						<FontAwesomeIcon icon={clipboard} />{' '}
-					</button>{' '}
+						<FontAwesomeIcon icon={clipboard} />
+					</button>
 					to share your shopping list.
 				</span>
 				{copied ? <p>Copied!</p> : null}
@@ -150,7 +150,7 @@ export function List({ data, listId }) {
 
 	return (
 		<>
-			<CopyToken listId={listId} />
+			<CopyToken />
 			{data.length > 1 ? <FormAndList /> : <WelcomePrompt />}
 		</>
 	);

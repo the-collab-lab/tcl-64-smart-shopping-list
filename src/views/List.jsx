@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { comparePurchaseUrgency } from '../api/firebase';
 
+import copy from 'clipboard-copy';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClipboard as clipboard } from '@fortawesome/free-regular-svg-icons';
+
 export function List({ data, listId }) {
 	const navigate = useNavigate();
 
@@ -19,6 +23,36 @@ export function List({ data, listId }) {
 					Add Item
 				</button>
 			</>
+		);
+	};
+
+	const CopyToken = () => {
+		const [copied, setCopied] = useState(false);
+
+		const handleCopyToClipboard = () => {
+			try {
+				copy(listId);
+				setCopied(true);
+
+				setTimeout(() => {
+					setCopied(false);
+				}, 3000);
+			} catch (err) {
+				console.error('Copy failed:', err);
+			}
+		};
+
+		return (
+			<div>
+				<span>
+					Use the token <em>{listId}</em>{' '}
+					<button onClick={handleCopyToClipboard}>
+						<FontAwesomeIcon icon={clipboard} />{' '}
+					</button>{' '}
+					to share your shopping list.
+				</span>
+				{copied ? <p>Copied!</p> : null}
+			</div>
 		);
 	};
 
@@ -114,5 +148,10 @@ export function List({ data, listId }) {
 		);
 	};
 
-	return <>{data.length > 1 ? <FormAndList /> : <WelcomePrompt />}</>;
+	return (
+		<>
+			<CopyToken listId={listId} />
+			{data.length > 1 ? <FormAndList /> : <WelcomePrompt />}
+		</>
+	);
 }

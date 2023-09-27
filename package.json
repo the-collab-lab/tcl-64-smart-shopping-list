@@ -7,11 +7,16 @@
 		"npm": ">=8.19.0"
 	},
 	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^6.4.2",
+		"@fortawesome/free-regular-svg-icons": "^6.4.2",
+		"@fortawesome/react-fontawesome": "^0.2.0",
 		"@the-collab-lab/shopping-list-utils": "^2.0.0",
+		"clipboard-copy": "^4.0.1",
 		"firebase": "^10.1.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"react-router-dom": "^6.14.2"
+		"react-router-dom": "^6.14.2",
+		"react-tooltip": "^5.21.4"
 	},
 	"devDependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",

@@ -22,7 +22,11 @@ export function Layout() {
 		<>
 			<div className="Layout">
 				<header className="Layout-header flex justify-end">
-					<FontAwesomeIcon icon={faRightFromBracket} title="Leave list" />
+					<FontAwesomeIcon
+						icon={faRightFromBracket}
+						title="Leave list"
+						className="text-black"
+					/>
 				</header>
 				<main className="Layout-main">
 					<Outlet />
@@ -30,14 +34,24 @@ export function Layout() {
 				<nav className="Nav">
 					<div className="Nav-container">
 						<NavLink to="/list" className="Nav-link">
-							<FontAwesomeIcon icon={faList} title="Navigate to list page" />
+							<FontAwesomeIcon
+								icon={faList}
+								title="Navigate to list page"
+								className="text-black"
+							/>
 							<br />
-							<p className="text-lg">List</p>
+							<p
+								className="text-lg
+							 text-black"
+							>
+								List
+							</p>
 						</NavLink>
 						<NavLink to="/add-item" className="Nav-link">
 							<FontAwesomeIcon
 								icon={faPlus}
 								title="Navigate to the add item page"
+								className="text-black"
 							/>
 							<br />
 							<p className="text-lg">Add Item</p>

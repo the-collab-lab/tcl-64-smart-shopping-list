@@ -9,8 +9,9 @@ export const UrgencyTag = ({
 		<div className="h-[120px]">
 			<div
 				className={
-					color +
-					' w-32 h-72  rounded-t-full relative hover:scale-105 mx-auto -rotate-90 sm:rotate-0 border-2 border-gray-400'
+					frequency === value
+						? `${color} w-32 h-72  rounded-t-full relative hover:scale-105 active:border-4 active:border- mx-auto -rotate-90 sm:rotate-0 border-4 border-blue-600`
+						: `${color} w-32 h-72  rounded-t-full relative hover:scale-105 active:border-4 active:border- mx-auto -rotate-90 sm:rotate-0 border-2 border-gray-400`
 				}
 			>
 				<input

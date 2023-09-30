@@ -27,13 +27,16 @@ export function Layout({ setListToken }) {
 		<>
 			<div className="Layout">
 				<header className="Layout-header flex justify-end">
-					<FontAwesomeIcon
-						icon={faRightFromBracket}
-						title="Leave list"
-						className="text-black"
-						type="button"
-						onClick={removeListToken}
-					/>
+					<div className="p-2">
+						<FontAwesomeIcon
+							icon={faRightFromBracket}
+							title="Leave list"
+							className="text-black"
+							type="button"
+							onClick={removeListToken}
+						/>
+						<p className="text-lg text-black">LEAVE LIST</p>
+					</div>
 				</header>
 				<main className="Layout-main">
 					<Outlet />
@@ -47,7 +50,7 @@ export function Layout({ setListToken }) {
 								className="text-black"
 							/>
 							<br />
-							<p className="text-lg text-black">List</p>
+							<p className="text-lg text-black">LIST</p>
 						</NavLink>
 						<NavLink to="/add-item" className="Nav-link">
 							<FontAwesomeIcon
@@ -56,7 +59,7 @@ export function Layout({ setListToken }) {
 								className="text-black"
 							/>
 							<br />
-							<p className="text-lg text-black">Add Item</p>
+							<p className="text-lg text-black">ADD ITEM</p>
 						</NavLink>
 					</div>
 				</nav>

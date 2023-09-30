@@ -93,7 +93,7 @@ export function AddItem({ listId, data }) {
 						setItemName(e.target.value);
 					}}
 				/>
-				<br />
+				<p className="mt-3 pt-10">How soon do you need to buy this item?</p>
 				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-10 sm:py-44">
 					<UrgencyTag
 						color={'bg-light-blue'}
@@ -123,7 +123,6 @@ export function AddItem({ listId, data }) {
 						order={'3'}
 					/>
 				</div>
-				<p className="m-3">How soon do you need to buy this item?</p>
 				<button type="submit" className="bg-green">
 					Add Item
 				</button>

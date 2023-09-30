@@ -17,7 +17,12 @@ import {
  * defined in `App.jsx`.
  */
 
-export function Layout() {
+export function Layout({ setListToken }) {
+	const removeListToken = () => {
+		localStorage.removeItem('tcl-shopping-list-token');
+		setListToken(null);
+	};
+
 	return (
 		<>
 			<div className="Layout">
@@ -26,6 +31,8 @@ export function Layout() {
 						icon={faRightFromBracket}
 						title="Leave list"
 						className="text-black"
+						type="button"
+						onClick={removeListToken}
 					/>
 				</header>
 				<main className="Layout-main">
@@ -40,12 +47,7 @@ export function Layout() {
 								className="text-black"
 							/>
 							<br />
-							<p
-								className="text-lg
-							 text-black"
-							>
-								List
-							</p>
+							<p className="text-lg text-black">List</p>
 						</NavLink>
 						<NavLink to="/add-item" className="Nav-link">
 							<FontAwesomeIcon
@@ -54,7 +56,7 @@ export function Layout() {
 								className="text-black"
 							/>
 							<br />
-							<p className="text-lg">Add Item</p>
+							<p className="text-lg text-black">Add Item</p>
 						</NavLink>
 					</div>
 				</nav>

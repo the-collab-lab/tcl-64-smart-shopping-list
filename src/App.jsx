@@ -42,7 +42,7 @@ export function App() {
 	return (
 		<Router>
 			<Routes>
-				<Route path="/" element={<Layout />}>
+				<Route path="/" element={<Layout setListToken={setListToken} />}>
 					<Route
 						index
 						element={
@@ -57,7 +57,7 @@ export function App() {
 						path="/list"
 						element={
 							listToken ? (
-								<List data={data} listId={listToken} />
+								<List data={data} l istId={listToken} />
 							) : (
 								<Navigate to="/" />
 							)

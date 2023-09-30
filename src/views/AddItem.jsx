@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase';
+import { RoughNotation } from 'react-rough-notation';
 
 const messageResetTimeout = 3000;
 
@@ -19,16 +20,20 @@ export function AddItem({ listId, data }) {
 	const [frequency, setFrequency] = useState('soon');
 	const [itemMessage, setItemMessage] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
+	const [showRoughNotation, setShowRoughNotation] = useState(false);
+	const [color, setColor] = useState('');
 
 	const clearErrorMessage = () => {
 		setTimeout(() => {
 			setErrorMessage('');
+			setShowRoughNotation(false);
 		}, messageResetTimeout);
 	};
 
 	const clearItemMessage = () => {
 		setTimeout(() => {
 			setItemMessage('');
+			setShowRoughNotation(false);
 		}, messageResetTimeout);
 	};
 
@@ -37,6 +42,8 @@ export function AddItem({ listId, data }) {
 
 		if (!itemName.trim()) {
 			setErrorMessage('Please enter item name.');
+			setColor('FF0000'); // red
+			setShowRoughNotation(true);
 			clearErrorMessage();
 			return;
 		}
@@ -52,6 +59,8 @@ export function AddItem({ listId, data }) {
 
 		if (existingItem !== undefined) {
 			setErrorMessage(`${existingItem.name} is already in your shopping list.`);
+			setColor('FF0000');
+			setShowRoughNotation(true);
 			clearErrorMessage();
 			return;
 		}
@@ -60,12 +69,15 @@ export function AddItem({ listId, data }) {
 		try {
 			await addItem(listId, { itemName, daysUntilNextPurchase });
 			setItemMessage(`${itemName} was added to the list`);
+			setColor('7AB179'); // green
+			setShowRoughNotation(true);
 			setItemName('');
 			setFrequency('soon');
 			clearItemMessage();
 		} catch (err) {
 			console.error(err);
 			setItemMessage(`Failed to Add: ${itemName}`);
+			setColor('FF0000');
 			clearItemMessage();
 		}
 	};
@@ -121,8 +133,30 @@ export function AddItem({ listId, data }) {
 				<br />
 				<button type="submit">Add Item</button>
 			</form>
-			<div>{errorMessage && <p>{errorMessage}</p>}</div>
-			<div>{itemMessage && <p>{itemMessage}</p>}</div>
+			<div>
+				{errorMessage && (
+					<RoughNotation
+						type="underline"
+						strokeWidth={2}
+						color={`#${color}`}
+						show={showRoughNotation}
+					>
+						{errorMessage}
+					</RoughNotation>
+				)}
+			</div>
+			<div>
+				{itemMessage && (
+					<RoughNotation
+						type="underline"
+						strokeWidth={2}
+						color={`#${color}`}
+						show={showRoughNotation}
+					>
+						{itemMessage}
+					</RoughNotation>
+				)}
+			</div>
 		</div>
 	);
 }

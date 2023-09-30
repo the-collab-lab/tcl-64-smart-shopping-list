@@ -24,9 +24,9 @@ export const UrgencyTag = ({
 				/>
 				<label
 					htmlFor={value}
-					className="absolute w-52 sm:w-full bg-white top-[50%] -right-10 sm:right-0 text-center border rotate-90 sm:rotate-0 cursor-pointer"
+					className="absolute w-52 sm:w-full bg-white dark:text-black top-[50%] -right-10 sm:right-0 sm:h-20 text-center border rotate-90 sm:rotate-0 sm:flex sm:items-center sm:justify-center   cursor-pointer"
 				>
-					{tagName}
+					<span>{tagName}</span>
 				</label>
 			</div>
 		</div>

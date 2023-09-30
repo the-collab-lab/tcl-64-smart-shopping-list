@@ -1,5 +1,13 @@
 import { Outlet, NavLink } from 'react-router-dom';
 import './Layout.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+	faRightFromBracket,
+	faList,
+	faPlus,
+} from '@fortawesome/free-solid-svg-icons';
+
+// import { faLeaf } from '@fortawesome/free-brands-svg-icons';
 
 /**
  * TODO: The links defined in this file don't work!
@@ -13,22 +21,26 @@ export function Layout() {
 	return (
 		<>
 			<div className="Layout">
-				<header className="Layout-header">
-					<h1 className="text-5xl tracking-widest font-normal">LISTIFY</h1>
+				<header className="Layout-header flex justify-end">
+					<FontAwesomeIcon icon={faRightFromBracket} title="Leave list" />
 				</header>
 				<main className="Layout-main">
 					<Outlet />
 				</main>
 				<nav className="Nav">
 					<div className="Nav-container">
-						<NavLink to="/" className="Nav-link">
-							Home
-						</NavLink>
 						<NavLink to="/list" className="Nav-link">
-							List
+							<FontAwesomeIcon icon={faList} title="Navigate to list page" />
+							<br />
+							<p className="text-lg">List</p>
 						</NavLink>
 						<NavLink to="/add-item" className="Nav-link">
-							Add Item
+							<FontAwesomeIcon
+								icon={faPlus}
+								title="Navigate to the add item page"
+							/>
+							<br />
+							<p className="text-lg">Add Item</p>
 						</NavLink>
 					</div>
 				</nav>

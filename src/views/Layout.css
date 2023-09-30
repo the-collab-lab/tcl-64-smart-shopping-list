@@ -18,10 +18,11 @@
 }
 
 .Layout-header {
-	background-color: var(--color-bg);
+	background-color: var(--color-accent);
 	padding-bottom: 0.5rem;
 	padding-top: max(env(safe-area-inset-top), 1rem);
 	text-align: center;
+	color: var(--color-text);
 }
 
 .Layout-header > h1 {
@@ -36,7 +37,7 @@
 }
 
 .Nav {
-	background-color: var(--color-bg);
+	background-color: var(--color-accent);
 	border-top: 1px solid var(--color-border);
 	bottom: 0;
 	display: flex;
@@ -56,7 +57,7 @@
 }
 
 .Nav-link {
-	--color-text: var(--color-accent);
+	/* --color-text: var(--color-accent); */
 
 	color: var(--color-text);
 	font-size: 1.4em;

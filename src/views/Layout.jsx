@@ -1,5 +1,4 @@
 import { Outlet, NavLink } from 'react-router-dom';
-
 import './Layout.css';
 
 /**
@@ -15,7 +14,7 @@ export function Layout() {
 		<>
 			<div className="Layout">
 				<header className="Layout-header">
-					<h1 className="text-green">Smart shopping list</h1>
+					<h1 className="text-5xl tracking-widest font-normal">LISTIFY</h1>
 				</header>
 				<main className="Layout-main">
 					<Outlet />

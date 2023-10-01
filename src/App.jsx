@@ -42,7 +42,10 @@ export function App() {
 	return (
 		<Router>
 			<Routes>
-				<Route path="/" element={<Layout setListToken={setListToken} />}>
+				<Route
+					path="/"
+					element={<Layout setListToken={setListToken} listId={listToken} />}
+				>
 					<Route
 						index
 						element={

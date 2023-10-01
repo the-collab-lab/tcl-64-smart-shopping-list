@@ -6,6 +6,7 @@ import {
 	faList,
 	faPlus,
 } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 // import { faLeaf } from '@fortawesome/free-brands-svg-icons';
 
@@ -23,25 +24,38 @@ export function Layout({ setListToken }) {
 		setListToken(null);
 	};
 
-	return (
-		<>
-			<div className="Layout">
-				<header className="Layout-header flex justify-end">
-					<div className="p-2">
-						<FontAwesomeIcon
-							icon={faRightFromBracket}
-							title="Leave list"
-							className="text-black"
-							type="button"
-							onClick={removeListToken}
+	const listToken = localStorage.getItem('tcl-shopping-list-token');
+
+	const renderNavBar = () => {
+		if (!listToken) {
+			return (
+				<div className="Nav-container">
+					<a href="https://the-collab-lab.codes/" className="Nav-link">
+						<img
+							src="https://myawsbucketmundoimages.s3.us-east-2.amazonaws.com/collabLabLogo.svg"
+							alt="CollabLab logo, click here to learn more"
+							className="text-black h-16 -mt-2"
 						/>
-						<p className="text-lg text-black">LEAVE LIST</p>
-					</div>
-				</header>
-				<main className="Layout-main">
-					<Outlet />
-				</main>
-				<nav className="Nav">
+					</a>
+					<a
+						href="https://github.com/the-collab-lab/tcl-64-smart-shopping-list"
+						className="Nav-link"
+					>
+						<FontAwesomeIcon
+							icon={faGithub}
+							title="Navigate to project repository"
+							className="text-black"
+						/>
+					</a>
+
+					<p className="text-lg text-black mt-2 pl-4">
+						Created by Tiala, Ismarji, Satoshi, and Christina
+					</p>
+				</div>
+			);
+		} else {
+			if (listToken) {
+				return (
 					<div className="Nav-container">
 						<NavLink to="/list" className="Nav-link">
 							<FontAwesomeIcon
@@ -62,7 +76,40 @@ export function Layout({ setListToken }) {
 							<p className="text-lg text-black">ADD ITEM</p>
 						</NavLink>
 					</div>
-				</nav>
+				);
+			}
+		}
+	};
+	const showLogOut = () => {
+		if (!listToken) {
+			return <div className="p-10"></div>;
+		} else {
+			if (listToken) {
+				return (
+					<div className="p-2">
+						<FontAwesomeIcon
+							icon={faRightFromBracket}
+							title="Leave list"
+							className="text-black"
+							type="button"
+							onClick={removeListToken}
+						/>
+						<p className="text-lg text-black">LEAVE LIST</p>
+					</div>
+				);
+			}
+		}
+	};
+	return (
+		<>
+			<div className="Layout">
+				<header className="Layout-header flex justify-end">
+					{showLogOut()}
+				</header>
+				<main className="Layout-main">
+					<Outlet />
+				</main>
+				<nav className="Nav">{renderNavBar()}</nav>
 			</div>
 		</>
 	);

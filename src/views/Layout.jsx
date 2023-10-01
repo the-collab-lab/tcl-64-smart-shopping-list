@@ -1,4 +1,4 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import './Layout.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -9,6 +9,8 @@ import {
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 export function Layout({ setListToken }) {
+	const location = useLocation();
+
 	const removeListToken = () => {
 		localStorage.removeItem('tcl-shopping-list-token');
 		setListToken(null);
@@ -46,7 +48,12 @@ export function Layout({ setListToken }) {
 			if (listToken) {
 				return (
 					<div className="Nav-container">
-						<NavLink to="/list" className="Nav-link">
+						<NavLink
+							to="/list"
+							className={`Nav-link ${
+								location.pathname === '/list' ? 'underline text-black' : ''
+							}`}
+						>
 							<FontAwesomeIcon
 								icon={faList}
 								title="Navigate to list page"
@@ -55,7 +62,12 @@ export function Layout({ setListToken }) {
 							<br />
 							<p className="text-lg text-black">LIST</p>
 						</NavLink>
-						<NavLink to="/add-item" className="Nav-link">
+						<NavLink
+							to="/add-item"
+							className={`Nav-link ${
+								location.pathname === '/add-item' ? 'underline text-black' : ''
+							}`}
+						>
 							<FontAwesomeIcon
 								icon={faPlus}
 								title="Navigate to the add item page"

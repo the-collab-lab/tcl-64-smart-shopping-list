@@ -8,16 +8,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
-// import { faLeaf } from '@fortawesome/free-brands-svg-icons';
-
-/**
- * TODO: The links defined in this file don't work!
- *
- * Instead of anchor element, they should use a component
- * from `react-router-dom` to navigate to the routes
- * defined in `App.jsx`.
- */
-
 export function Layout({ setListToken }) {
 	const removeListToken = () => {
 		localStorage.removeItem('tcl-shopping-list-token');
@@ -29,12 +19,12 @@ export function Layout({ setListToken }) {
 	const renderNavBar = () => {
 		if (!listToken) {
 			return (
-				<div className="Nav-container">
+				<div className="Nav-container flex">
 					<a href="https://the-collab-lab.codes/" className="Nav-link">
 						<img
 							src="https://myawsbucketmundoimages.s3.us-east-2.amazonaws.com/collabLabLogo.svg"
 							alt="CollabLab logo, click here to learn more"
-							className="text-black h-16 -mt-2"
+							className="text-black h-12 -mt-1 md:h-16 "
 						/>
 					</a>
 					<a
@@ -44,11 +34,10 @@ export function Layout({ setListToken }) {
 						<FontAwesomeIcon
 							icon={faGithub}
 							title="Navigate to project repository"
-							className="text-black"
+							className="text-black md:text-6xl -mt-2"
 						/>
 					</a>
-
-					<p className="text-lg text-black mt-2 pl-4">
+					<p className="text-xl text-black mt-2 pl-4 md:mt-6 md:text-2xl">
 						Created by Tiala, Ismarji, Satoshi, and Christina
 					</p>
 				</div>

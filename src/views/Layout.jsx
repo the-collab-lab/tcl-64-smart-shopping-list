@@ -26,7 +26,7 @@ export function Layout({ setListToken }) {
 						<img
 							src="https://myawsbucketmundoimages.s3.us-east-2.amazonaws.com/collabLabLogo.svg"
 							alt="CollabLab logo, click here to learn more"
-							className="text-black h-12 -mt-1 md:h-16 "
+							className="text-black h-12 md:mt-1 md:h-14 "
 						/>
 					</a>
 					<a
@@ -36,7 +36,7 @@ export function Layout({ setListToken }) {
 						<FontAwesomeIcon
 							icon={faGithub}
 							title="Navigate to project repository"
-							className="text-black md:text-6xl -mt-2"
+							className="text-black md:text-6xl md:-mt-0  "
 						/>
 					</a>
 					<p className="text-xl text-black mt-2 pl-4 md:mt-6 md:text-2xl">
@@ -47,7 +47,7 @@ export function Layout({ setListToken }) {
 		} else {
 			if (listToken) {
 				return (
-					<div className="Nav-container">
+					<div className="Nav-container -mt-4">
 						<NavLink
 							to="/list"
 							className={`Nav-link ${
@@ -60,7 +60,7 @@ export function Layout({ setListToken }) {
 								className="text-black"
 							/>
 							<br />
-							<p className="text-lg text-black">LIST</p>
+							<p className="text-lg text-black">VIEW LIST</p>
 						</NavLink>
 						<NavLink
 							to="/add-item"
@@ -76,37 +76,26 @@ export function Layout({ setListToken }) {
 							<br />
 							<p className="text-lg text-black">ADD ITEM</p>
 						</NavLink>
+						<NavLink className="Nav-link">
+							<FontAwesomeIcon
+								icon={faRightFromBracket}
+								title="Leave list"
+								className="text-black"
+								type="button"
+								onClick={removeListToken}
+							/>
+							<p className="text-lg text-black">LEAVE LIST</p>
+							<br />
+						</NavLink>
 					</div>
 				);
 			}
 		}
 	};
-	const showLogOut = () => {
-		if (!listToken) {
-			return <div className="p-10"></div>;
-		} else {
-			if (listToken) {
-				return (
-					<div className="p-2">
-						<FontAwesomeIcon
-							icon={faRightFromBracket}
-							title="Leave list"
-							className="text-black"
-							type="button"
-							onClick={removeListToken}
-						/>
-						<p className="text-lg text-black">LEAVE LIST</p>
-					</div>
-				);
-			}
-		}
-	};
+
 	return (
 		<>
 			<div className="Layout">
-				<header className="Layout-header flex justify-end">
-					{showLogOut()}
-				</header>
 				<main className="Layout-main">
 					<Outlet />
 				</main>

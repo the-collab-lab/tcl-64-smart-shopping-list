@@ -63,6 +63,7 @@
 	padding: 0.8rem;
 	text-align: center;
 	text-underline-offset: 0.1em;
+	height: 50px;
 }
 
 .Nav-link.active {

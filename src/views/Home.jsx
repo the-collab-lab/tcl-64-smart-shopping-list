@@ -3,12 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { createNewList } from '../api/firebase';
 import { useState } from 'react';
 import { checkIfListExists } from '../api/firebase';
+import { RoughNotation } from 'react-rough-notation';
+
+const messageResetTimeout = 3000;
 
 export function Home({ createToken, setListToken }) {
 	const navigate = useNavigate();
 	const [createListMessage, setCreateListMessage] = useState('');
 	const [existingListMessage, setExistingListMessage] = useState('');
 	const [tokenInput, setTokenInput] = useState('');
+	const [showRoughNotation, setShowRoughNotation] = useState(false);
+	const messageColor = 'FF0000';
 
 	async function handleCreateClick() {
 		let listId = createToken();
@@ -23,6 +28,8 @@ export function Home({ createToken, setListToken }) {
 			setCreateListMessage(
 				'Your shopping list was not created. Please try again. ',
 			);
+			setShowRoughNotation(true);
+			clearErrorMessage();
 		}
 	}
 
@@ -31,6 +38,8 @@ export function Home({ createToken, setListToken }) {
 
 		if (!tokenInput) {
 			setExistingListMessage('Please enter a token.');
+			setShowRoughNotation(true);
+			clearErrorMessage();
 			return;
 		}
 		const listExists = await checkIfListExists(tokenInput);
@@ -39,6 +48,8 @@ export function Home({ createToken, setListToken }) {
 			navigate('/list');
 		} else {
 			setExistingListMessage(' Enter a valid token or create a new list.');
+			setShowRoughNotation(true);
+			clearErrorMessage();
 			setTokenInput('');
 		}
 	}
@@ -46,9 +57,41 @@ export function Home({ createToken, setListToken }) {
 		setTokenInput(e.target.value);
 	}
 
+	const clearErrorMessage = () => {
+		setTimeout(() => {
+			setExistingListMessage('');
+			setCreateListMessage('');
+			setShowRoughNotation(false);
+		}, messageResetTimeout);
+	};
+
 	return (
 		<div className="Home">
 			<h2>Welcome to your Smart Shopping List</h2>
+			<div>
+				{existingListMessage && (
+					<RoughNotation
+						type="underline"
+						strokeWidth={2}
+						color={`#${messageColor}`}
+						show={showRoughNotation}
+					>
+						{existingListMessage}
+					</RoughNotation>
+				)}
+			</div>
+			<div>
+				{createListMessage && (
+					<RoughNotation
+						type="underline"
+						strokeWidth={2}
+						color={`#${messageColor}`}
+						show={showRoughNotation}
+					>
+						{createListMessage}
+					</RoughNotation>
+				)}
+			</div>
 			<form onSubmit={handleTokenInputFormSubmit}>
 				<label htmlFor="tokenInput">Enter existing list token:</label>
 				<br />
@@ -63,10 +106,8 @@ export function Home({ createToken, setListToken }) {
 				<button type="submit">Join existing list</button>
 				<br />
 			</form>
-			<p>{existingListMessage}</p>
 			<br />
 			<button onClick={handleCreateClick}>Create a new list</button>
-			<p>{createListMessage}</p>
 		</div>
 	);
 }

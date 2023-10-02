@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { addItem } from '../api/firebase';
 import { RoughNotation } from 'react-rough-notation';
 import { UrgencyTag } from '../components/UrgencyTag';
+import Button from '../components/Button';
 
 const messageResetTimeout = 3000;
 
@@ -127,8 +128,8 @@ export function AddItem({ listId, data }) {
 						setItemName(e.target.value);
 					}}
 				/>
-				<p className="mt-3 pt-10">How soon do you need to buy this item?</p>
-				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-10 sm:py-44">
+				<p className="mt-3 pt-20">How soon do you need to buy this item?</p>
+				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-20 sm:py-20">
 					<UrgencyTag
 						color={'bg-light-blue'}
 						value={'soon'}
@@ -157,9 +158,12 @@ export function AddItem({ listId, data }) {
 						order={'3'}
 					/>
 				</div>
-				<button type="submit" className="bg-green">
-					Add Item
-				</button>
+				<Button
+					text="ADD ITEM"
+					withIcon={true}
+					onClick={handleSubmit}
+					className="mb-5"
+				/>
 			</form>
 		</div>
 	);

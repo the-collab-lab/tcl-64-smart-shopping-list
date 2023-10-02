@@ -7,7 +7,10 @@ export default {
 				yellow: '#FFDE30',
 				'light-blue': '#8AD0C3',
 				red: '#E36849',
-				green: '#137C78',
+				green: {
+					DEFAULT: '#137C78',
+					dark: '#1fa39e',
+				},
 			},
 		},
 	},

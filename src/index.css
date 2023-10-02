@@ -12,36 +12,33 @@
 }
 
 :root {
-	--color-black: hsla(220, 13%, 18%, 1);
-	--color-gray-dark: hsla(220, 13%, 25%, 1);
-	--color-white: hsla(220, 13%, 98%, 1);
-	--color-gray-light: hsla(220, 13%, 94%, 1);
-	--color-emerald-green: hsla(168, 92%, 25%, 1);
-	--color-vermillion-green: hsla(168, 92%, 43%, 1);
-	--color-cobalt-blue: hsla(215, 100%, 34%, 1);
-	--color-pastel-blue: hsla(215, 100%, 73%, 1);
-	--color-red: hsl(0, 68%, 42%);
+	--color-black: #000000;
+	--color-white: #ffffff;
+	--color-dark-teal: #137c78;
+	--color-light-teal: #8ad0ce;
+	--color-dark-orange: #e36849;
+	--color-yellow: #ffbe30;
 
-	--color-accent: var(--color-pastel-blue);
+	--color-accent: var(--color-light-teal);
 	--color-bg: var(--color-black);
-	--color-border: hsla(220, 13%, 32%, 1);
-	--color-error: var(--color-red);
+	--color-border: var(--color-light-teal);
+	--color-error: var(--color-dark-orange);
 	--color-text: var(--color-white);
 }
 
 @media screen and (prefers-color-scheme: light) {
 	:root {
-		--color-accent: var(--color-cobalt-blue);
+		--color-accent: var(--color-light-teal);
 		--color-bg: var(--color-white);
-		--color-border: hsla(220, 13%, 78%, 1);
+		--color-border: var(--color-black);
 		--color-text: var(--color-black);
 	}
 }
 
 :root.theme-light {
-	--color-accent: var(--color-cobalt-blue);
+	--color-accent: var(--color-light-teal);
 	--color-bg: var(--color-white);
-	--color-border: hsla(220, 13%, 78%, 1);
+	--color-border: var(--color-black);
 	--color-text: var(--color-black);
 }
 

@@ -119,15 +119,15 @@ export function AddItem({ listId, data }) {
 				</div>
 			</div>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor="item" className="mr-2">
-					Item
-				</label>
 				<div className="flex justify-center items-center">
-					<div className="w-1/2 flex items-center border-2 rounded-lg py-3 px-4">
+					<label htmlFor="item" className="px-3">
+						Item:
+					</label>
+					<div className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3 sm:px-5">
 						<FontAwesomeIcon
 							icon={pen}
 							title="Enter item name"
-							className="text-gray-500 mr-2"
+							className="text-gray-500 mr-2 sm:mr-4"
 						/>
 						<input
 							className="flex-grow border-none outline-none bg-transparent"
@@ -142,6 +142,7 @@ export function AddItem({ listId, data }) {
 						/>
 					</div>
 				</div>
+
 				<p className="mt-3 pt-10">How soon do you need to buy this item?</p>
 				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-10 sm:py-44">
 					<UrgencyTag

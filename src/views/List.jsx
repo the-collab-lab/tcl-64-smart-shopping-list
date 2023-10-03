@@ -6,6 +6,7 @@ import { comparePurchaseUrgency } from '../api/firebase';
 import copy from 'clipboard-copy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard as clipboard } from '@fortawesome/free-regular-svg-icons';
+import { faPenToSquare as pen } from '@fortawesome/free-regular-svg-icons';
 
 export function List({ data, listId }) {
 	const navigate = useNavigate();
@@ -43,8 +44,8 @@ export function List({ data, listId }) {
 		};
 
 		return (
-			<div>
-				<span>
+			<div className="flex justify-center items-center">
+				<span className="block p-5">
 					List token: <em>{listId}</em>{' '}
 					<button onClick={handleCopyToClipboard}>
 						<FontAwesomeIcon icon={clipboard} title="Copy to clipboard" />
@@ -116,31 +117,43 @@ export function List({ data, listId }) {
 
 		return (
 			<>
-				<form>
-					<label htmlFor="filter">Filter List</label>
-					<br />
-					<input
-						type="text"
-						name="filter"
-						id="filter"
-						value={searchInput}
-						placeholder="Item name"
-						onChange={(e) => {
-							setSearchInput(e.target.value);
-						}}
-						onKeyDown={(e) => {
-							handleKeyDown(e);
-						}}
-					></input>
-					<button
-						type="button"
-						name="clearInput"
-						onClick={(e) => {
-							resetDisplayList(e);
-						}}
-					>
-						X
-					</button>
+				<form className="pb-5">
+					<div className="flex justify-center items-center">
+						<label htmlFor="filter" className="px-3">
+							Filter List:{' '}
+						</label>
+						<div className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3 sm:px-5">
+							<FontAwesomeIcon
+								icon={pen}
+								title="Enter item name"
+								className="text-gray-500 mr-2 sm:mr-4"
+							/>
+							<input
+								className="flex-grow border-none outline-none bg-transparent"
+								type="text"
+								name="filter"
+								id="filter"
+								value={searchInput}
+								placeholder="Item name"
+								onChange={(e) => {
+									setSearchInput(e.target.value);
+								}}
+								onKeyDown={(e) => {
+									handleKeyDown(e);
+								}}
+							></input>
+						</div>
+						<button
+							className="px-3"
+							type="button"
+							name="clearInput"
+							onClick={(e) => {
+								resetDisplayList(e);
+							}}
+						>
+							X
+						</button>
+					</div>
 				</form>
 				<ul>{listItemsToDisplay}</ul>
 			</>

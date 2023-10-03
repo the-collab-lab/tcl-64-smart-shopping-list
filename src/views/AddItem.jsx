@@ -4,7 +4,7 @@ import { RoughNotation } from 'react-rough-notation';
 import { UrgencyTag } from '../components/UrgencyTag';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare as pen } from '@fortawesome/free-regular-svg-icons';
+import { faPlus as plus } from '@fortawesome/free-solid-svg-icons';
 
 const messageResetTimeout = 3000;
 
@@ -125,7 +125,7 @@ export function AddItem({ listId, data }) {
 					</label>
 					<div className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3">
 						<FontAwesomeIcon
-							icon={pen}
+							icon={plus}
 							title="Enter item name"
 							className="text-gray-500 mr-2 sm:mr-4"
 						/>

@@ -6,7 +6,7 @@ import { comparePurchaseUrgency } from '../api/firebase';
 import copy from 'clipboard-copy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard as clipboard } from '@fortawesome/free-regular-svg-icons';
-import { faPenToSquare as pen } from '@fortawesome/free-regular-svg-icons';
+import { faFilter as filter } from '@fortawesome/free-solid-svg-icons';
 
 export function List({ data, listId }) {
 	const navigate = useNavigate();
@@ -118,18 +118,20 @@ export function List({ data, listId }) {
 		return (
 			<>
 				<form className="pb-5">
-					<div className="flex flex-col justify-center items-center">
-						<label htmlFor="filter" className="px-3 mt-2">
-							Filter List:
-						</label>
+					<div className="flex flex-col md:flex-row justify-center items-center md:text-left">
+						<div>
+							<label htmlFor="filter" className="px-3 mt-2">
+								Filter List:
+							</label>
+						</div>
 						<div className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3 sm:px-5">
 							<FontAwesomeIcon
-								icon={pen}
+								icon={filter}
 								title="Enter item name"
 								className="text-gray-500 mr-2 sm:mr-4"
 							/>
 							<input
-								className="flex-grow border-none outline-none bg-transparent"
+								className="flex-grow border-none outline-none bg-transparent placeholder-light dark:placeholder-dark"
 								type="text"
 								name="filter"
 								id="filter"
@@ -142,17 +144,17 @@ export function List({ data, listId }) {
 									handleKeyDown(e);
 								}}
 							></input>
+							<button
+								className="px-3 mt-2 sm:mt-0 md:text-right"
+								type="button"
+								name="clearInput"
+								onClick={(e) => {
+									resetDisplayList(e);
+								}}
+							>
+								X
+							</button>
 						</div>
-						<button
-							className="px-3"
-							type="button"
-							name="clearInput"
-							onClick={(e) => {
-								resetDisplayList(e);
-							}}
-						>
-							X
-						</button>
 					</div>
 				</form>
 				<ul>{listItemsToDisplay}</ul>

@@ -49,8 +49,8 @@ export function App() {
 					path="/"
 					element={
 						<Layout
+							listToken={listToken}
 							setListToken={setListToken}
-							listId={listToken}
 							showModal={showModal}
 							setShowModal={setShowModal}
 						/>

@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
-export function Layout({ setListToken, showModal, setShowModal }) {
+export function Layout({ listToken, setListToken, showModal, setShowModal }) {
 	const location = useLocation();
 
 	const removeListToken = () => {
@@ -17,8 +17,6 @@ export function Layout({ setListToken, showModal, setShowModal }) {
 		setListToken(null);
 		setShowModal(false);
 	};
-
-	const listToken = localStorage.getItem('tcl-shopping-list-token');
 
 	const renderNavBar = () => {
 		if (!listToken) {
@@ -46,61 +44,57 @@ export function Layout({ setListToken, showModal, setShowModal }) {
 					</p>
 				</div>
 			);
-		} else {
-			if (listToken) {
-				return (
-					<>
-						<div className="Nav-container -mt-4">
-							<NavLink
-								to="/list"
-								className={`Nav-link ${
-									location.pathname === '/list' ? 'underline text-black' : ''
-								}`}
-							>
-								<FontAwesomeIcon
-									icon={faList}
-									title="Navigate to list page"
-									className="text-black"
-								/>
-								<br />
-								<p className="text-lg text-black">VIEW LIST</p>
-							</NavLink>
-							<NavLink
-								to="/add-item"
-								className={`Nav-link ${
-									location.pathname === '/add-item'
-										? 'underline text-black'
-										: ''
-								}`}
-							>
-								<FontAwesomeIcon
-									icon={faPlus}
-									title="Navigate to the add item page"
-									className="text-black"
-								/>
-								<br />
-								<p className="text-lg text-black">ADD ITEM</p>
-							</NavLink>
-							<NavLink className="Nav-link">
-								<FontAwesomeIcon
-									icon={faRightFromBracket}
-									title="Leave list"
-									className="text-black"
-									type="button"
-									onClick={() => setShowModal(true)}
-								/>
-								<p className="text-lg text-black">LEAVE LIST</p>
-								<br />
-							</NavLink>
-						</div>
-						<Modal
-							showModal={showModal}
-							setShowModal={setShowModal}
-							confirmationAction={removeListToken}
-						/>
-					</>
-				);
-			}
+		} else if (listToken) {
+			return (
+				<>
+					<div className="Nav-container -mt-4">
+						<NavLink
+							to="/list"
+							className={`Nav-link ${
+								location.pathname === '/list' ? 'underline text-black' : ''
+							}`}
+						>
+							<FontAwesomeIcon
+								icon={faList}
+								title="Navigate to list page"
+								className="text-black"
+							/>
+							<br />
+							<p className="text-lg text-black">VIEW LIST</p>
+						</NavLink>
+						<NavLink
+							to="/add-item"
+							className={`Nav-link ${
+								location.pathname === '/add-item' ? 'underline text-black' : ''
+							}`}
+						>
+							<FontAwesomeIcon
+								icon={faPlus}
+								title="Navigate to the add item page"
+								className="text-black"
+							/>
+							<br />
+							<p className="text-lg text-black">ADD ITEM</p>
+						</NavLink>
+						<NavLink className="Nav-link">
+							<FontAwesomeIcon
+								icon={faRightFromBracket}
+								title="Leave list"
+								className="text-black"
+								type="button"
+								onClick={() => setShowModal(true)}
+							/>
+							<p className="text-lg text-black">LEAVE LIST</p>
+							<br />
+						</NavLink>
+					</div>
+					<Modal
+						showModal={showModal}
+						setShowModal={setShowModal}
+						confirmationAction={removeListToken}
+					/>
+				</>
+			);
 		}
 	};
 

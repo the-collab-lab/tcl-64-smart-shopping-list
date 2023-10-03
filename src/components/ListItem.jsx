@@ -13,6 +13,8 @@ export function ListItem({
 	dateNextPurchased,
 	dateCreated,
 	urgency,
+	setShowModal,
+	setItemToDelete,
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 
@@ -50,11 +52,19 @@ export function ListItem({
 		setIsChecked(true);
 	};
 
-	const handleDelete = async () => {
-		if (window.confirm('Are you sure you want to delete this item?')) {
-			await deleteItem(listId, itemId);
-		}
-	};
+	const modalBody = (
+		<>
+			Are you sure you want to delete this item?
+			<br />
+			{/* <!--TODO: Restyle listToken display using standardized inputs ? --> */}
+		</>
+	);
+
+	// const handleDelete = async () => {
+	// 	if (window.confirm('Are you sure you want to delete this item?')) {
+	// 		await deleteItem(listId, itemId);
+	// 	}
+	// };
 
 	return (
 		<li className="ListItem">
@@ -70,7 +80,13 @@ export function ListItem({
 				<code className="ListItem-urgency">{urgency}</code>
 			</label>
 			&nbsp;
-			<button onClick={handleDelete}>
+			<button
+				onClick={(e) => {
+					setItemToDelete(itemId);
+					console.log(itemId);
+					setShowModal(true);
+				}}
+			>
 				<FontAwesomeIcon icon={trash} title="Delete item" />
 			</button>
 		</li>

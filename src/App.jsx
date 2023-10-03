@@ -70,7 +70,12 @@ export function App() {
 						path="/list"
 						element={
 							listToken ? (
-								<List data={data} listId={listToken} />
+								<List
+									data={data}
+									listId={listToken}
+									showModal={showModal}
+									setShowModal={setShowModal}
+								/>
 							) : (
 								<Navigate to="/" />
 							)

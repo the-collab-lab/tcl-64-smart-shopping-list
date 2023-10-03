@@ -3,6 +3,9 @@ import { addItem } from '../api/firebase';
 import { RoughNotation } from 'react-rough-notation';
 import { UrgencyTag } from '../components/UrgencyTag';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare as pen } from '@fortawesome/free-regular-svg-icons';
+
 const messageResetTimeout = 3000;
 
 const dayConverter = (text) => {
@@ -116,17 +119,29 @@ export function AddItem({ listId, data }) {
 				</div>
 			</div>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor="item">Item:</label>
-				<input
-					type="text"
-					id="item"
-					name="item"
-					placeholder="Enter Item"
-					value={itemName}
-					onChange={(e) => {
-						setItemName(e.target.value);
-					}}
-				/>
+				<label htmlFor="item" className="mr-2">
+					Item
+				</label>
+				<div className="flex justify-center items-center">
+					<div className="w-1/2 flex items-center border-2 rounded-lg py-3 px-4">
+						<FontAwesomeIcon
+							icon={pen}
+							title="Enter item name"
+							className="text-gray-500 mr-2"
+						/>
+						<input
+							className="flex-grow border-none outline-none bg-transparent"
+							type="text"
+							id="item"
+							name="item"
+							placeholder="Enter Item"
+							value={itemName}
+							onChange={(e) => {
+								setItemName(e.target.value);
+							}}
+						/>
+					</div>
+				</div>
 				<p className="mt-3 pt-10">How soon do you need to buy this item?</p>
 				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-10 sm:py-44">
 					<UrgencyTag

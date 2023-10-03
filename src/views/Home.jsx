@@ -96,11 +96,10 @@ export function Home({ createToken, setListToken }) {
 				)}
 			</div>
 			<form onSubmit={handleTokenInputFormSubmit}>
-				<div className="flex justify-center items-center">
-					<label htmlFor="tokenInput" className="px-3">
-						Enter existing list token:{' '}
+				<div className="flex flex-col justify-center items-center">
+					<label htmlFor="tokenInput" className="px-3 mt-2">
+						Enter existing list token:
 					</label>
-					<br />
 					<div className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3 sm:px-5">
 						<FontAwesomeIcon
 							icon={pen}
@@ -116,11 +115,12 @@ export function Home({ createToken, setListToken }) {
 							placeholder="Enter token"
 						/>
 					</div>
-					<button type="submit" className="px-3">
+					<button type="submit" className="px-3 mt-3">
 						Join existing list
 					</button>
 				</div>
 			</form>
+
 			<button onClick={handleCreateClick}>Create a new list</button>
 		</div>
 	);

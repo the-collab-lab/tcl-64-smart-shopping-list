@@ -119,11 +119,11 @@ export function AddItem({ listId, data }) {
 				</div>
 			</div>
 			<form onSubmit={handleSubmit}>
-				<div className="flex justify-center items-center">
-					<label htmlFor="item" className="px-3">
+				<div className="flex flex-col justify-center items-center">
+					<label htmlFor="item" className="px-3 mt-2">
 						Item:
 					</label>
-					<div className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3 sm:px-5">
+					<div className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3">
 						<FontAwesomeIcon
 							icon={pen}
 							title="Enter item name"

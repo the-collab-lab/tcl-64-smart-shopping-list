@@ -9,7 +9,7 @@ import {
 	TEModalFooter,
 } from 'tw-elements-react';
 
-export default function Modal() {
+export function Modal() {
 	const [showModal, setShowModal] = useState(false);
 
 	return (

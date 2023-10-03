@@ -18,6 +18,15 @@ export function Layout({ listToken, setListToken, showModal, setShowModal }) {
 		setShowModal(false);
 	};
 
+	const modalBody = (
+		<>
+			Are you sure you want to leave this list?
+			<br />
+			{/* <!--TODO: Restyle listToken display using standardized inputs ? --> */}
+			{listToken}
+		</>
+	);
+
 	const renderNavBar = () => {
 		if (!listToken) {
 			return (
@@ -76,13 +85,11 @@ export function Layout({ listToken, setListToken, showModal, setShowModal }) {
 							<br />
 							<p className="text-lg text-black">ADD ITEM</p>
 						</NavLink>
-						<NavLink className="Nav-link">
+						<NavLink className="Nav-link" onClick={() => setShowModal(true)}>
 							<FontAwesomeIcon
 								icon={faRightFromBracket}
 								title="Leave list"
 								className="text-black"
-								type="button"
-								onClick={() => setShowModal(true)}
 							/>
 							<p className="text-lg text-black">LEAVE LIST</p>
 							<br />
@@ -91,6 +98,7 @@ export function Layout({ listToken, setListToken, showModal, setShowModal }) {
 					<Modal
 						showModal={showModal}
 						setShowModal={setShowModal}
+						modalBody={modalBody}
 						confirmationAction={removeListToken}
 					/>
 				</>

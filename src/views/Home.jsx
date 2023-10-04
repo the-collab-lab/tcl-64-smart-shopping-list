@@ -67,7 +67,6 @@ export function Home({ createToken, setListToken }) {
 
 	return (
 		<div className="Home">
-			<h2>Welcome to your Smart Shopping List</h2>
 			<div>
 				{existingListMessage && (
 					<RoughNotation

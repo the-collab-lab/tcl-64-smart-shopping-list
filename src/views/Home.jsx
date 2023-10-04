@@ -4,6 +4,7 @@ import { createNewList } from '../api/firebase';
 import { useState } from 'react';
 import { checkIfListExists } from '../api/firebase';
 import { RoughNotation } from 'react-rough-notation';
+import Button from '../components/Button';
 
 const messageResetTimeout = 3000;
 
@@ -15,7 +16,8 @@ export function Home({ createToken, setListToken }) {
 	const [showRoughNotation, setShowRoughNotation] = useState(false);
 	const messageColor = 'FF0000';
 
-	async function handleCreateClick() {
+	async function handleCreateClick(e) {
+		e.preventDefault();
 		let listId = createToken();
 
 		const firestoreResult = await createNewList(listId);
@@ -91,7 +93,10 @@ export function Home({ createToken, setListToken }) {
 					</RoughNotation>
 				)}
 			</div>
-			<form onSubmit={handleTokenInputFormSubmit}>
+			<form
+				onSubmit={handleTokenInputFormSubmit}
+				className="flex flex-col items-center"
+			>
 				<label htmlFor="tokenInput">Enter existing list token:</label>
 				<br />
 				<input
@@ -102,11 +107,20 @@ export function Home({ createToken, setListToken }) {
 					placeholder="Enter token"
 				/>
 				<br />
-				<button type="submit">Join existing list</button>
-				<br />
+				<div className="flex flex-col items-center gap-10">
+					<Button
+						onClick={(e) => handleCreateClick(e)}
+						text="CREATE LIST"
+						className="max-w-4xl"
+					/>
+					<button
+						type="submit"
+						className="underline underline-offset-8 font-semibold text-green dark:text-light-green"
+					>
+						Join existing list
+					</button>
+				</div>
 			</form>
-			<br />
-			<button onClick={handleCreateClick}>Create a new list</button>
 		</div>
 	);
 }

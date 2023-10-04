@@ -25,7 +25,7 @@ const Button = ({ text, variant, type, onClick, withIcon, className }) => {
 					{
 						<FontAwesomeIcon
 							icon={plus}
-							className="text-white -translate-y-[1px]"
+							className="text-white dark:text-black"
 						/>
 					}
 				</>

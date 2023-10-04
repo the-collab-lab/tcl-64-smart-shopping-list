@@ -22,10 +22,15 @@ export function Layout({ listToken, setListToken }) {
 
 	const modalBody = (
 		<>
-			Are you sure you want to leave this list?
-			<br />
-			{/* <!--TODO: Restyle listToken display using standardized inputs ? --> */}
-			{listToken}
+			<div className="flex flex-col justify-center">
+				<p className="flex justify-center text-center text-white pb-6">
+					Are you sure you want to leave this list?
+				</p>
+				{/* <!--TODO: Restyle listToken display using standardized inputs ? --> */}
+				<p className="flex justify-center text-center text-white">
+					{listToken}
+				</p>
+			</div>
 		</>
 	);
 

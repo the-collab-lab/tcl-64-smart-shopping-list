@@ -13,12 +13,15 @@ export function List({ data, listId }) {
 	const [showModal, setShowModal] = useState(false);
 
 	const modalBody = (
-		<>
-			Are you sure you want to delete this item?
-			<br />
+		<div className="flex flex-col justify-center">
+			<p className="flex justify-center text-center text-white pb-6">
+				Are you sure you want to delete this item?
+			</p>
 			{/* <!--TODO: Restyle name display using standardized inputs ? --> */}
-			{itemToDelete.name}
-		</>
+			<p className="flex justify-center text-center text-white">
+				{itemToDelete.name}
+			</p>
+		</div>
 	);
 
 	const handleDelete = async (e) => {

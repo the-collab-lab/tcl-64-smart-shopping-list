@@ -19,16 +19,21 @@ export function Home({ createToken, setListToken }) {
 
 	const modalBody = (
 		<>
-			{/* <!--TODO: Restyle input display using standardized inputs ? --> */}
-			<form>
-				<label htmlFor="tokenInput">Enter List Token</label>
-				<br />
+			{/* <!--TODO: Finish styling after merging input PR --> */}
+			<form className="flex flex-col justify-center">
+				<label
+					htmlFor="tokenInput"
+					className="flex justify-center text-center text-white pb-6"
+				>
+					ENTER LIST TOKEN
+				</label>
 				<input
 					type="text"
 					id="tokenInput"
+					className="flex justify-center text-center"
 					value={tokenInput}
 					onChange={handleTokenInputChange}
-					placeholder="Enter token"
+					placeholder="my list token"
 				/>
 			</form>
 		</>

@@ -2,6 +2,7 @@ import { ListItem } from '../components';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { comparePurchaseUrgency, deleteItem } from '../api/firebase';
+import { Modal } from '../components/Modal';
 import Button from '../components/Button';
 import copy from 'clipboard-copy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

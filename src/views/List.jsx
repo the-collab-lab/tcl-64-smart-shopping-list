@@ -9,7 +9,7 @@ import { faClipboard as clipboard } from '@fortawesome/free-regular-svg-icons';
 
 export function List({ data, listId }) {
 	const navigate = useNavigate();
-	const [itemToDelete, setItemToDelete] = useState('');
+	const [itemToDelete, setItemToDelete] = useState({ itemId: '', name: '' });
 	const [showModal, setShowModal] = useState(false);
 
 	const modalBody = (
@@ -17,14 +17,15 @@ export function List({ data, listId }) {
 			Are you sure you want to delete this item?
 			<br />
 			{/* <!--TODO: Restyle listToken display using standardized inputs ? --> */}
-			{/* {itemToDelete} */}
+			{itemToDelete.name}
 		</>
 	);
 
 	const handleDelete = async (e) => {
-		console.log(itemToDelete);
+		console.log(itemToDelete.itemId);
+		console.log(itemToDelete.name);
 		console.log(listId);
-		await deleteItem(listId, itemToDelete);
+		await deleteItem(listId, itemToDelete.itemId);
 		setShowModal(false);
 	};
 

@@ -1,6 +1,7 @@
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { Modal } from '../components/Modal';
+import Title from '../components/Title';
 import './Layout.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -116,6 +117,7 @@ export function Layout({ listToken, setListToken }) {
 	return (
 		<>
 			<div className="Layout">
+				<Title />
 				<main className="Layout-main">
 					<Outlet />
 				</main>

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Modal } from '../components/Modal';
 import { checkIfListExists } from '../api/firebase';
 import { RoughNotation } from 'react-rough-notation';
+import Button from '../components/Button';
 
 const messageResetTimeout = 3000;
 
@@ -39,7 +40,9 @@ export function Home({ createToken, setListToken }) {
 		</>
 	);
 
-	async function handleCreateClick() {
+	async function handleCreateClick(e) {
+		e.preventDefault();
+
 		let listId = createToken();
 
 		const firestoreResult = await createNewList(listId);
@@ -93,7 +96,6 @@ export function Home({ createToken, setListToken }) {
 
 	return (
 		<div className="Home">
-			<h2>Welcome to your Smart Shopping List</h2>
 			<div>
 				{existingListMessage && (
 					<RoughNotation
@@ -118,9 +120,19 @@ export function Home({ createToken, setListToken }) {
 					</RoughNotation>
 				)}
 			</div>
-			<button onClick={() => setShowModal(true)}>Join existing list</button>
-			<br />
-			<button onClick={handleCreateClick}>Create a new list</button>
+      <div className="flex flex-col items-center gap-10">
+					<Button
+						onClick={(e) => handleCreateClick(e)}
+						text="CREATE LIST"
+						className="max-w-4xl"
+					/>
+					<button
+						onClick={() => setShowModal(true)}
+						className="underline underline-offset-8 font-semibold text-green dark:text-light-green"
+					>
+						Join existing list
+					</button>
+				</div>
 			<Modal
 				showModal={showModal}
 				setShowModal={setShowModal}

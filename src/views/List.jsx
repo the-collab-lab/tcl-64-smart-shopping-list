@@ -2,7 +2,7 @@ import { ListItem } from '../components';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { comparePurchaseUrgency, deleteItem } from '../api/firebase';
-import { Modal } from '../components/Modal';
+import Button from '../components/Button';
 import copy from 'clipboard-copy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard as clipboard } from '@fortawesome/free-regular-svg-icons';
@@ -33,14 +33,14 @@ export function List({ data, listId }) {
 		return (
 			<>
 				<h3>Shopping list is currently empty...</h3>
-				<button
+				<Button
 					type="button"
 					onClick={() => {
 						navigate('/add-item');
 					}}
-				>
-					Add Item
-				</button>
+					withIcon={true}
+					text="ADD ITEM"
+				/>
 			</>
 		);
 	};

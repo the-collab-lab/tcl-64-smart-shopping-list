@@ -114,7 +114,10 @@ export function Home({ createToken, setListToken }) {
 						text="CREATE LIST"
 						className="max-w-4xl"
 					/>
-					<button type="submit" className="underline">
+					<button
+						type="submit"
+						className="underline underline-offset-8 font-semibold text-green dark:text-light-green"
+					>
 						Join existing list
 					</button>
 				</div>

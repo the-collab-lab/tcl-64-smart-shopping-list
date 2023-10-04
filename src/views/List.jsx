@@ -16,15 +16,12 @@ export function List({ data, listId }) {
 		<>
 			Are you sure you want to delete this item?
 			<br />
-			{/* <!--TODO: Restyle listToken display using standardized inputs ? --> */}
+			{/* <!--TODO: Restyle name display using standardized inputs ? --> */}
 			{itemToDelete.name}
 		</>
 	);
 
 	const handleDelete = async (e) => {
-		console.log(itemToDelete.itemId);
-		console.log(itemToDelete.name);
-		console.log(listId);
 		await deleteItem(listId, itemToDelete.itemId);
 		setShowModal(false);
 	};

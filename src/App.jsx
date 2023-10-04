@@ -4,7 +4,6 @@ import {
 	Route,
 	Navigate,
 } from 'react-router-dom';
-import { useState } from 'react';
 
 import { AddItem, Home, Layout, List } from './views';
 
@@ -15,8 +14,6 @@ import { useStateWithStorage } from './utils';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 
 export function App() {
-	const [showModal, setShowModal] = useState(false);
-
 	/**
 	 * This custom hook takes a token pointing to a shopping list
 	 * in our database and syncs it with localStorage for later use.
@@ -47,14 +44,7 @@ export function App() {
 			<Routes>
 				<Route
 					path="/"
-					element={
-						<Layout
-							listToken={listToken}
-							setListToken={setListToken}
-							showModal={showModal}
-							setShowModal={setShowModal}
-						/>
-					}
+					element={<Layout listToken={listToken} setListToken={setListToken} />}
 				>
 					<Route
 						index
@@ -70,12 +60,7 @@ export function App() {
 						path="/list"
 						element={
 							listToken ? (
-								<List
-									data={data}
-									listId={listToken}
-									showModal={showModal}
-									setShowModal={setShowModal}
-								/>
+								<List data={data} listId={listToken} />
 							) : (
 								<Navigate to="/" />
 							)

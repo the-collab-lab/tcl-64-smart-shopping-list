@@ -1,4 +1,5 @@
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import { Modal } from '../components/Modal';
 import './Layout.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,8 +10,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
-export function Layout({ listToken, setListToken, showModal, setShowModal }) {
+export function Layout({ listToken, setListToken }) {
 	const location = useLocation();
+	const [showModal, setShowModal] = useState(false);
 
 	const removeListToken = () => {
 		localStorage.removeItem('tcl-shopping-list-token');

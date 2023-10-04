@@ -52,14 +52,6 @@ export function ListItem({
 		setIsChecked(true);
 	};
 
-	const modalBody = (
-		<>
-			Are you sure you want to delete this item?
-			<br />
-			{/* <!--TODO: Restyle listToken display using standardized inputs ? --> */}
-		</>
-	);
-
 	// const handleDelete = async () => {
 	// 	if (window.confirm('Are you sure you want to delete this item?')) {
 	// 		await deleteItem(listId, itemId);

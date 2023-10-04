@@ -7,15 +7,17 @@ import copy from 'clipboard-copy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard as clipboard } from '@fortawesome/free-regular-svg-icons';
 
-export function List({ data, listId, showModal, setShowModal }) {
+export function List({ data, listId }) {
 	const navigate = useNavigate();
 	const [itemToDelete, setItemToDelete] = useState('');
+	const [showModal, setShowModal] = useState(false);
 
 	const modalBody = (
 		<>
 			Are you sure you want to delete this item?
 			<br />
 			{/* <!--TODO: Restyle listToken display using standardized inputs ? --> */}
+			{/* {itemToDelete} */}
 		</>
 	);
 
@@ -126,7 +128,6 @@ export function List({ data, listId, showModal, setShowModal }) {
 					dateNextPurchased={item.dateNextPurchased}
 					dateCreated={item.dateCreated}
 					urgency={itemUrgency}
-					showModal={showModal}
 					setShowModal={setShowModal}
 					setItemToDelete={setItemToDelete}
 				/>

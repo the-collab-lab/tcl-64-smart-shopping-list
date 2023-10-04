@@ -1,5 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus as plus } from '@fortawesome/free-solid-svg-icons';
 
 const Button = ({ text, variant, type, onClick, withIcon, className }) => {
 	const variantClasses = {
@@ -13,14 +15,20 @@ const Button = ({ text, variant, type, onClick, withIcon, className }) => {
 		variantClasses[variant] || variantClasses.primary,
 		className,
 	);
-	const iconSpan = <span className="text-5xl">+</span>;
 	const buttonType = type ? type : 'submit';
 	return (
 		<button type={buttonType} className={classes} onClick={onClick}>
 			{withIcon ? (
-				<div className="flex items-center gap-4">
-					{text} {iconSpan}
-				</div>
+				<>
+					{text}
+					&nbsp; &nbsp;
+					{
+						<FontAwesomeIcon
+							icon={plus}
+							className="text-white -translate-y-[1px]"
+						/>
+					}
+				</>
 			) : (
 				text
 			)}

@@ -2,6 +2,7 @@ import './Home.css';
 import { useNavigate } from 'react-router-dom';
 import { createNewList } from '../api/firebase';
 import { useState } from 'react';
+import { Modal } from '../components/Modal';
 import { checkIfListExists } from '../api/firebase';
 import { RoughNotation } from 'react-rough-notation';
 
@@ -12,8 +13,26 @@ export function Home({ createToken, setListToken }) {
 	const [createListMessage, setCreateListMessage] = useState('');
 	const [existingListMessage, setExistingListMessage] = useState('');
 	const [tokenInput, setTokenInput] = useState('');
+	const [showModal, setShowModal] = useState(false);
 	const [showRoughNotation, setShowRoughNotation] = useState(false);
 	const messageColor = 'FF0000';
+
+	const modalBody = (
+		<>
+			{/* <!--TODO: Restyle input display using standardized inputs ? --> */}
+			<form>
+				<label htmlFor="tokenInput">Enter List Token</label>
+				<br />
+				<input
+					type="text"
+					id="tokenInput"
+					value={tokenInput}
+					onChange={handleTokenInputChange}
+					placeholder="Enter token"
+				/>
+			</form>
+		</>
+	);
 
 	async function handleCreateClick() {
 		let listId = createToken();
@@ -35,6 +54,7 @@ export function Home({ createToken, setListToken }) {
 
 	async function handleTokenInputFormSubmit(e) {
 		e.preventDefault();
+		setShowModal(false);
 
 		if (!tokenInput) {
 			setExistingListMessage('Please enter a token.');
@@ -53,6 +73,7 @@ export function Home({ createToken, setListToken }) {
 			setTokenInput('');
 		}
 	}
+
 	function handleTokenInputChange(e) {
 		setTokenInput(e.target.value);
 	}
@@ -92,22 +113,15 @@ export function Home({ createToken, setListToken }) {
 					</RoughNotation>
 				)}
 			</div>
-			<form onSubmit={handleTokenInputFormSubmit}>
-				<label htmlFor="tokenInput">Enter existing list token:</label>
-				<br />
-				<input
-					type="text"
-					id="tokenInput"
-					value={tokenInput}
-					onChange={handleTokenInputChange}
-					placeholder="Enter token"
-				/>
-				<br />
-				<button type="submit">Join existing list</button>
-				<br />
-			</form>
+			<button onClick={() => setShowModal(true)}>Join existing list</button>
 			<br />
 			<button onClick={handleCreateClick}>Create a new list</button>
+			<Modal
+				showModal={showModal}
+				setShowModal={setShowModal}
+				modalBody={modalBody}
+				confirmationAction={handleTokenInputFormSubmit}
+			/>
 		</div>
 	);
 }

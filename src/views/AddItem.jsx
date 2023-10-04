@@ -90,7 +90,7 @@ export function AddItem({ listId, data }) {
 
 	return (
 		<div className="text-center">
-			<div className="flex items-center justify-center h-32">
+			<div className="flex items-center justify-center h-16">
 				<div>
 					{errorMessage && (
 						<RoughNotation
@@ -128,7 +128,7 @@ export function AddItem({ listId, data }) {
 						setItemName(e.target.value);
 					}}
 				/>
-				<p className="mt-3 pt-20">How soon do you need to buy this item?</p>
+				<p className="mt-3 pt-6">How soon do you need to buy this item?</p>
 				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-20 sm:py-20">
 					<UrgencyTag
 						color={'bg-light-blue'}

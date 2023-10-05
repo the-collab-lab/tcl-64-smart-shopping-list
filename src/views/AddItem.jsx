@@ -124,7 +124,7 @@ export function AddItem({ listId, data }) {
 					<label htmlFor="item" className="px-3 mt-2">
 						Item:
 					</label>
-					<div className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3">
+					<div className="w-1/2 min-w-[280px] flex items-center border-2 rounded-lg py-2 px-3">
 						<FontAwesomeIcon
 							icon={plus}
 							title="Enter item name"
@@ -145,7 +145,7 @@ export function AddItem({ listId, data }) {
 				</div>
 
 				<p className="mt-3 pt-10">How soon do you need to buy this item?</p>
-				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-10 sm:py-44">
+				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-10 sm:py-10">
 					<UrgencyTag
 						color={'bg-light-blue'}
 						value={'soon'}
@@ -178,7 +178,7 @@ export function AddItem({ listId, data }) {
 					text="ADD ITEM"
 					withIcon={true}
 					onClick={handleSubmit}
-					className="mb-5"
+					className="mb-5 sm:m-16"
 				/>
 			</form>
 		</div>

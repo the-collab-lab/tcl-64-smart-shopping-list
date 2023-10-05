@@ -5,6 +5,7 @@ import {
 	TEModalContent,
 	TEModalBody,
 } from 'tw-elements-react';
+import Button from '../components/Button';
 
 export function Modal({
 	showModal,
@@ -15,12 +16,27 @@ export function Modal({
 	return (
 		<div>
 			<TEModal show={showModal} setShow={setShowModal}>
-				<TEModalDialog className="pt-64 px-10">
-					<TEModalContent className="rounded-3xl">
-						<TEModalBody className="flex flex-col justify-center bg-green rounded-2xl p-10">
+				<TEModalDialog className="pt-96 px-10">
+					<TEModalContent className="rounded-2xl">
+						<TEModalBody className="flex flex-col justify-center p-10 dark:bg-light-blue dark:rounded-2xl">
 							{modalBody}
-							{/* <!--TODO: Finish styling after merging button component --> */}
-							<div className="flex justify-center bg-green pt-8 px-8">
+							<div className="flex justify-center pt-8 px-8">
+								<Button
+									text="CANCEL"
+									variant="secondaryCancel"
+									type="button"
+									onClick={() => setShowModal(false)}
+									className="text-2xl mb-3 mr-2 sm:mr-3"
+								/>
+								<Button
+									text="CONFIRM"
+									variant="secondaryConfirm"
+									type="button"
+									onClick={confirmationAction}
+									className="text-2xl mb-3 ml-2 sm:ml-3"
+								/>
+							</div>
+							{/* <div className="flex justify-center bg-green pt-8 px-8">
 								<button
 									type="button"
 									className="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
@@ -35,7 +51,7 @@ export function Modal({
 								>
 									Confirm
 								</button>
-							</div>
+							</div> */}
 						</TEModalBody>
 					</TEModalContent>
 				</TEModalDialog>

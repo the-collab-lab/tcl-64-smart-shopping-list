@@ -22,29 +22,28 @@ export function Home({ createToken, setListToken }) {
 
 	const modalBody = (
 		<>
-			{/* <!--TODO: Finish styling after merging input PR --> */}
-			<form className="flex flex-col justify-center items-center">
+			<form className="flex flex-col items-center">
 				<label
 					htmlFor="tokenInput"
-					className="flex justify-center text-center text-white pb-6 px-3 mt-2"
+					className="flex text-center dark:text-black pb-6 px-3 mt-4"
 				>
 					ENTER LIST TOKEN
 				</label>
-        <div className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3 sm:px-5">
-          <FontAwesomeIcon
-            icon={key}
-            title="Enter item name"
-            className="text-gray-500 mr-2 sm:mr-4"
-          />
-          <input
-            type="text"
-            id="tokenInput"
-            className="flex-grow border-none outline-none bg-transparent text-center"
-            value={tokenInput}
-            onChange={handleTokenInputChange}
-            placeholder="my list token"
-          />
-        </div>
+				<div className="w-full sm:w-4/5 flex items-center border-2 rounded-lg py-2 px-3 sm:px-5 dark:bg-white">
+					<FontAwesomeIcon
+						icon={key}
+						title="Enter item name"
+						className="text-gray-500 mr-2 sm:mr-4"
+					/>
+					<input
+						type="text"
+						id="tokenInput"
+						className="flex-grow border-none outline-none bg-transparent text-center text-2xl mr-14 dark:placeholder:text-green"
+						value={tokenInput}
+						onChange={handleTokenInputChange}
+						placeholder="my list token"
+					/>
+				</div>
 			</form>
 		</>
 	);
@@ -129,19 +128,19 @@ export function Home({ createToken, setListToken }) {
 					</RoughNotation>
 				)}
 			</div>
-      <div className="flex flex-col items-center gap-10">
-        <Button
-          onClick={(e) => handleCreateClick(e)}
-          text="CREATE LIST"
-          className="max-w-4xl"
-        />
-        <button
-          onClick={() => setShowModal(true)}
-          className="underline underline-offset-8 font-semibold text-green dark:text-light-green"
-        >
-          Join existing list
-        </button>
-      </div>
+			<div className="flex flex-col items-center gap-10">
+				<Button
+					onClick={(e) => handleCreateClick(e)}
+					text="CREATE LIST"
+					className="max-w-4xl"
+				/>
+				<button
+					onClick={() => setShowModal(true)}
+					className="underline underline-offset-8 font-semibold text-green dark:text-light-green"
+				>
+					Join existing list
+				</button>
+			</div>
 			<Modal
 				showModal={showModal}
 				setShowModal={setShowModal}

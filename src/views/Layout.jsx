@@ -23,13 +23,16 @@ export function Layout({ listToken, setListToken }) {
 
 	const modalBody = (
 		<>
-			<div className="flex flex-col justify-center">
-				<p className="flex justify-center text-center text-white pb-6">
+			<div className="flex flex-col items-center">
+				<p className="flex text-center dark:text-black pb-8 px-3 mt-4">
 					Are you sure you want to leave this list?
 				</p>
 				{/* <!--TODO: Restyle listToken display using standardized inputs ? --> */}
-				<p className="flex justify-center text-center text-white">
+				<p className="flex text-center text-4xl font-extrabold text-green dark:text-black">
 					{listToken}
+				</p>
+				<p className="text-green dark:text-black text-center italic pt-2 pb-4">
+					Save your list token for next time!
 				</p>
 			</div>
 		</>

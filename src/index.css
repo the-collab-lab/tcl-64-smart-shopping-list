@@ -17,7 +17,7 @@
 	--color-dark-teal: #137c78;
 	--color-light-teal: #8ad0ce;
 	--color-dark-orange: #e36849;
-	--color-yellow: #ffbe30;
+	--color-yellow: #ffde30;
 	--color-transparent-yellow: rgba(249, 197, 13, 0.5);
 
 	--color-accent: var(--color-light-teal);
@@ -25,7 +25,7 @@
 	--color-border: var(--color-light-teal);
 	--color-error: var(--color-dark-orange);
 	--color-text: var(--color-light-teal);
-	--color-list: var(--color-light-teal);
+	--color-list: var(--color-yellow);
 }
 
 @media screen and (prefers-color-scheme: light) {

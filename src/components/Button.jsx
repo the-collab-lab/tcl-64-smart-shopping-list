@@ -8,7 +8,7 @@ const Button = ({ text, variant, type, onClick, withIcon, className }) => {
 		primary:
 			'bg-green dark:bg-light-blue text-white hover:bg-green-dark active:scale-105 dark:text-black px-32 py-4',
 		secondaryConfirm:
-			'bg-light-blue border dark:bg-light-blue dark:border-hidden dark:text-black text-black hover:bg-green-dark dark:bg-green-dark hover:dark:bg-yellow active:scale-105 px-16 py-4',
+			'bg-light-blue border dark:bg-green-dark dark:border-hidden dark:text-black text-black hover:bg-green-dark dark:bg-green-dark hover:dark:bg-yellow active:scale-105 px-16 py-4',
 		secondaryCancel:
 			'bg-white border text-black hover:bg-gray-400 dark:text-black dark:bg-gray-300 dark:border-hidden active:scale-105 px-16 py-4',
 	};

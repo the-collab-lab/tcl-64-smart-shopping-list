@@ -9,9 +9,7 @@ function Title() {
 		// Tablet
 		'p-10 md:text-6xl',
 		// Desktop
-		'p-12 lg:text-8xl',
-		// Dark Mode
-		'dark:text-teal-500',
+		'p-12 dark:text-teal-200 lg:text-8xl',
 	);
 	return (
 		<div className={styles}>

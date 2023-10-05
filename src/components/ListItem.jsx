@@ -55,7 +55,7 @@ export function ListItem({
 	};
 
 	return (
-		<li className="ListItem">
+		<li className={isChecked ? 'ListItemChecked' : 'ListItem'}>
 			<label className="ListItem-label">
 				<input
 					className="ListItem-checkbox"

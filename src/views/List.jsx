@@ -70,7 +70,7 @@ export function List({ data, listId }) {
 						<FontAwesomeIcon icon={clipboard} title="Copy to clipboard" />
 					</button>
 				</span>
-				{copied ? <p>Copied!</p> : null}
+				{copied ? <p className="text-red">Copied!</p> : null}
 			</div>
 		);
 	};

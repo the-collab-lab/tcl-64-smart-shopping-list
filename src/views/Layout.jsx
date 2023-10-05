@@ -10,6 +10,8 @@ import {
 	faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faClipboard as clipboard } from '@fortawesome/free-regular-svg-icons';
+import copy from 'clipboard-copy';
 
 export function Layout({ listToken, setListToken }) {
 	const location = useLocation();
@@ -21,19 +23,57 @@ export function Layout({ listToken, setListToken }) {
 		setShowModal(false);
 	};
 
+	const CopyToken = () => {
+		const [copied, setCopied] = useState(false);
+
+		const handleCopyToClipboard = async () => {
+			try {
+				await copy(listToken);
+				setCopied(true);
+
+				setTimeout(() => {
+					setCopied(false);
+				}, 3000);
+			} catch (err) {
+				console.error('Copy failed:', err);
+			}
+		};
+
+		return (
+			<>
+				<button onClick={handleCopyToClipboard}>
+					<FontAwesomeIcon icon={clipboard} title="Copy to clipboard" />
+				</button>
+				{copied ? <p className="text-red pl-2">Copied!</p> : null}
+			</>
+		);
+	};
+
 	const modalBody = (
 		<>
 			<div className="flex flex-col items-center">
 				<p className="flex text-center dark:text-black pb-8 px-3 mt-4">
 					Are you sure you want to leave this list?
 				</p>
-				{/* <!--TODO: Restyle listToken display using standardized inputs ? --> */}
+				{/* <div className="flex justify-center items-center text-green dark:text-black">
+					<p className="flex text-center text-4xl font-extrabold pr-3">
+						{listToken}
+					</p>
+					<CopyToken/>
+				</div>
+				<p className="text-green dark:text-black text-center italic pt-2 pb-4">
+					Copy your list token for next time!
+				</p> */}
+
 				<p className="flex text-center text-4xl font-extrabold text-green dark:text-black">
 					{listToken}
 				</p>
-				<p className="text-green dark:text-black text-center italic pt-2 pb-4">
-					Save your list token for next time!
-				</p>
+				<div className="flex justify-center items-center text-green dark:text-black pt-2 pb-4 ">
+					<p className="text-green dark:text-black text-center italic pr-3">
+						Copy your list token for next time
+					</p>
+					<CopyToken />
+				</div>
 			</div>
 		</>
 	);

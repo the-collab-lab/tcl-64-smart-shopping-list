@@ -44,7 +44,9 @@ export function Layout({ listToken, setListToken }) {
 				<button onClick={handleCopyToClipboard}>
 					<FontAwesomeIcon icon={clipboard} title="Copy to clipboard" />
 				</button>
-				{copied ? <p className="text-red pl-2">Copied!</p> : null}
+				{copied ? (
+					<p className="text-red dark:text-black pl-2">Copied!</p>
+				) : null}
 			</>
 		);
 	};
@@ -55,16 +57,6 @@ export function Layout({ listToken, setListToken }) {
 				<p className="flex text-center dark:text-black pb-8 px-3 mt-4">
 					Are you sure you want to leave this list?
 				</p>
-				{/* <div className="flex justify-center items-center text-green dark:text-black">
-					<p className="flex text-center text-4xl font-extrabold pr-3">
-						{listToken}
-					</p>
-					<CopyToken/>
-				</div>
-				<p className="text-green dark:text-black text-center italic pt-2 pb-4">
-					Copy your list token for next time!
-				</p> */}
-
 				<p className="flex text-center text-4xl font-extrabold text-green dark:text-black">
 					{listToken}
 				</p>

@@ -1,6 +1,8 @@
 import './ListItem.css';
 import { useState, useEffect } from 'react';
 import { updateItem, deleteItem } from '../api/firebase';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export function ListItem({
 	name,
@@ -68,7 +70,11 @@ export function ListItem({
 				<code className="ListItem-urgency">{urgency}</code>
 			</label>
 			&nbsp;
-			<button onClick={handleDelete}>Delete</button>
+			<FontAwesomeIcon
+				icon={faTrash}
+				title="Click to remove item from list"
+				onClick={handleDelete}
+			/>
 		</li>
 	);
 }

@@ -44,8 +44,8 @@ export function List({ data, listId }) {
 
 		return (
 			<div>
-				<span>
-					List token: <em>{listId}</em>{' '}
+				<span className="flex justify-center font-semibold">
+					List token: <em className="font-thin pl-2 pr-2">{listId}</em>{' '}
 					<button onClick={handleCopyToClipboard}>
 						<FontAwesomeIcon icon={clipboard} title="Copy to clipboard" />
 					</button>
@@ -116,10 +116,11 @@ export function List({ data, listId }) {
 
 		return (
 			<>
-				<form>
+				<form className="p-8">
 					<label htmlFor="filter">Filter List</label>
 					<br />
 					<input
+						className="mt-6"
 						type="text"
 						name="filter"
 						id="filter"

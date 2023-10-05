@@ -116,8 +116,11 @@ export function AddItem({ listId, data }) {
 				</div>
 			</div>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor="item">Item:</label>
+				<label className="font-semibold" htmlFor="item">
+					Item:
+				</label>
 				<input
+					className="pl-2"
 					type="text"
 					id="item"
 					name="item"

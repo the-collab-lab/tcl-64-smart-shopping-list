@@ -6,7 +6,7 @@ export const UrgencyTag = ({
 	tagName,
 }) => {
 	return (
-		<div className="h-[120px]">
+		<div className="h-[100px] sm:h-[120px]  -translate-y-10 sm:translate-y-0">
 			<div
 				className={
 					frequency === value

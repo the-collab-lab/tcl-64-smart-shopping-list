@@ -16,7 +16,7 @@ function Title() {
 	return (
 		<div className={styles}>
 			<p>
-				LISTIFY <FontAwesomeIcon icon={faLeaf} title="decortive leaf" />
+				LISTIFY <FontAwesomeIcon icon={faLeaf} title="decorative leaf" />
 			</p>
 		</div>
 	);

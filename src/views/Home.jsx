@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { checkIfListExists } from '../api/firebase';
 import { RoughNotation } from 'react-rough-notation';
 import Button from '../components/Button';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKey as key } from '@fortawesome/free-solid-svg-icons';
 
@@ -116,18 +115,20 @@ export function Home({ createToken, setListToken }) {
 							placeholder="Enter token"
 						/>
 					</div>
-					<div className="flex flex-col items-center gap-10">
-						<Button
-							onClick={(e) => handleCreateClick(e)}
-							text="CREATE LIST"
-							className="max-w-4xl"
-						/>
-						<button
-							type="submit"
-							className="underline underline-offset-8 font-semibold text-green dark:text-light-green"
-						>
-							Join existing list
-						</button>
+					<div className="h-[40rem] md:h-[30rem] flex items-center justify-center">
+						<div className="flex flex-col gap-10 mt-20">
+							<Button
+								onClick={(e) => handleCreateClick(e)}
+								text="CREATE LIST"
+								className="max-w-4xl"
+							/>
+							<button
+								type="submit"
+								className="underline underline-offset-8 font-semibold text-green dark:text-light-green"
+							>
+								Join existing list
+							</button>
+						</div>
 					</div>
 				</div>
 			</form>

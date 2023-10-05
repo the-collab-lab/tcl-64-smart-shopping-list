@@ -18,19 +18,19 @@ export function Modal({
 			<TEModal show={showModal} setShow={setShowModal}>
 				<TEModalDialog className="pt-96 px-10">
 					<TEModalContent className="rounded-2xl">
-						<TEModalBody className="flex flex-col justify-center p-10 dark:bg-light-blue dark:rounded-2xl">
+						<TEModalBody className="flex flex-col justify-center p-10 dark:bg-yellow dark:rounded-2xl">
 							{modalBody}
 							<div className="flex justify-center pt-8 px-8">
 								<Button
 									text="CANCEL"
-									variant="secondaryCancel"
+									variant="secondary"
 									type="button"
 									onClick={() => setShowModal(false)}
 									className="text-2xl mb-3 mr-2 sm:mr-3"
 								/>
 								<Button
 									text="CONFIRM"
-									variant="secondaryConfirm"
+									variant="primarySmall"
 									type="button"
 									onClick={confirmationAction}
 									className="text-2xl mb-3 ml-2 sm:ml-3"

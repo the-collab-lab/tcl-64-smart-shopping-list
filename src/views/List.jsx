@@ -15,7 +15,7 @@ export function List({ data, listId }) {
 	const WelcomePrompt = () => {
 		return (
 			<>
-				<h3>Shopping list is currently empty...</h3>
+				<h3 className="mt-16 mb-16">Shopping list is currently empty...</h3>
 				<Button
 					type="button"
 					onClick={() => {

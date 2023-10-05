@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { addItem } from '../api/firebase';
 import { RoughNotation } from 'react-rough-notation';
 import { UrgencyTag } from '../components/UrgencyTag';
+import Button from '../components/Button';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus as plus } from '@fortawesome/free-solid-svg-icons';
 
 const messageResetTimeout = 3000;
 
@@ -89,7 +93,7 @@ export function AddItem({ listId, data }) {
 
 	return (
 		<div className="text-center">
-			<div className="flex items-center justify-center h-32">
+			<div className="flex items-center justify-center h-16">
 				<div>
 					{errorMessage && (
 						<RoughNotation
@@ -116,20 +120,29 @@ export function AddItem({ listId, data }) {
 				</div>
 			</div>
 			<form onSubmit={handleSubmit}>
-				<label className="font-semibold" htmlFor="item">
-					Item:
-				</label>
-				<input
-					className="pl-2"
-					type="text"
-					id="item"
-					name="item"
-					placeholder="Enter Item"
-					value={itemName}
-					onChange={(e) => {
-						setItemName(e.target.value);
-					}}
-				/>
+				<div className="flex flex-col justify-center items-center">
+					<label htmlFor="item" className="px-3 mt-2 font-semibold">
+						Item:
+					</label>
+					<div className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3">
+						<FontAwesomeIcon
+							icon={plus}
+							title="Enter item name"
+							className="text-gray-500 mr-2 sm:mr-4"
+						/>
+						<input
+							className="pl-2 flex-grow border-none outline-none bg-transparent"
+							type="text"
+							id="item"
+							name="item"
+							placeholder="Enter Item"
+							value={itemName}
+							onChange={(e) => {
+								setItemName(e.target.value);
+							}}
+						/>
+					</div>
+				</div>
 				<p className="mt-3 pt-10">How soon do you need to buy this item?</p>
 				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-10 sm:py-44">
 					<UrgencyTag
@@ -160,9 +173,12 @@ export function AddItem({ listId, data }) {
 						order={'3'}
 					/>
 				</div>
-				<button type="submit" className="bg-green">
-					Add Item
-				</button>
+				<Button
+					text="ADD ITEM"
+					withIcon={true}
+					onClick={handleSubmit}
+					className="mb-5"
+				/>
 			</form>
 		</div>
 	);

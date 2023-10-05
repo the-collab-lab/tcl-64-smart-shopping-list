@@ -4,6 +4,10 @@ import { createNewList } from '../api/firebase';
 import { useState } from 'react';
 import { checkIfListExists } from '../api/firebase';
 import { RoughNotation } from 'react-rough-notation';
+import Button from '../components/Button';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faKey as key } from '@fortawesome/free-solid-svg-icons';
 
 const messageResetTimeout = 3000;
 
@@ -15,7 +19,8 @@ export function Home({ createToken, setListToken }) {
 	const [showRoughNotation, setShowRoughNotation] = useState(false);
 	const messageColor = 'FF0000';
 
-	async function handleCreateClick() {
+	async function handleCreateClick(e) {
+		e.preventDefault();
 		let listId = createToken();
 
 		const firestoreResult = await createNewList(listId);
@@ -92,21 +97,40 @@ export function Home({ createToken, setListToken }) {
 				)}
 			</div>
 			<form onSubmit={handleTokenInputFormSubmit}>
-				<label htmlFor="tokenInput">Enter existing list token:</label>
-				<br />
-				<input
-					type="text"
-					id="tokenInput"
-					value={tokenInput}
-					onChange={handleTokenInputChange}
-					placeholder="Enter token"
-				/>
-				<br />
-				<button type="submit">Join existing list</button>
-				<br />
+				<div className="flex flex-col justify-center items-center">
+					<label htmlFor="tokenInput" className="px-3 mt-2">
+						Enter existing list token:
+					</label>
+					<div className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3 sm:px-5">
+						<FontAwesomeIcon
+							icon={key}
+							title="Enter item name"
+							className="text-gray-500 mr-2 sm:mr-4"
+						/>
+						<input
+							className="flex-grow border-none outline-none bg-transparent"
+							type="text"
+							id="tokenInput"
+							value={tokenInput}
+							onChange={handleTokenInputChange}
+							placeholder="Enter token"
+						/>
+					</div>
+					<div className="flex flex-col items-center gap-10">
+						<Button
+							onClick={(e) => handleCreateClick(e)}
+							text="CREATE LIST"
+							className="max-w-4xl"
+						/>
+						<button
+							type="submit"
+							className="underline underline-offset-8 font-semibold text-green dark:text-light-green"
+						>
+							Join existing list
+						</button>
+					</div>
+				</div>
 			</form>
-			<br />
-			<button onClick={handleCreateClick}>Create a new list</button>
 		</div>
 	);
 }

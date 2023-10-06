@@ -38,7 +38,7 @@ export function Home({ createToken, setListToken }) {
 					<input
 						type="text"
 						id="tokenInput"
-						className="flex-grow border-none outline-none bg-transparent text-center text-2xl mr-14 dark:placeholder:text-green"
+						className="flex-grow border-none outline-none bg-transparent dark:text-black text-center text-2xl mr-14 dark:placeholder:text-green"
 						value={tokenInput}
 						onChange={handleTokenInputChange}
 						placeholder="my list token"

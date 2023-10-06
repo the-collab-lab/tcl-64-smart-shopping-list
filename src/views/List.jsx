@@ -1,9 +1,9 @@
 import { ListItem } from '../components';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { comparePurchaseUrgency } from '../api/firebase';
+import { comparePurchaseUrgency, deleteItem } from '../api/firebase';
+import { Modal } from '../components/Modal';
 import Button from '../components/Button';
-
 import copy from 'clipboard-copy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard as clipboard } from '@fortawesome/free-regular-svg-icons';
@@ -11,6 +11,24 @@ import { faFilter as filter } from '@fortawesome/free-solid-svg-icons';
 
 export function List({ data, listId }) {
 	const navigate = useNavigate();
+	const [itemToDelete, setItemToDelete] = useState({ itemId: '', name: '' });
+	const [showModal, setShowModal] = useState(false);
+
+	const modalBody = (
+		<div className="flex flex-col items-center">
+			<p className="flex text-center dark:text-black pb-6 px-3 mt-4">
+				Are you sure you want to delete this item?
+			</p>
+			<p className="flex text-center text-4xl font-extrabold text-green dark:text-black pb-2">
+				{itemToDelete.name}
+			</p>
+		</div>
+	);
+
+	const handleDelete = async (e) => {
+		await deleteItem(listId, itemToDelete.itemId);
+		setShowModal(false);
+	};
 
 	const WelcomePrompt = () => {
 		return (
@@ -53,7 +71,7 @@ export function List({ data, listId }) {
 						<FontAwesomeIcon icon={clipboard} title="Copy to clipboard" />
 					</button>
 				</span>
-				{copied ? <p>Copied!</p> : null}
+				{copied ? <p className="text-red">Copied!</p> : null}
 			</div>
 		);
 	};
@@ -113,6 +131,8 @@ export function List({ data, listId }) {
 					dateNextPurchased={item.dateNextPurchased}
 					dateCreated={item.dateCreated}
 					urgency={itemUrgency}
+					setShowModal={setShowModal}
+					setItemToDelete={setItemToDelete}
 				/>
 			) : null;
 		});
@@ -168,6 +188,12 @@ export function List({ data, listId }) {
 		<>
 			<CopyToken />
 			{data.length > 1 ? <FormAndList /> : <WelcomePrompt />}
+			<Modal
+				showModal={showModal}
+				setShowModal={setShowModal}
+				modalBody={modalBody}
+				confirmationAction={handleDelete}
+			/>
 		</>
 	);
 }

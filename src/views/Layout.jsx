@@ -1,4 +1,6 @@
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { Modal } from '../components/Modal';
 import Title from '../components/Title';
 import './Layout.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,16 +10,65 @@ import {
 	faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faClipboard as clipboard } from '@fortawesome/free-regular-svg-icons';
+import copy from 'clipboard-copy';
 
-export function Layout({ setListToken }) {
+export function Layout({ listToken, setListToken }) {
 	const location = useLocation();
+	const [showModal, setShowModal] = useState(false);
 
 	const removeListToken = () => {
 		localStorage.removeItem('tcl-shopping-list-token');
 		setListToken(null);
+		setShowModal(false);
 	};
 
-	const listToken = localStorage.getItem('tcl-shopping-list-token');
+	const CopyToken = () => {
+		const [copied, setCopied] = useState(false);
+
+		const handleCopyToClipboard = async () => {
+			try {
+				await copy(listToken);
+				setCopied(true);
+
+				setTimeout(() => {
+					setCopied(false);
+				}, 3000);
+			} catch (err) {
+				console.error('Copy failed:', err);
+			}
+		};
+
+		return (
+			<>
+				<button onClick={handleCopyToClipboard}>
+					<FontAwesomeIcon icon={clipboard} title="Copy to clipboard" />
+				</button>
+				{copied ? (
+					<p className="text-red dark:text-black pl-2">Copied!</p>
+				) : null}
+			</>
+		);
+	};
+
+	const modalBody = (
+		<>
+			<div className="flex flex-col items-center">
+				<p className="flex text-center dark:text-black pb-8 px-3 mt-4">
+					Are you sure you want to leave this list?
+				</p>
+				<p className="flex text-center text-4xl font-extrabold text-green dark:text-black">
+					{listToken}
+				</p>
+				<div className="flex justify-center items-center text-green dark:text-black pt-2 pb-4 ">
+					<p className="text-green dark:text-black text-center italic pr-3">
+						Copy your list token for next time
+					</p>
+					<CopyToken />
+				</div>
+			</div>
+		</>
+	);
 
 	const renderNavBar = () => {
 		if (!listToken) {
@@ -45,9 +96,9 @@ export function Layout({ setListToken }) {
 					</p>
 				</div>
 			);
-		} else {
-			if (listToken) {
-				return (
+		} else if (listToken) {
+			return (
+				<>
 					<div className="Nav-container -mt-4">
 						<NavLink
 							to="/list"
@@ -77,20 +128,24 @@ export function Layout({ setListToken }) {
 							<br />
 							<p className="text-lg text-black">ADD ITEM</p>
 						</NavLink>
-						<NavLink className="Nav-link">
+						<NavLink className="Nav-link" onClick={() => setShowModal(true)}>
 							<FontAwesomeIcon
 								icon={faRightFromBracket}
 								title="Leave list"
 								className="text-black"
-								type="button"
-								onClick={removeListToken}
 							/>
 							<p className="text-lg text-black">LEAVE LIST</p>
 							<br />
 						</NavLink>
 					</div>
-				);
-			}
+					<Modal
+						showModal={showModal}
+						setShowModal={setShowModal}
+						modalBody={modalBody}
+						confirmationAction={removeListToken}
+					/>
+				</>
+			);
 		}
 	};
 

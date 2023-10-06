@@ -178,7 +178,7 @@ export function AddItem({ listId, data }) {
 					text="ADD ITEM"
 					withIcon={true}
 					onClick={handleSubmit}
-					className="mb-5 border-2 focus:border-mx-auto focus:-rotate-90 focus:sm:rotate-0 focus:border-blue-600"
+					className="mb-5"
 				/>
 			</form>
 		</div>

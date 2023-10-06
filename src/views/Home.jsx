@@ -133,7 +133,7 @@ export function Home({ createToken, setListToken }) {
 					<Button
 						onClick={(e) => handleCreateClick(e)}
 						text="CREATE LIST"
-						className="max-w-4xl border-2 focus:border-mx-auto focus:-rotate-90 focus:sm:rotate-0 focus:border-blue-600"
+						className="max-w-4xl"
 					/>
 					<button
 						onClick={() => setShowModal(true)}

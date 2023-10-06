@@ -136,7 +136,7 @@ export function Home({ createToken, setListToken }) {
 				/>
 				<button
 					onClick={() => setShowModal(true)}
-					className="underline underline-offset-8 font-semibold text-green dark:text-light-green"
+					className="underline underline-offset-8 font-semibold text-green dark:text-teal-200"
 				>
 					Join existing list
 				</button>

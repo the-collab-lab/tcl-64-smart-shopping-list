@@ -25,7 +25,6 @@
 	background-color: rgba(232, 231, 230);
 	border-radius: 7px;
 	transition: transform 0.2s ease-in-out;
-	text-decoration: line-through;
 }
 
 .ListItem:hover {
@@ -49,6 +48,11 @@
 }
 
 .ListItem-label {
+	margin-left: 0.5em;
+	width: 87%;
+}
+.ListItem-label-checked {
+	text-decoration: line-through;
 	margin-left: 0.5em;
 	width: 87%;
 }

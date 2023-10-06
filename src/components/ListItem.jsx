@@ -58,7 +58,9 @@ export function ListItem({
 
 	return (
 		<li className={isChecked ? 'ListItemChecked' : 'ListItem'}>
-			<label className="ListItem-label">
+			<label
+				className={isChecked ? 'ListItem-label-checked' : 'ListItem-label'}
+			>
 				<input
 					className="ListItem-checkbox"
 					type="checkbox"

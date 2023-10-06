@@ -33,15 +33,17 @@ export function List({ data, listId }) {
 	const WelcomePrompt = () => {
 		return (
 			<>
-				<h3 className="mt-16 mb-16">Shopping list is currently empty...</h3>
-				<Button
-					type="button"
-					onClick={() => {
-						navigate('/add-item');
-					}}
-					withIcon={true}
-					text="ADD ITEM"
-				/>
+				<div className="grid place-content-center gap-16 mt-8">
+					<h3>Shopping list is currently empty...</h3>
+					<Button
+						type="button"
+						onClick={() => {
+							navigate('/add-item');
+						}}
+						withIcon={true}
+						text="ADD ITEM"
+					/>
+				</div>
 			</>
 		);
 	};
@@ -63,8 +65,7 @@ export function List({ data, listId }) {
 		};
 
 		return (
-
-			<div className="flex justify-center items-center">
+			<div className="flex justify-center items-center p-8">
 				<span className="flex justify-center font-semibold ">
 					List token: <em className="font-thin pl-2 pr-2">{listId}</em>{' '}
 					<button onClick={handleCopyToClipboard}>
@@ -146,7 +147,7 @@ export function List({ data, listId }) {
 								Filter List:
 							</label>
 						</div>
-						<div className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3 sm:px-5">
+						<div className="w-full mt-4 sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3 sm:px-5">
 							<FontAwesomeIcon
 								icon={filter}
 								title="Enter item name"

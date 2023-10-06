@@ -43,7 +43,8 @@
 	font-size: 0.99rem;
 	margin-left: 0.5em;
 	padding: 10px;
-	color: gray;
+	color: black;
+	font-weight: 400;
 	font-style: italic;
 }
 

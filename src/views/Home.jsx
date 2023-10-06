@@ -128,7 +128,7 @@ export function Home({ createToken, setListToken }) {
 					</RoughNotation>
 				)}
 			</div>
-			<div className="flex flex-col items-center gap-10">
+			<div className="flex flex-col items-center gap-10 mt-40">
 				<Button
 					onClick={(e) => handleCreateClick(e)}
 					text="CREATE LIST"

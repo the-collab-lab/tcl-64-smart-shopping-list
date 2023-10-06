@@ -26,14 +26,14 @@ export function Modal({
 									variant="secondary"
 									type="button"
 									onClick={() => setShowModal(false)}
-									className="text-2xl mb-3 mr-2 sm:mr-3"
+									className="text-2xl mb-3 mr-2 sm:mr-3 border-2 focus:border-mx-auto focus:-rotate-90 focus:sm:rotate-0 focus:border-blue-600"
 								/>
 								<Button
 									text="CONFIRM"
 									variant="primarySmall"
 									type="button"
 									onClick={confirmationAction}
-									className="text-2xl mb-3 ml-2 sm:ml-3"
+									className="text-2xl mb-3 ml-2 sm:ml-3 border-2 focus:border-mx-auto focus:-rotate-90 focus:sm:rotate-0 focus:border-blue-600"
 								/>
 							</div>
 						</TEModalBody>

@@ -128,18 +128,20 @@ export function Home({ createToken, setListToken }) {
 					</RoughNotation>
 				)}
 			</div>
-			<div className="flex flex-col items-center gap-10">
-				<Button
-					onClick={(e) => handleCreateClick(e)}
-					text="CREATE LIST"
-					className="max-w-4xl"
-				/>
-				<button
-					onClick={() => setShowModal(true)}
-					className="underline underline-offset-8 font-semibold text-green dark:text-light-green"
-				>
-					Join existing list
-				</button>
+			<div className="h-[55rem] md:h-[40rem] flex items-center justify-center">
+				<div className="flex flex-col items-center gap-10">
+					<Button
+						onClick={(e) => handleCreateClick(e)}
+						text="CREATE LIST"
+						className="max-w-4xl border-2 focus:border-mx-auto focus:-rotate-90 focus:sm:rotate-0 focus:border-blue-600"
+					/>
+					<button
+						onClick={() => setShowModal(true)}
+						className="underline underline-offset-8 font-semibold text-green dark:text-light-green"
+					>
+						Join existing list
+					</button>
+				</div>
 			</div>
 			<Modal
 				showModal={showModal}

@@ -7,7 +7,6 @@
 	font-size: 1.2 em;
 	font-weight: 300;
 	margin-bottom: 0.6em;
-	margin-left: 1.15em;
 	background-color: var(--color-list);
 	border-radius: 7px;
 	transition: transform 0.2s ease-in-out;
@@ -21,7 +20,6 @@
 	font-size: 1.2 em;
 	font-weight: 300;
 	margin-bottom: 0.6em;
-	margin-left: 1.15em;
 	background-color: rgba(232, 231, 230);
 	border-radius: 7px;
 	transition: transform 0.2s ease-in-out;

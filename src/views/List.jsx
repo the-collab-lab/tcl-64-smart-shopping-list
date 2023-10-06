@@ -180,7 +180,7 @@ export function List({ data, listId }) {
 						</div>
 					</div>
 				</form>
-				<ul>{listItemsToDisplay}</ul>
+				<ul className="flex flex-col items-center">{listItemsToDisplay}</ul>
 			</>
 		);
 	};

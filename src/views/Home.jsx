@@ -104,32 +104,32 @@ export function Home({ createToken, setListToken }) {
 
 	return (
 		<div className="Home">
-			<div>
-				{existingListMessage && (
-					<RoughNotation
-						type="underline"
-						strokeWidth={2}
-						color={`#${messageColor}`}
-						show={showRoughNotation}
-					>
-						{existingListMessage}
-					</RoughNotation>
-				)}
-			</div>
-			<div>
-				{createListMessage && (
-					<RoughNotation
-						type="underline"
-						strokeWidth={2}
-						color={`#${messageColor}`}
-						show={showRoughNotation}
-					>
-						{createListMessage}
-					</RoughNotation>
-				)}
-			</div>
 			<div className="h-[55rem] md:h-[40rem] flex items-center justify-center">
 				<div className="flex flex-col items-center gap-10">
+					<div>
+						{existingListMessage && (
+							<RoughNotation
+								type="underline"
+								strokeWidth={2}
+								color={`#${messageColor}`}
+								show={showRoughNotation}
+							>
+								{existingListMessage}
+							</RoughNotation>
+						)}
+					</div>
+					<div>
+						{createListMessage && (
+							<RoughNotation
+								type="underline"
+								strokeWidth={2}
+								color={`#${messageColor}`}
+								show={showRoughNotation}
+							>
+								{createListMessage}
+							</RoughNotation>
+						)}
+					</div>
 					<Button
 						onClick={(e) => handleCreateClick(e)}
 						text="CREATE LIST"

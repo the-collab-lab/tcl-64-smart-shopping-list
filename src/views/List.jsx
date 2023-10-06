@@ -131,7 +131,7 @@ export function List({ data, listId }) {
 								className="text-gray-500 mr-2 sm:mr-4"
 							/>
 							<input
-								className="flex-grow border-none outline-none bg-transparent placeholder-light dark:placeholder-dark"
+								className="flex-grow border-none bg-transparent placeholder-light dark:placeholder-dark"
 								type="text"
 								name="filter"
 								id="filter"

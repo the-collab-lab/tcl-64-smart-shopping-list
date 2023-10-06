@@ -131,7 +131,7 @@ export function AddItem({ listId, data }) {
 							className="text-gray-500 mr-2 sm:mr-4"
 						/>
 						<input
-							className="flex-grow border-none outline-none bg-transparent"
+							className="flex-grow border-none bg-transparent placeholder-light dark:placeholder-dark"
 							type="text"
 							id="item"
 							name="item"
@@ -178,7 +178,7 @@ export function AddItem({ listId, data }) {
 					text="ADD ITEM"
 					withIcon={true}
 					onClick={handleSubmit}
-					className="mb-5"
+					className="mb-5 border-2 focus:border-mx-auto focus:-rotate-90 focus:sm:rotate-0 focus:border-blue-600"
 				/>
 			</form>
 		</div>

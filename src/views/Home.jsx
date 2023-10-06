@@ -100,14 +100,17 @@ export function Home({ createToken, setListToken }) {
 					<label htmlFor="tokenInput" className="px-3 mt-2">
 						Enter existing list token:
 					</label>
-					<div className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3 sm:px-5">
+					<div
+						className="w-full sm:w-1/2 flex items-center border-2 rounded-lg py-2 px-3 sm:px-5
+					active:border-mx-auto active:-rotate-90 active:sm:rotate-0 active:border-blue-600"
+					>
 						<FontAwesomeIcon
 							icon={key}
 							title="Enter item name"
 							className="text-gray-500 mr-2 sm:mr-4"
 						/>
 						<input
-							className="flex-grow border-none outline-none bg-transparent"
+							className="flex-grow border-none bg-transparent placeholder-light dark:placeholder-dark"
 							type="text"
 							id="tokenInput"
 							value={tokenInput}
@@ -120,7 +123,7 @@ export function Home({ createToken, setListToken }) {
 							<Button
 								onClick={(e) => handleCreateClick(e)}
 								text="CREATE LIST"
-								className="max-w-4xl"
+								className="max-w-4xl border-2 focus:border-mx-auto focus:-rotate-90 focus:sm:rotate-0 focus:border-blue-600"
 							/>
 							<button
 								type="submit"

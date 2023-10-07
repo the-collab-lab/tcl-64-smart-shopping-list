@@ -144,7 +144,7 @@ export function AddItem({ listId, data }) {
 					</div>
 				</div>
 				<p className="mt-3 pt-10">How soon will you buy this item?</p>
-				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-10 sm:py-44"
+				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-10 sm:py-44">
 					<UrgencyTag
 						color={'bg-light-blue'}
 						value={'soon'}

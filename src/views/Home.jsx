@@ -104,7 +104,7 @@ export function Home({ createToken, setListToken }) {
 
 	return (
 		<div className="Home">
-			<div className="h-[55rem] md:h-[40rem] flex items-center justify-center">
+			<div className="mt-48 flex items-center justify-center">
 				<div className="flex flex-col items-center gap-10">
 					<div>
 						{existingListMessage && (

@@ -121,7 +121,7 @@ export function AddItem({ listId, data }) {
 			</div>
 			<form onSubmit={handleSubmit}>
 				<div className="flex flex-col justify-center items-center">
-					<label htmlFor="item" className="px-3 mt-2">
+					<label htmlFor="item" className="px-3 mt-2 font-semibold">
 						Item:
 					</label>
 					<div className="w-1/2 min-w-[280px] flex items-center border-2 rounded-lg py-2 px-3">
@@ -131,7 +131,7 @@ export function AddItem({ listId, data }) {
 							className="text-gray-500 mr-2 sm:mr-4"
 						/>
 						<input
-							className="flex-grow border-none bg-transparent placeholder-light dark:placeholder-dark"
+							className="pl-2 flex-grow border-none bg-transparent placeholder-light dark:placeholder-dark"
 							type="text"
 							id="item"
 							name="item"
@@ -143,9 +143,8 @@ export function AddItem({ listId, data }) {
 						/>
 					</div>
 				</div>
-
-				<p className="mt-3 pt-2 sm:pt-10">How soon will you buy this item?</p>
-				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-10 sm:py-10">
+				<p className="mt-3 pt-10">How soon will you buy this item?</p>
+				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-10 sm:py-44">
 					<UrgencyTag
 						color={'bg-light-blue'}
 						value={'soon'}

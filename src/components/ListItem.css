@@ -1,12 +1,26 @@
 .ListItem {
-	width: 100%;
+	color: black;
+	width: 90%;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	font-size: 1.2 em;
+	font-weight: 300;
+	margin-bottom: 0.6em;
+	background-color: var(--color-list);
+	border-radius: 7px;
+	transition: transform 0.2s ease-in-out;
+}
+.ListItemChecked {
+	color: black;
+	width: 90%;
 	align-items: center;
 	display: flex;
 	flex-direction: row;
-	font-size: 1.2em;
+	font-size: 1.2 em;
+	font-weight: 300;
 	margin-bottom: 0.6em;
-	background-color: var(--color-yellow);
-	padding: 1em 1em;
+	background-color: rgba(232, 231, 230);
 	border-radius: 7px;
 	transition: transform 0.2s ease-in-out;
 }
@@ -16,23 +30,28 @@
 }
 
 .ListItem-name {
-	font-size: 1.2em;
+	font-size: 1em;
 	margin-left: 0.5em;
 }
 
 .ListItem-urgency {
 	width: fit-content;
 	block-size: fit-content;
-	display: block;
 	text-transform: uppercase;
-	font-size: 1.4rem;
-	margin-left: 2.5em;
-	padding-left: 5px;
-	padding-right: 5px;
-	color: gray;
+	font-size: 0.99rem;
+	margin-left: 0.5em;
+	padding: 10px;
+	color: black;
+	font-weight: 400;
+	font-style: italic;
 }
 
 .ListItem-label {
 	margin-left: 0.5em;
-	width: 80%;
+	width: 87%;
+}
+.ListItem-label-checked {
+	text-decoration: line-through;
+	margin-left: 0.5em;
+	width: 87%;
 }

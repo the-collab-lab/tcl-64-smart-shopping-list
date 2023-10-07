@@ -18,13 +18,15 @@
 	--color-dark-teal: #137c78;
 	--color-light-teal: #8ad0ce;
 	--color-dark-orange: #e36849;
-	--color-yellow: #ffbe30;
+	--color-yellow: #ffde30;
+	--color-transparent-yellow: rgba(249, 197, 13, 0.5);
 
 	--color-accent: var(--color-light-teal);
 	--color-bg: var(--color-black);
 	--color-border: var(--color-light-teal);
 	--color-error: var(--color-dark-orange);
-	--color-text: var(--color-white);
+	--color-text: var(--color-light-teal);
+	--color-list: var(--color-yellow);
 }
 
 @media screen and (prefers-color-scheme: light) {
@@ -33,6 +35,7 @@
 		--color-bg: var(--color-white);
 		--color-border: var(--color-black);
 		--color-text: var(--color-black);
+		--color-list: var(--color-transparent-yellow);
 	}
 }
 
@@ -68,23 +71,10 @@ html {
 body {
 	background-color: var(--color-bg);
 	color: var(--color-text);
-	font-family:
-		-apple-system,
-		BlinkMacSystemFont,
-		avenir next,
-		avenir,
-		segoe ui,
-		helvetica neue,
-		helvetica,
-		Ubuntu,
-		roboto,
-		noto,
-		arial,
-		sans-serif;
+	font-family: 'Poppins', sans-serif;
 	font-size: 1.8rem;
 	line-height: 1.4;
 	margin: 0;
-
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -97,13 +87,7 @@ code {
 	border-radius: 4px;
 	color: var(--color-text);
 	display: inline-block;
-	font-family:
-		Menlo,
-		Consolas,
-		Monaco,
-		Liberation Mono,
-		Lucida Console,
-		monospace;
+	font-family: 'Poppins', sans-serif;
 	font-size: 0.9em;
 	padding: 0.15em 0.15em;
 }

@@ -38,7 +38,7 @@ export function Home({ createToken, setListToken }) {
 					<input
 						type="text"
 						id="tokenInput"
-						className="flex-grow border-none outline-none bg-transparent dark:text-black text-center text-2xl mr-14 dark:placeholder:text-green"
+						className="flex-grow border-none bg-transparent dark:text-black text-center text-2xl mr-14 dark:placeholder:text-green"
 						value={tokenInput}
 						onChange={handleTokenInputChange}
 						placeholder="my list token"
@@ -104,25 +104,40 @@ export function Home({ createToken, setListToken }) {
 
 	return (
 		<div className="Home">
-			<div>
-				{existingListMessage && (
-					<RoughNotation
-						type="underline"
-						strokeWidth={2}
-						color={`#${messageColor}`}
-						show={showRoughNotation}
-					>
-						{existingListMessage}
-					</RoughNotation>
-				)}
-			</div>
-			<div>
-				{createListMessage && (
-					<RoughNotation
-						type="underline"
-						strokeWidth={2}
-						color={`#${messageColor}`}
-						show={showRoughNotation}
+			<div className="h-[55rem] md:h-[40rem] flex items-center justify-center">
+				<div className="flex flex-col items-center gap-10">
+					<div>
+						{existingListMessage && (
+							<RoughNotation
+								type="underline"
+								strokeWidth={2}
+								color={`#${messageColor}`}
+								show={showRoughNotation}
+							>
+								{existingListMessage}
+							</RoughNotation>
+						)}
+					</div>
+					<div>
+						{createListMessage && (
+							<RoughNotation
+								type="underline"
+								strokeWidth={2}
+								color={`#${messageColor}`}
+								show={showRoughNotation}
+							>
+								{createListMessage}
+							</RoughNotation>
+						)}
+					</div>
+					<Button
+						onClick={(e) => handleCreateClick(e)}
+						text="CREATE LIST"
+						className="max-w-4xl"
+					/>
+					<button
+						onClick={() => setShowModal(true)}
+						className="underline underline-offset-8 font-semibold text-green dark:text-light-green"
 					>
 						{createListMessage}
 					</RoughNotation>

@@ -173,12 +173,14 @@ export function AddItem({ listId, data }) {
 						order={'3'}
 					/>
 				</div>
-				<Button
-					text="ADD ITEM"
-					withIcon={true}
-					onClick={handleSubmit}
-					className="mb-5 sm:m-16"
-				/>
+				<div className="pb-10">
+					<Button
+						text="ADD ITEM"
+						withIcon={true}
+						onClick={handleSubmit}
+						className="mb-5 sm:m-16"
+					/>
+				</div>
 			</form>
 		</div>
 	);

@@ -131,7 +131,7 @@ export function AddItem({ listId, data }) {
 							className="text-gray-500 mr-2 sm:mr-4"
 						/>
 						<input
-							className="pl-2 flex-grow border-none bg-transparent placeholder-light dark:placeholder-dark"
+							className="pl-2 w-full border-none bg-transparent placeholder-light dark:placeholder-dark"
 							type="text"
 							id="item"
 							name="item"
@@ -143,8 +143,8 @@ export function AddItem({ listId, data }) {
 						/>
 					</div>
 				</div>
-				<p className="mt-3 pt-10">How soon will you buy this item?</p>
-				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-10 sm:py-44">
+				<p className="mt-3 pt-5 sm:pt-20">How soon will you buy this item?</p>
+				<div className="flex flex-col sm:flex-row sm:gap-6 justify-center mb-10 sm:py-10">
 					<UrgencyTag
 						color={'bg-light-blue'}
 						value={'soon'}
@@ -173,14 +173,12 @@ export function AddItem({ listId, data }) {
 						order={'3'}
 					/>
 				</div>
-				<div className="pb-10">
-					<Button
-						text="ADD ITEM"
-						withIcon={true}
-						onClick={handleSubmit}
-						className="mb-5 sm:m-16"
-					/>
-				</div>
+				<Button
+					text="ADD ITEM"
+					withIcon={true}
+					onClick={handleSubmit}
+					className="mb-5 sm:m-16"
+				/>
 			</form>
 		</div>
 	);

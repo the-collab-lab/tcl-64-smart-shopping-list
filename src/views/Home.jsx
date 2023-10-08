@@ -38,7 +38,7 @@ export function Home({ createToken, setListToken }) {
 					<input
 						type="text"
 						id="tokenInput"
-						className="flex-grow border-none bg-transparent dark:text-black text-center text-2xl mr-14 dark:placeholder:text-green"
+						className="w-full border-none bg-transparent dark:text-black text-center text-2xl dark:placeholder:text-green"
 						value={tokenInput}
 						onChange={handleTokenInputChange}
 						placeholder="my list token"
@@ -104,8 +104,8 @@ export function Home({ createToken, setListToken }) {
 
 	return (
 		<div className="Home">
-			<div className="mt-48 flex items-center justify-center">
-				<div className="flex flex-col items-center gap-10">
+			<div className="mt-24 flex-col items-center justify-center">
+				<div className="flex flex-col h-10 items-center gap-10">
 					<div>
 						{existingListMessage && (
 							<RoughNotation

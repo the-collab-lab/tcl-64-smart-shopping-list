@@ -119,7 +119,7 @@ export function AddItem({ listId, data }) {
 					)}
 				</div>
 			</div>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className="pb-20">
 				<div className="flex flex-col justify-center items-center">
 					<label htmlFor="item" className="px-3 mt-2 font-semibold">
 						Item:

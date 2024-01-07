@@ -11,7 +11,7 @@ import { ArchivalNoticeModal } from '@the-collab-lab/shopping-list-utils';
 
 const messageResetTimeout = 3000;
 
-export function Home({ createToken, setListToken }) {
+export function Home({ setListToken }) {
 	const navigate = useNavigate();
 	const [createListMessage, setCreateListMessage] = useState('');
 	const [existingListMessage, setExistingListMessage] = useState('');

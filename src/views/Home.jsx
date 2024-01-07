@@ -1,6 +1,5 @@
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
-import { createNewList } from '../api/firebase';
 import { useState } from 'react';
 import { Modal } from '../components/Modal';
 import { checkIfListExists } from '../api/firebase';
@@ -8,6 +7,7 @@ import { RoughNotation } from 'react-rough-notation';
 import Button from '../components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKey as key } from '@fortawesome/free-solid-svg-icons';
+import { ArchivalNoticeModal } from '@the-collab-lab/shopping-list-utils';
 
 const messageResetTimeout = 3000;
 
@@ -51,21 +51,22 @@ export function Home({ createToken, setListToken }) {
 	async function handleCreateClick(e) {
 		e.preventDefault();
 
-		let listId = createToken();
+		// let listId = 'the collab lab';
 
-		const firestoreResult = await createNewList(listId);
-		if (firestoreResult !== 'error') {
-			setListToken(listId);
-			navigate('/list');
-		} else {
-			listId = null;
-			setListToken(listId);
-			setCreateListMessage(
-				'Your shopping list was not created. Please try again. ',
-			);
-			setShowRoughNotation(true);
-			clearErrorMessage();
-		}
+		// const firestoreResult = await createNewList(listId);
+		// if (firestoreResult !== 'error') {
+		// 	setListToken(listId);
+		// 	navigate('/list');
+		// } else {
+		// 	listId = null;
+		// 	setListToken(listId);
+		// 	setCreateListMessage(
+		// 		'Your shopping list was not created. Please try again. ',
+		// 	);
+		// 	setShowRoughNotation(true);
+		// 	clearErrorMessage();
+		// }
+		console.log('Creating new lists is no longer supported.');
 	}
 
 	async function handleTokenInputFormSubmit(e) {
@@ -151,6 +152,7 @@ export function Home({ createToken, setListToken }) {
 					confirmationAction={handleTokenInputFormSubmit}
 				/>
 			</div>
+			<ArchivalNoticeModal />
 		</div>
 	);
 }
